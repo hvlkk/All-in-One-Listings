@@ -1,0 +1,129 @@
+/*
+    background-color -> Seting the background color of the body to #fbf0e4.
+    font-family -> Setting the font family of the body to "Georgia", "Times New Roman", serif.
+*/
+body {
+  background-color: #fbf0e4;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+/*
+    font-family -> Setting the font family of the h1, h2, h3, h4, h5, h6 to "Helvetica", "Verdana", sans-serif.
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Helvetica", "Verdana", sans-serif;
+}
+/*
+    background-color -> Seting the background color of the form to #fffdfb66.
+*/
+form {
+  background-color: #fffdfb66;
+}
+
+/*
+    list-style-type: none -> Removing the default list style.
+*/
+li {
+  list-style-type: none;
+}
+
+/*
+    text-decoration: none -> Removing the default text decoration.
+*/
+a {
+  text-decoration: none;
+}
+
+/*  When hovering over an anchor tag, the following styles will be applied.
+
+    text-decoration: underline -> Adding an underline to the text.
+    color: blue -> Setting the color of the text to blue.
+*/
+a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+/*  When an anchor tag is visited, the following styles will be applied.
+
+*/
+a:visited {
+  /* color: purple; */
+}
+
+/*  spin -> Creating a custom animation called sway. 
+     transform: rotate(x); -> Rotating the element by x degrees.
+*/
+@keyframes sway {
+  0% {
+    transform: rotate(-20deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  75% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+/*  Selecting the images with hovering state,
+    inside the company-social-media class ancestor.
+    
+    animation: sway 0.4s linear; -> Applying the sway animation to the image.
+    opacity: 0.8; -> Setting the opacity of the image to 0.8, to make the color lighter.
+
+*/
+.company-social-media img:hover {
+  animation: sway 0.4s linear;
+  opacity: 0.8;
+}
+
+button {
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 35px;
+  width: 117px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background-color: rgb(25, 157, 200);
+  color: white;
+}
+
+.btn-reset {
+  background-color: rgb(225, 0, 0);
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+#price-trend {
+  color: red;
+}
+
+table {
+  background-color: #f1d6b5;
+  border-collapse: collapse;
+  width: 350px;
+}
+
+tr > * {
+  text-align: start;
+  border: 1px solid black;
+}

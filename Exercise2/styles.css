@@ -3,8 +3,16 @@
     font-family -> Setting the font family of the body to "Georgia", "Times New Roman", serif.
 */
 body {
-  background-color: #fbf0e4;
+  background-color: #fff7ef;
   font-family: "Georgia", "Times New Roman", serif;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+main {
+  min-height: 80vh;
 }
 
 /*
@@ -46,14 +54,21 @@ a {
 */
 a:hover {
   text-decoration: underline;
-  color: blue;
 }
 
 /*  When an anchor tag is visited, the following styles will be applied.
 
 */
 a:visited {
-  /* color: purple; */
+  color: rgb(128, 0, 70);
+}
+
+a:active {
+  opacity: 0.7;
+}
+
+a:link {
+  color: #8b4513; /* Soft blue color */
 }
 
 /*  spin -> Creating a custom animation called sway. 
@@ -115,6 +130,7 @@ button {
 
 #price-trend {
   color: red;
+  font-weight: normal;
 }
 
 table {
@@ -126,4 +142,112 @@ table {
 tr > * {
   text-align: start;
   border: 1px solid black;
+}
+
+.listing-characteristics {
+  font-weight: bold;
+}
+
+table > caption {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+tr > * {
+  padding: 5px;
+}
+
+tr:nth-child(odd) {
+  background-color: #fbe8d2;
+}
+
+table {
+  margin: 2rem 0px;
+}
+
+.listing {
+  background-color: #fcfbfb;
+  height: 40rem;
+  width: 25rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.listing:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.listing img {
+  height: 15rem;
+  width: 18rem;
+}
+
+a.card:hover {
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+}
+
+a.card:visited,
+a.card:link {
+  color: black;
+}
+
+.category img {
+  height: 20rem;
+  width: 30rem;
+}
+
+.category {
+  width: 60%;
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#team > article {
+  text-align: center;
+}
+
+#team > article > figure > img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+header {
+  position: sticky;
+  top: 0rem;
+  padding: 0.2rem;
+  background-color: #f5f5f5;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+header li {
+  display: inline;
+  margin: 0px 2rem;
+}
+
+header a:hover {
+  color: darkblue;
+}
+
+.company-social-media li {
+  display: inline;
+}
+
+footer {
+  position: relative;
+  bottom: -10px;
+  width: 100%;
+  background-color: #333; /* Add background color as needed */
+  color: #fff; /* Add text color as needed */
+  padding: 8px;
+  text-align: center;
 }

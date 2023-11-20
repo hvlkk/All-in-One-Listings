@@ -195,17 +195,26 @@ a.card:link {
 }
 
 .category img {
-  height: 20rem;
-  width: 30rem;
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .category {
-  width: 60%;
+  /* width: 60%; */
   background-color: whitesmoke;
   border: 1px solid grey;
   border-radius: 10px;
   margin-bottom: 1rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+ul {
+  padding: 0px;
 }
 
 #team > article {
@@ -263,4 +272,16 @@ body {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
+}
+
+.categories,
+.listings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  grid-gap: 1rem;
+  place-items: center;
+}
+
+.category:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }

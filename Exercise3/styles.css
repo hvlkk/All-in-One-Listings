@@ -289,3 +289,38 @@ body {
 .category:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
+
+.apartment > img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.apartment {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  padding: 1rem;
+}
+
+.apartment > figcaption {
+  margin-top: 1rem;
+}
+.apartment > img:hover {
+  transform: scale(1.1);
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.detailed-listing {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}

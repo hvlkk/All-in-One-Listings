@@ -257,3 +257,10 @@ footer {
   border-radius: 50%;
   float: left;
 }
+
+.apartment > img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}

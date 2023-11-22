@@ -1,14 +1,47 @@
+@font-face {
+  font-family: MyRegularFont;
+  src: url(../resources/fonts/Roboto-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: MyBoldFont;
+  src: url(../resources/fonts/Roboto-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: MyItalicFont;
+  src: url(../resources/fonts/Roboto-Italic.ttf);
+  font-style: italic;
+}
+
+@font-face {
+  font-family: MyLightFont;
+  src: url(../resources/fonts/Roboto-Light.ttf);
+  font-weight: lighter;
+}
+
 /*
     background-color -> Seting the background color of the body to #fbf0e4.
     font-family -> Setting the font family of the body to "Georgia", "Times New Roman", serif.
 */
 body {
   background-color: #fff7ef;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: MyRegularFont, "Times New Roman", serif;
   text-align: center;
   padding: 0px;
   margin: 0px;
   overflow-x: hidden;
+}
+
+figcaption {
+  font-family: MyBoldFont;
+}
+
+#team > article > p {
+  padding: 0.5rem;
+  font-family: MyItalicFont;
 }
 
 /*
@@ -426,6 +459,6 @@ fieldset > input {
 }
 
 fieldset > legend {
-  font-weight: bold;
+  font-family: MyLightFont;
   margin: 0.5rem 0;
 }

@@ -10,40 +10,54 @@
   <body>
     <header>
       <nav>
+        <img src="../resources/logo.jpg" alt="Company Logo" />
         <ul>
           <li><a href="index.html">Home</a><img src="" alt="" /></li>
           <li><a href="about.html">About Us</a><img src="" alt="" /></li>
           <li><a href="categories.html">Categories</a><img src="" alt="" /></li>
           <li><a href="support.html">Support</a><img src="" alt="" /></li>
         </ul>
+        <div><img src="../resources/login.svg" alt="Log In" /></div>
       </nav>
     </header>
-    <main>
+    <main class="about-us">
       <h1>Support</h1>
       <h2>Contact form</h2>
       <form method="post">
         <fieldset>
           <legend>User details</legend>
-          <label for="first-name-txt">First name:</label>
-          <input type="text" id="first-name" name="first-name" placeholder="John" maxlength="30" autocomplete="given-name" required></input>
-          <label for="last-name-txt">Last name:</label>
-          <input type="text" id="last-name-txt" name="last-name" placeholder="Doe" maxlength="30" autocomplete="family-name" required></input>
-          <label for="email-txt">E-mail:</label>
-          <input type="email" id="email-txt" name="e-mail" placeholder="john.doe@gmail.com" autocomplete="email" required></input>
-          <label for="telephone-txt">Telephone</label>
-          <input type="tel" id="telephone-txt" name="telephone" placeholder="+30 6901234567" autocomplete="tel"></input>
+          <div>
+            <label for="first-name-txt">First name:</label>
+            <input type="text" id="first-name" name="first-name" placeholder="John" maxlength="30" autocomplete="given-name" required></input>
+          </div>
+          <div>
+            <label for="last-name-txt">Last name:</label>
+            <input type="text" id="last-name-txt" name="last-name" placeholder="Doe" maxlength="30" autocomplete="family-name" required></input>
+          </div>
+          <div>
+            <label for="email-txt">E-mail:</label>
+            <input type="email" id="email-txt" name="e-mail" placeholder="john.doe@gmail.com" autocomplete="email" required></input>
+          </div>
+          <div>
+            <label for="telephone-txt">Telephone</label>
+            <input type="tel" id="telephone-txt" name="telephone" placeholder="+30 6901234567" autocomplete="tel"></input>
+          </div>
         </fieldset>
-
         <fieldset>
           <legend>Issue details</legend>
-          <label for="listing-id-txt">Listing id:</label>
-          <input type="number" step="1" min="0" id="listing-id-txt" name="listing-id" autocomplete="off" required></input>
-          <label for="listing-issue-details-txt">Details:</label>
-          <textarea id="listing-issue-details" placeholder="Describe your issue in detail." rows="2" cols="40" required></textarea>
+          <div>
+            <label for="listing-id-txt">Listing id:</label>
+            <input type="number" step="1" min="0" id="listing-id-txt" name="listing-id" autocomplete="off" required></input>
+          </div>
+          <div>
+            <label for="listing-issue-details-txt">Details:</label>
+            <textarea id="listing-issue-details" placeholder="Describe your issue in detail." rows="2" cols="20" required></textarea>
+          </div>
         </fieldset>
-
-        <button type="submit" class="btn btn-submit">Submit ticket</button>
-        <button type="reset" class="btn btn-reset">Reset form</button>
+<div>
+  <button type="submit" class="btn btn-submit">Submit ticket</button>
+  <button type="reset" class="btn btn-reset">Reset form</button>
+</div>
       </form>
     </main>
     <footer>

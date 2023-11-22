@@ -11,9 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-main {
-}
-
 /*
     font-family -> Setting the font family of the h1, h2, h3, h4, h5, h6 to "Helvetica", "Verdana", sans-serif.
 */
@@ -114,12 +111,12 @@ button {
 }
 
 .btn-submit {
-  background-color: rgb(25, 157, 200);
+  background-color: rgb(98, 174, 91);
   color: white;
 }
 
 .btn-reset {
-  background-color: rgb(225, 0, 0);
+  background-color: rgb(160, 52, 52);
   color: white;
 }
 
@@ -136,6 +133,7 @@ table {
   background-color: #f1d6b5;
   border-collapse: collapse;
   width: 350px;
+  margin: 3rem;
 }
 
 tr > * {
@@ -158,10 +156,6 @@ tr > * {
 
 tr:nth-child(odd) {
   background-color: #fbe8d2;
-}
-
-table {
-  margin: 2rem 0px;
 }
 
 .listing {
@@ -232,27 +226,16 @@ header {
   /* position: sticky; */
   /* top: 0rem; */
   padding: 0.2rem;
-  background-color: #f5f5f5;
+  background-color: #ffdeb7;
   width: 100%;
-  margin-bottom: 1rem;
-}
-
-header li {
-  display: inline;
-  margin: 0px 2rem;
+  /* margin-bottom: 1rem; */
 }
 
 header a:hover {
   color: darkblue;
 }
 
-.company-social-media li {
-  display: inline;
-}
-
 footer {
-  /* position: relative;
-  bottom: -10px; */
   width: 100%;
   background-color: #333; /* Add background color as needed */
   color: #fff; /* Add text color as needed */
@@ -263,7 +246,6 @@ footer {
 .company-logo {
   height: 100px;
   border-radius: 50%;
-  float: left;
 }
 
 /* Exercise 3 - Grid, Flexbox */
@@ -315,12 +297,127 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  /* width: 80%; */
 }
 
-.detailed-listing {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+nav > img {
+  height: 3rem;
+  border-radius: 50%;
+}
+
+nav > ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.description > p {
+  text-align: left;
+  margin: 5rem;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.company-social-media > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#team {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 0.5rem; */
+}
+
+#team > h2 {
+  margin-bottom: 0rem;
+}
+
+#team > article {
+  background-color: rgb(214, 235, 235);
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+  width: 60%;
+  justify-content: center;
+  margin: 0.5rem 0rem;
+}
+
+#team > article > figure {
+  margin: 1rem 0rem;
+}
+
+/* TODO:  Rename this class!! */
+.about-us {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 3rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(232, 226, 209);
+  width: 60%;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+fieldset > div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 1.5rem;
+  width: 90%;
+}
+
+fieldset > div > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+fieldset > input {
+  border-radius: 5px;
+  height: 1.5rem;
+  width: 90%;
+  max-width: 95%;
+}
+
+main {
 }

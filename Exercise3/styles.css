@@ -365,7 +365,7 @@ footer {
 }
 
 /* TODO:  Rename this class!! */
-.about-us {
+.main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -419,5 +419,7 @@ fieldset > input {
   max-width: 95%;
 }
 
-main {
+fieldset > legend {
+  font-weight: bold;
+  margin: 0.5rem 0;
 }

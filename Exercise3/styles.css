@@ -462,3 +462,7 @@ fieldset > legend {
   font-family: MyLightFont;
   margin: 0.5rem 0;
 }
+
+#intro > h1 {
+  font-size: 2em;
+}

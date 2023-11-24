@@ -33,12 +33,13 @@ body {
   background-color: #fff7ef;
   font-family: MyRegularFont, "Times New Roman", serif;
   text-align: center;
+  max-width: 100%;
   padding: 0px;
   margin: 0px;
   overflow-x: hidden;
 }
 
-figcaption {
+.main figcaption {
   font-family: MyBoldFont;
 }
 
@@ -57,7 +58,14 @@ h4,
 h5,
 h6 {
   font-family: "Helvetica", "Verdana", sans-serif;
+  margin: 0.4rem;
 }
+
+h1 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
 /*
     background-color -> Seting the background color of the form to #fffdfb66.
 */
@@ -195,13 +203,14 @@ tr:nth-child(odd) {
 }
 
 .listing {
+  font-size: 0.9rem;
   background-color: #fcfbfb;
-  height: 40rem;
-  width: 25rem;
+  height: 27rem;
+  width: 17rem;
   border: 1px solid black;
   border-radius: 15px;
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .listing:hover {
@@ -209,8 +218,9 @@ tr:nth-child(odd) {
 }
 
 .listing img {
-  height: 15rem;
-  width: 18rem;
+  height: 5rem;
+  width: 10rem;
+  /* border-radius: 50%; */
 }
 
 a.card:hover {
@@ -252,8 +262,8 @@ ul {
 }
 
 #team > article > figure > img {
-  height: 10rem;
-  width: 10rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 50%;
   margin: 1rem;
 }
@@ -295,7 +305,7 @@ body {
 .categories,
 .listings {
   display: grid;
-  grid-template-columns: repeat(1, minmax(430px, 1fr));
+  /* grid-template-columns: repeat(1, minmax(430px, 1fr)); */
   grid-template-rows: auto 1fr;
   grid-gap: 1rem;
   place-items: center;
@@ -316,8 +326,8 @@ body {
 }
 
 .apartment > img {
-  height: 15rem;
-  width: 20rem;
+  /* height: 15rem; */
+  width: 17rem;
   max-width: 100%;
   max-height: 100%;
 }
@@ -325,15 +335,17 @@ body {
 .apartment {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   padding: 1rem;
+  text-align: center;
+  justify-items: center;
 }
 
 .apartment > figcaption {
   margin-top: 1rem;
 }
 .apartment > img:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
 }
 
 .description {
@@ -345,19 +357,20 @@ body {
 
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 2.5rem;
+  font-size: 0.75rem;
+  max-width: 100%;
 }
 
 nav > img {
-  height: 3rem;
+  height: 2rem;
   border-radius: 50%;
 }
 
 nav > ul {
   display: flex;
-  gap: 2rem;
+  gap: 0.7rem;
 }
 
 .description > p {
@@ -395,16 +408,17 @@ footer {
 #team > article {
   background-color: rgb(214, 235, 235);
   display: flex;
+  flex-direction: column;
   align-items: center;
   border: 1px solid black;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
-  width: 60%;
+  width: 100%;
   justify-content: center;
   margin: 0.5rem 0rem;
 }
 
 #team > article > figure {
-  margin: 1rem 0rem;
+  margin: 0rem;
 }
 
 /* TODO:  Rename this class!! */
@@ -413,7 +427,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0rem 3rem;
+  padding: 0rem 2rem;
 }
 
 form {
@@ -479,16 +493,4 @@ fieldset > legend {
   .listings {
     grid-template-columns: repeat(2, minmax(350px, 1fr));
   }
-
-  /* .apartment {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  }
-
-  .description > p {
-    margin: 2rem;
-  }
-
-  #team > article {
-    width: 80%;
-  } */
 }

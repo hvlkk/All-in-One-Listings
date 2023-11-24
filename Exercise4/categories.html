@@ -11,10 +11,10 @@
       <nav>
         <img src="../resources/logo.jpg" alt="Company Logo" />
         <ul>
-          <li><a href="index.html">Home</a><img src="" alt="" /></li>
-          <li><a href="about.html">About Us</a><img src="" alt="" /></li>
-          <li><a href="categories.html">Categories</a><img src="" alt="" /></li>
-          <li><a href="support.html">Support</a><img src="" alt="" /></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="support.html">Support</a></li>
         </ul>
         <div><img src="../resources/login.svg" alt="Log In" /></div>
       </nav>
@@ -24,7 +24,10 @@
       <h1>Categories</h1>
       <section class="category">
         <h2>Real Estate</h2>
-        <img src="../resources/house-low-res.jpg" alt="Real Estate" />
+        <img srcset="../resources/house-low-res.jpg 240w,
+        ../resources/house-med-res.jpg 480w, ../resources/house.jpg 800w"
+        sizes="(max-width: 480px) 30vw, (max-width: 1000px) 320px, 400px"
+        src="../resources/house.jpg alt="Real Estate" />
         <ul>
           <li>
             Rentals
@@ -61,7 +64,18 @@
       </section>
       <section class="category">
         <h2>Technology</h2>
-        <img src="../resources/technology-low-res.jpg" alt="Technology" />
+        <img
+          srcset="
+            ../resources/technology-low-res.jpg 240w,
+            ../resources/technology-med-res.jpg 480w,
+            ../resources/technology.jpg         800w
+          "
+          sizes="(max-width: 480px) 30vw, (max-width: 1000px) 320px, 400px"
+          src="../resources/technology.jpg
+        
+        "
+          alt="Technology"
+        />
         <ul>
           <li><a href="#">Laptops</a></li>
           <li><a href="#">Tablets</a></li>

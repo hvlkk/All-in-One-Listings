@@ -295,13 +295,14 @@ body {
 .categories,
 .listings {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  grid-template-columns: repeat(3, minmax(430px, 1fr));
   grid-template-rows: auto 1fr;
   grid-gap: 1rem;
   place-items: center;
 }
 
-.categories > h1 {
+.categories > h1,
+.listings > h1 {
   grid-column: 1 / -1;
   text-align: center;
 }

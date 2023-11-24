@@ -44,6 +44,12 @@ body {
 main.detailed-listing {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+figure.apartment {
+  margin: 0;
 }
 
 .main figcaption {
@@ -90,7 +96,7 @@ form {
 }
 
 p {
-  text-align: left;
+  text-align: center;
 }
 
 p.listing-number {
@@ -201,7 +207,6 @@ table {
   background-color: #f1d6b5;
   border-collapse: collapse;
   width: 350px;
-  margin: 3rem;
 }
 
 tr > * {
@@ -348,8 +353,6 @@ footer {
 }
 
 .apartment > img {
-  /* height: 15rem; */
-  width: 17rem;
   max-width: 100%;
   max-height: 100%;
 }
@@ -397,7 +400,7 @@ nav > ul {
 
 .description > p {
   text-align: left;
-  margin: 5rem;
+  margin: 2rem;
 }
 
 footer {

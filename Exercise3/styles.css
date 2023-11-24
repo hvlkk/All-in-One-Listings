@@ -1,3 +1,6 @@
+/*
+  font-face -> Making 4 custom text fonts for regular, bold, italic and light font styles respectively.
+*/
 @font-face {
   font-family: MyRegularFont;
   src: url(../resources/fonts/Roboto-Regular.ttf);
@@ -23,8 +26,8 @@
 }
 
 /*
-    background-color -> Seting the background color of the body to #fbf0e4.
-    font-family -> Setting the font family of the body to "Georgia", "Times New Roman", serif.
+    background-color -> Setting the background color of the body to #fbf0e4.
+    font-family -> Setting the font family of the body to our custom font (Roboto), "Times New Roman", serif.
 */
 body {
   background-color: #fff7ef;
@@ -85,7 +88,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/*  When an anchor tag is visited, the following styles will be applied.
+/*  When an anchor tag is visited/active, the following styles will be applied.
 
 */
 a:visited {

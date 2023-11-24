@@ -24,10 +24,17 @@
       <h1>Categories</h1>
       <section class="category">
         <h2>Real Estate</h2>
-        <img srcset="../resources/house-low-res.jpg 240w,
-        ../resources/house-med-res.jpg 480w, ../resources/house.jpg 800w"
-        sizes="(max-width: 480px) 30vw, (max-width: 1000px) 320px, 400px"
-        src="../resources/house.jpg alt="Real Estate" />
+        <img
+          srcset="
+            ../resources/low-res/houses-low-res.jpg 240w,
+            ../resources/med-res/houses-med-res.jpg 320w,
+            ../resources/original-res/houses.jpg    765w
+          "
+          sizes="(max-width: 320px) 240px,
+          (max-width: 480px) 320px, 765px"
+          src="../resources/original-res/houses.jpg"
+          alt="Real Estate"
+        />
         <ul>
           <li>
             Rentals
@@ -54,7 +61,17 @@
 
       <section class="category">
         <h2>Employment</h2>
-        <img src="../resources/job.jpeg" alt="Employment" />
+        <img
+          srcset="
+            ../resources/low-res/job-low-res.jpg 240w,
+            ../resources/med-res/job-med-res.jpg 320w,
+            ../resources/original-res/job.jpg    765w
+          "
+          sizes="(max-width: 320px) 240px,
+          (max-width: 480px) 320px, 765px"
+          src="../resources/original-res/employment.jpg"
+          alt="Employment"
+        />
         <ul>
           <li><a href="#">Part-time employment</a></li>
           <li>
@@ -66,14 +83,12 @@
         <h2>Technology</h2>
         <img
           srcset="
-            ../resources/technology-low-res.jpg 240w,
-            ../resources/technology-med-res.jpg 480w,
-            ../resources/technology.jpg         800w
+            ../resources/low-res/technology-low-res.jpg 240w,
+            ../resources/med-res/technology-med-res.jpg 320w,
+            ../resources/original-res/technology.jpg    765w
           "
-          sizes="(max-width: 480px) 30vw, (max-width: 1000px) 320px, 400px"
-          src="../resources/technology.jpg
-        
-        "
+          sizes="(max-width: 320px) 240px, (max-width: 480px) 320px, 765px"
+          src="../resources/original-res/technology.jpg"
           alt="Technology"
         />
         <ul>
@@ -86,7 +101,18 @@
       </section>
       <section class="category">
         <h2>Vehicles</h2>
-        <img src="../resources/vehicles-low-res.jpg" alt="Vehicles" />
+        <img
+          srcset="
+            ../resources/low-res/vehicles-low-res.jpg 240w,
+            ../resources/med-res/vehicles-med-res.jpg 320w,
+            ../resources/original-res/vehicles.jpg    765w
+          "
+          sizes="(max-width: 320px) 240px, (max-width: 480px) 320px, 765px"
+          src="../resources/original-res/vehicles.jpg"
+          alt="Vehicles"
+          src="../resources/vehicles-low-res.jpg"
+          alt="Vehicles"
+        />
         <ul>
           <li><a href="#">Cars</a></li>
           <li><a href="#">Motorcycles</a></li>

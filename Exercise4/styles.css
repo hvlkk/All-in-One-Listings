@@ -33,10 +33,17 @@ body {
   background-color: #fff7ef;
   font-family: MyRegularFont, "Times New Roman", serif;
   text-align: center;
-  max-width: 100%;
   padding: 0px;
   margin: 0px;
   overflow-x: hidden;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+main.detailed-listing {
+  display: flex;
+  flex-direction: column;
 }
 
 .main figcaption {
@@ -62,8 +69,13 @@ h6 {
 }
 
 h1 {
-  margin-top: 1rem;
+  margin: 1rem;
   font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 /*
@@ -71,6 +83,18 @@ h1 {
 */
 form {
   background-color: #fffdfb66;
+}
+
+.category li {
+  margin-bottom: 0.3rem;
+}
+
+p {
+  text-align: left;
+}
+
+p.listing-number {
+  text-align: center;
 }
 
 /*
@@ -205,12 +229,15 @@ tr:nth-child(odd) {
 .listing {
   font-size: 0.9rem;
   background-color: #fcfbfb;
-  height: 27rem;
-  width: 17rem;
+  width: 20rem;
   border: 1px solid black;
   border-radius: 15px;
   margin-bottom: 1rem;
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .listing:hover {
@@ -218,8 +245,9 @@ tr:nth-child(odd) {
 }
 
 .listing img {
-  height: 5rem;
-  width: 10rem;
+  height: 7rem;
+  width: 14rem;
+  margin-bottom: 1rem;
   /* border-radius: 50%; */
 }
 
@@ -271,7 +299,7 @@ ul {
 header {
   /* position: sticky; */
   /* top: 0rem; */
-  padding: 0.2rem;
+  padding: 0.2rem 0;
   background-color: #ffdeb7;
   width: 100%;
   /* margin-bottom: 1rem; */
@@ -285,22 +313,16 @@ footer {
   width: 100%;
   background-color: #333; /* Add background color as needed */
   color: #fff; /* Add text color as needed */
-  padding: 8px;
+  padding: 10px 0px;
   text-align: center;
 }
 
 .company-logo {
-  height: 100px;
+  height: 70px;
   border-radius: 50%;
 }
 
 /* Exercise 3 - Grid, Flexbox */
-
-body {
-  display: grid;
-  min-height: 100vh;
-  grid-template-rows: auto 1fr auto;
-}
 
 .categories,
 .listings {
@@ -318,7 +340,7 @@ body {
 }
 
 .category {
-  height: 510px;
+  /* height: 510px; */
 }
 
 .category:hover {
@@ -437,7 +459,7 @@ form {
   align-items: center;
   gap: 1rem;
   background-color: rgb(232, 226, 209);
-  width: 60%;
+  width: 100%;
   border: 1px solid #333;
   border-radius: 10px;
 }
@@ -492,5 +514,12 @@ fieldset > legend {
   .categories,
   .listings {
     grid-template-columns: repeat(2, minmax(350px, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .categories,
+  .listings {
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
   }
 }

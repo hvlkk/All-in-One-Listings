@@ -1,0 +1,494 @@
+/*
+  font-face -> Making 4 custom text fonts for regular, bold, italic and light font styles respectively.
+*/
+@font-face {
+  font-family: MyRegularFont;
+  src: url(../resources/fonts/Roboto-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: MyBoldFont;
+  src: url(../resources/fonts/Roboto-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: MyItalicFont;
+  src: url(../resources/fonts/Roboto-Italic.ttf);
+  font-style: italic;
+}
+
+@font-face {
+  font-family: MyLightFont;
+  src: url(../resources/fonts/Roboto-Light.ttf);
+  font-weight: lighter;
+}
+
+/*
+    background-color -> Setting the background color of the body to #fbf0e4.
+    font-family -> Setting the font family of the body to our custom font (Roboto), "Times New Roman", serif.
+*/
+body {
+  background-color: #fff7ef;
+  font-family: MyRegularFont, "Times New Roman", serif;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+figcaption {
+  font-family: MyBoldFont;
+}
+
+#team > article > p {
+  padding: 0.5rem;
+  font-family: MyItalicFont;
+}
+
+/*
+    font-family -> Setting the font family of the h1, h2, h3, h4, h5, h6 to "Helvetica", "Verdana", sans-serif.
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Helvetica", "Verdana", sans-serif;
+}
+/*
+    background-color -> Seting the background color of the form to #fffdfb66.
+*/
+form {
+  background-color: #fffdfb66;
+}
+
+/*
+    list-style-type: none -> Removing the default list style.
+*/
+li {
+  list-style-type: none;
+}
+
+/*
+    text-decoration: none -> Removing the default text decoration.
+*/
+a {
+  text-decoration: none;
+}
+
+/*  When hovering over an anchor tag, the following styles will be applied.
+
+    text-decoration: underline -> Adding an underline to the text.
+    color: blue -> Setting the color of the text to blue.
+*/
+a:hover {
+  text-decoration: underline;
+}
+
+/*  When an anchor tag is visited/active, the following styles will be applied.
+
+*/
+a:visited {
+  color: rgb(128, 0, 70);
+}
+
+a:active {
+  opacity: 0.7;
+}
+
+a:link {
+  color: #8b4513; /* Soft blue color */
+}
+
+/*  spin -> Creating a custom animation called sway. 
+     transform: rotate(x); -> Rotating the element by x degrees.
+*/
+@keyframes sway {
+  0% {
+    transform: rotate(-20deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  75% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+/*  Selecting the images with hovering state,
+    inside the company-social-media class ancestor.
+    
+    animation: sway 0.4s linear; -> Applying the sway animation to the image.
+    opacity: 0.8; -> Setting the opacity of the image to 0.8, to make the color lighter.
+
+*/
+.company-social-media img:hover {
+  animation: sway 0.4s linear;
+  opacity: 0.8;
+}
+
+button {
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 35px;
+  width: 117px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background-color: rgb(98, 174, 91);
+  color: white;
+}
+
+.btn-reset {
+  background-color: rgb(160, 52, 52);
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+#price-trend {
+  color: red;
+  font-weight: normal;
+}
+
+table {
+  background-color: #f1d6b5;
+  border-collapse: collapse;
+  width: 350px;
+  margin: 3rem;
+}
+
+tr > * {
+  text-align: start;
+  border: 1px solid black;
+}
+
+.listing-characteristics {
+  font-weight: bold;
+}
+
+table > caption {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+tr > * {
+  padding: 5px;
+}
+
+tr:nth-child(odd) {
+  background-color: #fbe8d2;
+}
+
+.listing {
+  background-color: #fcfbfb;
+  height: 40rem;
+  width: 25rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.listing:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.listing img {
+  height: 15rem;
+  width: 18rem;
+}
+
+a.card:hover {
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+}
+
+a.card:visited,
+a.card:link {
+  color: black;
+}
+
+.category img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.category {
+  /* width: 60%; */
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+ul {
+  padding: 0px;
+}
+
+#team > article {
+  text-align: center;
+}
+
+#team > article > figure > img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+header {
+  /* position: sticky; */
+  /* top: 0rem; */
+  padding: 0.2rem;
+  background-color: #ffdeb7;
+  width: 100%;
+  /* margin-bottom: 1rem; */
+}
+
+header a:hover {
+  color: darkblue;
+}
+
+footer {
+  width: 100%;
+  background-color: #333; /* Add background color as needed */
+  color: #fff; /* Add text color as needed */
+  padding: 8px;
+  text-align: center;
+}
+
+.company-logo {
+  height: 100px;
+  border-radius: 50%;
+}
+
+/* Exercise 3 - Grid, Flexbox */
+
+body {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.categories,
+.listings {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(430px, 1fr));
+  grid-template-rows: auto 1fr;
+  grid-gap: 1rem;
+  place-items: center;
+}
+
+.categories > h1,
+.listings > h1 {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.category {
+  height: 510px;
+}
+
+.category:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.apartment > img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.apartment {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  padding: 1rem;
+}
+
+.apartment > figcaption {
+  margin-top: 1rem;
+}
+.apartment > img:hover {
+  transform: scale(1.1);
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 80%; */
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+nav > img {
+  height: 3rem;
+  border-radius: 50%;
+}
+
+nav > ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.description > p {
+  text-align: left;
+  margin: 5rem;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.company-social-media > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#team {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 0.5rem; */
+}
+
+#team > h2 {
+  margin-bottom: 0rem;
+}
+
+#team > article {
+  background-color: rgb(214, 235, 235);
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+  width: 60%;
+  justify-content: center;
+  margin: 0.5rem 0rem;
+}
+
+#team > article > figure {
+  margin: 1rem 0rem;
+}
+
+/* TODO:  Rename this class!! */
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 3rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(232, 226, 209);
+  width: 60%;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+fieldset > div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 1.5rem;
+  width: 90%;
+}
+
+fieldset > div > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+fieldset > input {
+  border-radius: 5px;
+  height: 1.5rem;
+  width: 90%;
+  max-width: 95%;
+}
+
+fieldset > legend {
+  font-family: MyLightFont;
+  margin: 0.5rem 0;
+}
+
+#intro > h1 {
+  font-size: 2em;
+}
+
+/* Exercise 4 - Media Queries */
+/* 480px - 768px */
+
+@media (min-width: 480px) {
+  .categories,
+  .listings {
+    grid-template-columns: repeat(2, minmax(350px, 1fr));
+  }
+
+  /* .apartment {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .description > p {
+    margin: 2rem;
+  }
+
+  #team > article {
+    width: 80%;
+  } */
+}

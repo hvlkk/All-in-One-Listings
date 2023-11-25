@@ -502,11 +502,12 @@ fieldset > div > label {
   left: 0;
 }
 
-fieldset > input {
-  border-radius: 5px;
+fieldset > div > input {
+  border-radius: 10px;
   height: 1.5rem;
   width: 90%;
   max-width: 95%;
+  padding-left: 0.5rem;
 }
 
 fieldset > legend {
@@ -554,11 +555,12 @@ fieldset > legend {
     width: 80%;
     position: relative;
     padding: 1rem;
+    margin-bottom: 3rem;
   }
 
   form > div {
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
   }
 
   .company-social-media > ul > li > a > img {

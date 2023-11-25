@@ -1,4 +1,4 @@
-document.addEventListener("mouseenter");
+// document.addEventListener("mouseenter");
 
 function createTooltip() {
   const tooltip = document.createElement("div");
@@ -10,3 +10,19 @@ function createTooltip() {
   });
   return tooltip;
 }
+
+const el = document.querySelector("button.btn-reset");
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (ev) => {
+  console.log(ev);
+  ev.preventDefault();
+  console.log("Form submitted");
+});
+
+el.addEventListener("click", (ev) => {
+  ev.preventDefault();
+  console.log(form);
+});
+
+const mailInput = document.getElementById("email-txt");

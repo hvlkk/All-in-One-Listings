@@ -27,7 +27,8 @@
     <main>
       <h1>User Registration</h1>
       <div class="main">
-        <form method="post">
+        <!-- <form method="post"> -->
+        <form action="#">
           <fieldset class="personal-info">
             <legend>User details</legend>
             <div>
@@ -62,6 +63,7 @@
                 name="e-mail"
                 placeholder="john.doe@gmail.com"
                 autocomplete="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 required
               />
             </div>
@@ -104,6 +106,7 @@
                 id="address-line-2"
                 name="address-line-2"
                 autocomplete="address-line2"
+                datalist="address-line-2"
               />
             </div>
             <div>
@@ -175,7 +178,9 @@
           </fieldset>
           <div>
             <button type="submit" class="btn btn-submit">Submit ticket</button>
-            <button type="reset" class="btn btn-reset">Reset form</button>
+            <button class="btn btn-reset">Reset form</button>
+
+            <!-- <button type="reset" class="btn btn-reset">Reset form</button> -->
           </div>
         </form>
       </div>

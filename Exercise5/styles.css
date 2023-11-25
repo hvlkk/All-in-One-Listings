@@ -596,6 +596,10 @@ fieldset .required {
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
 
+  .registration fieldset legend {
+    grid-column: 1 / -1;
+  }
+
   .registration .user-authentication,
   .registration .terms-and-conditions {
     display: flex;

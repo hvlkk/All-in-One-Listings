@@ -102,13 +102,6 @@
               />
             </div>
           </fieldset>
-
-          <div>
-            <button type="submit" class="btn btn-submit">Submit ticket</button>
-            <button class="btn btn-reset">Reset form</button>
-
-            <!-- <button type="reset" class="btn btn-reset">Reset form</button> -->
-          </div>
         </form>
         <form action="" class="hidden">
           <fieldset class="user-address">
@@ -209,7 +202,7 @@
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden">
+        <form action="" class="hidden" id="contact">
           <fieldset class="contact-preferences">
             <legend>Contact Preferences</legend>
             <div>
@@ -233,7 +226,7 @@
               />
             </div>
           </fieldset>
-          <fieldset class="contact-preferences">
+          <fieldset id="contact-methods" class="contact-preferences">
             <legend>Contact Methods</legend>
             <div>
               <label for="sms-checkbox">SMS</label>
@@ -496,6 +489,10 @@
             </details>
           </fieldset>
         </form>
+        <div class="buttons">
+          <button id="btn-previous" class="btn">Previous</button>
+          <button id="btn-next" class="btn">Next</button>
+          <button id="btn-submit" class="btn btn-submit">Submit</button>
       </div>
     </main>
     <footer>

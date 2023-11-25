@@ -455,6 +455,8 @@ form {
   width: 100%;
   border: 1px solid #333;
   border-radius: 10px;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 fieldset {
@@ -599,8 +601,14 @@ fieldset .required {
 }
 
 /* Exercise 5 - Form Validation */
-input:invalid {
+input:invalid,
+textarea:invalid {
   border: 2px solid red;
+}
+
+input:valid,
+textarea:valid {
+  border: 1px solid green;
 }
 
 .pages {
@@ -625,11 +633,16 @@ input:invalid {
 }
 
 a.selected {
-  background-color: greenyellow;
+  background-color: lightblue;
 }
 
 .hidden {
   display: none;
+}
+
+#contact-methods {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
 }
 
 .contact-preferences label {
@@ -641,4 +654,8 @@ a.selected {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#contact > fieldset > div {
+  padding-top: 0.5rem;
 }

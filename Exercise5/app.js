@@ -14,8 +14,10 @@ const inUsername = document.getElementById("username");
 const inPassword = document.getElementById("password");
 const inConfirmPassword = document.getElementById("password-confirmation");
 // Button selectors.
-const btnReset = document.querySelector("button.btn-reset");
 const pageSelector = document.querySelector(".pages");
+const btnPrevious = document.getElementById("btn-previous");
+const btnNext = document.getElementById("btn-next");
+const btnSubmit = document.getElementById("btn-submit");
 
 // Form selectors.
 const forms = document.querySelectorAll("form");
@@ -55,10 +57,26 @@ form.addEventListener("submit", (ev) => {
   console.log("Form is valid - submit");
 });
 
-btnReset.addEventListener("click", (ev) => {
-  ev.preventDefault();
-  console.log(inEmail.checkValidity());
+btnPrevious.addEventListener("click", (ev) => {
+  if (pageIndex == 0) {
+    return;
+  }
+  pageIndex--;
+  changeForm();
 });
+
+btnNext.addEventListener("click", (ev) => {
+  if (pageIndex == pages.length - 1) {
+    return;
+  }
+  pageIndex++;
+  changeForm();
+});
+
+// btnReset.addEventListener("click", (ev) => {
+//   ev.preventDefault();
+//   console.log(inEmail.checkValidity());
+// });
 
 inConfirmPassword.addEventListener("input", checkPasswordMatch);
 inPassword.addEventListener("input", checkPasswordMatch);

@@ -510,6 +510,10 @@ fieldset > legend {
   margin: 0.5rem 0;
 }
 
+fieldset .required {
+  color: brown;
+}
+
 #intro > h1 {
   font-size: 2em;
 }

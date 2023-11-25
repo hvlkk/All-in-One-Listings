@@ -210,35 +210,37 @@
           </fieldset>
         </form>
         <form action="" class="hidden">
-          <fieldset class="user-authentication">
-            <legend>User info</legend>
+          <fieldset class="contact-preferences">
+            <legend>Contact Preferences</legend>
             <div>
-              <label for="username">Username</label>
+              <label for="advertisements"
+                >I would like to be contacted about potential offers
+              </label>
               <input
-                type="text"
-                id="username"
-                name="username"
-                autocomplete="username"
-                required
+                type="checkbox"
+                id="advertisements"
+                name="advertisements"
               />
             </div>
             <div>
-              <label for="password">Password</label>
+              <label for="updates">
+                I want to be notified about major website updates
+              </label>
               <input
-                type="password"
-                id="password"
-                name="password"
-                autocomplete="new-password"
-                required
+                type="checkbox"
+                id="advertisements"
+                name="advertisements"
               />
             </div>
             <div>
-              <label for="password-confirmation">Confirm password</label>
+              <label for="terms-and-conditions"
+                ><span class="required">*</span>
+                I accept the terms and conditions
+              </label>
               <input
-                type="password"
-                id="password-confirmation"
-                name="password-confirmation"
-                autocomplete="new-password"
+                type="checkbox"
+                id="terms-and-conditions"
+                name="terms-and-conditions"
                 required
               />
             </div>

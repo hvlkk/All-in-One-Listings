@@ -596,9 +596,12 @@ fieldset .required {
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
 
-  .registration .user-authentication {
+  .registration .user-authentication,
+  .registration .terms-and-conditions {
     display: flex;
     width: 80%;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -634,4 +637,15 @@ a.selected {
 
 .hidden {
   display: none;
+}
+
+.contact-preferences label {
+  position: inherit;
+}
+
+.contact-preferences div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -593,3 +593,35 @@ fieldset .required {
 }
 
 /* Exercise 5 - Form Validation */
+input:invalid {
+  border: 2px solid red;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.pages > a {
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.pages > a:hover:not(.selected) {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+a.selected {
+  background-color: greenyellow;
+}
+
+.hidden {
+  display: none;
+}

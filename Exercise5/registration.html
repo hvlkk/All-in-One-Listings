@@ -28,7 +28,7 @@
       <h1>User Registration</h1>
       <div class="pages">
         <a data-index="0" class="selected">1</a><a data-index="1">2</a
-        ><a data-index="2">3</a><a data-index="3">4</a>
+        ><a data-index="2">3</a><a data-index="3">4</a><a data-index="4">5</a>
       </div>
       <div class="main registration">
         <!-- <form method="post"> -->
@@ -232,6 +232,39 @@
                 name="advertisements"
               />
             </div>
+          </fieldset>
+          <fieldset class="contact-preferences">
+            <legend>Contact Methods</legend>
+            <div>
+              <label for="sms-checkbox">SMS</label>
+              <input type="checkbox" id="sms-checkbox" name="sms-checkbox" />
+            </div>
+            <div>
+              <label for="email-checkbox"> E-mail </label>
+              <input
+                type="checkbox"
+                id="email-checkbox"
+                name="email-checkbox"
+              />
+            </div>
+            <div>
+              <label for="viber-checkbox">Viber</label>
+              <input
+                type="checkbox"
+                id="viber-checkbox"
+                name="viber-checkbox"
+              />
+            </div>
+            <div>
+              <label for="whatsapp-checkbox">WhatsApp</label>
+              <input
+                type="checkbox"
+                id="whatsapp-checkbox"
+                name="whatsapp-checkbox"
+              />
+            </div>
+          </fieldset>
+          <fieldset class="contact-preferences">
             <div>
               <label for="terms-and-conditions"
                 ><span class="required">*</span>
@@ -244,6 +277,223 @@
                 required
               />
             </div>
+          </fieldset>
+        </form>
+        <form action="" class="hidden">
+          <fieldset class="questionnaire">
+            <details open>
+              <summary>What is your gender?</summary>
+              <div>
+                <div>
+                  <label for="q1-a1">Male</label>
+                  <input type="radio" id="q1-a1" name="q1" />
+                </div>
+                <div>
+                  <label for="q1-a2">Female</label>
+                  <input type="radio" id="q1-a2" name="q1" />
+                </div>
+                <div>
+                  <label for="q1-a3">Other</label>
+                  <input type="radio" id="q1-a3" name="q1" />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>What is your age group?</summary>
+              <div>
+                <div>
+                  <label for="q2-a1">Under 18</label>
+                  <input type="radio" id="q2-a1" name="q2" />
+                </div>
+                <div>
+                  <label for="q2-a2">18-25</label>
+                  <input type="radio" id="q2-a2" name="q2" />
+                </div>
+                <div>
+                  <label for="q2-a3">26-35</label>
+                  <input type="radio" id="q2-a3" name="q2" />
+                </div>
+                <div>
+                  <label for="q2-a4">36-45</label>
+                  <input type="radio" id="q2-a4" name="q2" />
+                </div>
+                <div>
+                  <label for="q2-a5">46-60</label>
+                  <input type="radio" id="q2-a5" name="q2" />
+                </div>
+                <div>
+                  <label for="q2-a6">Over 60</label>
+                  <input type="radio" id="q2-a6" name="q2" />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>What is your employment status?</summary>
+              <div>
+                <div>
+                  <label for="q3-a1">Unemployed</label>
+                  <input type="radio" id="q3-a1" name="q3" />
+                </div>
+                <div>
+                  <label for="q3-a2">Part-time employee</label>
+                  <input type="radio" id="q3-a2" name="q3" />
+                </div>
+                <div>
+                  <label for="q3-a3">Full-time employee</label>
+                  <input type="radio" id="q3-a3" name="q3" />
+                </div>
+                <div>
+                  <label for="q3-a4">Retiree</label>
+                  <input type="radio" id="q3-a4" name="q3" />
+                </div>
+                <div>
+                  <label for="q3-a5">Prefer not to answer</label>
+                  <input type="radio" id="q3-a5" name="q3" />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>How often do you visit listing websites?</summary>
+              <div>
+                <div>
+                  <label for="q4-a1">Very rarely</label>
+                  <input type="radio" id="q4-a1" name="q4" />
+                </div>
+                <div>
+                  <label for="q4-a2">Rarely</label>
+                  <input type="radio" id="q4-a2" name="q4" />
+                </div>
+                <div>
+                  <label for="q4-a3">Sometimes</label>
+                  <input type="radio" id="q4-a3" name="q4" />
+                </div>
+                <div>
+                  <label for="q4-a4">Frequently</label>
+                  <input type="radio" id="q4-a4" name="q4" />
+                </div>
+                <div>
+                  <label for="q4-a5">Very frequently</label>
+                  <input type="radio" id="q4-a5" name="q4" />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>
+                How often do you purchase/sell items on listing websites?
+              </summary>
+              <div>
+                <div>
+                  <label for="q5-a1">Very rarely</label>
+                  <input type="radio" id="q5-a1" name="q5" />
+                </div>
+                <div>
+                  <label for="q5-a2">Rarely</label>
+                  <input type="radio" id="q5-a2" name="q5" />
+                </div>
+                <div>
+                  <label for="q5-a3">Sometimes</label>
+                  <input type="radio" id="q5-a3" name="q5" />
+                </div>
+                <div>
+                  <label for="q5-a4">Frequently</label>
+                  <input type="radio" id="q5-a4" name="q5" />
+                </div>
+                <div>
+                  <label for="q5-a5">Very frequently</label>
+                  <input type="radio" id="q5-a5" name="q5" />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>What types of listings most interest you?</summary>
+              <div>
+                <div>
+                  <label for="property-checkbox">Property listings</label>
+                  <input
+                    type="checkbox"
+                    id="property-checkbox"
+                    name="property-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="job-checkbox">Job listings</label>
+                  <input
+                    type="checkbox"
+                    id="job-checkbox"
+                    name="job-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="tech-checkbox">Technology</label>
+                  <input
+                    type="checkbox"
+                    id="tech-checkbox"
+                    name="tech-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="vehicle-checkbox">Vehicles</label>
+                  <input
+                    type="checkbox"
+                    id="vehicle-checkbox"
+                    name="vehicle-checkbox"
+                  />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>What types of vehicles do you use?</summary>
+              <div>
+                <div>
+                  <label for="cars-checkbox">Cars</label>
+                  <input
+                    type="checkbox"
+                    id="cars-checkbox"
+                    name="cars-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="motorcycle-checkbox">Motorcycles</label>
+                  <input
+                    type="checkbox"
+                    id="motorcycle-checkbox"
+                    name="motorcycle-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="boat-checkbox">Boats</label>
+                  <input
+                    type="checkbox"
+                    id="boat-checkbox"
+                    name="boat-checkbox"
+                  />
+                </div>
+                <div>
+                  <label for="rv-checkbox">Recreational Vehicles</label>
+                  <input type="checkbox" id="rv-checkbox" name="rv-checkbox" />
+                </div>
+                <div>
+                  <label for="luxury-vehicle-checkbox">Luxury Vehicles</label>
+                  <input
+                    type="checkbox"
+                    id="luxury-vehicle-checkbox"
+                    name="luxury-vehicle-checkbox"
+                  />
+                </div>
+              </div>
+            </details>
+            <details open>
+              <summary>
+                If you have any feedback about our website or this
+                questionnaire, please provide it below.
+              </summary>
+              <textarea
+                id="feedback-txt"
+                placeholder="Enter your feedback here."
+                rows="2"
+                cols="20"
+              ></textarea>
+            </details>
           </fieldset>
         </form>
       </div>

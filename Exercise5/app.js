@@ -1,5 +1,5 @@
-// Input selectors.
 const form = document.querySelector("form");
+// Input selectors.
 const inEmail = document.getElementById("email-txt");
 const inFirstName = document.getElementById("first-name-txt");
 const inLastName = document.getElementById("last-name-txt");
@@ -26,10 +26,11 @@ const pages = document.querySelector(".pages").children;
 let pageIndex = 0;
 
 // Fill form with test data.
-fillForm();
+// fillForm();
 
 // Page Change Event.
 pageSelector.addEventListener("click", (ev) => {
+  console.log(forms[0]);
   const temp = ev.target.getAttribute("data-index");
   if (temp === pageIndex || temp === undefined || temp === null) {
     return;
@@ -42,6 +43,7 @@ pageSelector.addEventListener("click", (ev) => {
       pages[i].classList.remove("selected");
     }
   }
+  changeForm();
 });
 
 form.addEventListener("submit", (ev) => {
@@ -69,12 +71,13 @@ function checkPasswordMatch() {
   }
 }
 
-function showForm(index) {
+function changeForm() {
   for (let i = 0; i < pages.length; i++) {
-    if (i == index) {
+    if (i == pageIndex) {
       pages[i].classList.add("selected");
+      forms[i].classList.remove("hidden");
     } else {
-      forms[i].classLi;
+      forms[i].classList.add("hidden");
       pages[i].classList.remove("selected");
     }
   }

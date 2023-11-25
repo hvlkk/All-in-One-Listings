@@ -28,11 +28,11 @@
       <h1>User Registration</h1>
       <div class="pages">
         <a data-index="0" class="selected">1</a><a data-index="1">2</a
-        ><a data-index="2">3</a>
+        ><a data-index="2">3</a><a data-index="3">4</a>
       </div>
-      <div class="main">
+      <div class="main registration">
         <!-- <form method="post"> -->
-        <form action="#" hidden="pageIndex==1">
+        <form action="#">
           <fieldset class="personal-info">
             <legend>User details</legend>
             <div>
@@ -103,6 +103,14 @@
             </div>
           </fieldset>
 
+          <div>
+            <button type="submit" class="btn btn-submit">Submit ticket</button>
+            <button class="btn btn-reset">Reset form</button>
+
+            <!-- <button type="reset" class="btn btn-reset">Reset form</button> -->
+          </div>
+        </form>
+        <form action="" class="hidden">
           <fieldset class="user-address">
             <legend>Address</legend>
             <div>
@@ -165,7 +173,8 @@
               />
             </div>
           </fieldset>
-
+        </form>
+        <form action="" class="hidden">
           <fieldset class="user-authentication">
             <legend>User info</legend>
             <div>
@@ -199,12 +208,41 @@
               />
             </div>
           </fieldset>
-          <div>
-            <button type="submit" class="btn btn-submit">Submit ticket</button>
-            <button class="btn btn-reset">Reset form</button>
-
-            <!-- <button type="reset" class="btn btn-reset">Reset form</button> -->
-          </div>
+        </form>
+        <form action="" class="hidden">
+          <fieldset class="user-authentication">
+            <legend>User info</legend>
+            <div>
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+                required
+              />
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+            <div>
+              <label for="password-confirmation">Confirm password</label>
+              <input
+                type="password"
+                id="password-confirmation"
+                name="password-confirmation"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+          </fieldset>
         </form>
       </div>
     </main>

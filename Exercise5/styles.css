@@ -377,7 +377,7 @@ footer {
 
 nav {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   font-size: 0.75rem;
   max-width: 100%;
@@ -588,7 +588,17 @@ fieldset .required {
   }
 
   form {
-    max-width: 1300px;
+    max-width: 1000px;
+  }
+
+  .registration fieldset {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+
+  .registration .user-authentication {
+    display: flex;
+    width: 80%;
   }
 }
 

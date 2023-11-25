@@ -475,15 +475,10 @@ fieldset {
 fieldset > div {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   position: relative;
   padding-top: 1.5rem;
   width: 90%;
-}
-
-fieldset > div > label {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 fieldset > div > input {
@@ -510,10 +505,23 @@ fieldset .required {
   font-size: 2em;
 }
 
+details > div > div {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
 /* Exercise 4 - Media Queries */
 /* 480px - 768px */
 
 @media (min-width: 480px) {
+  .questionnaire input[type="checkbox"],
+  .questionnaire input[type="radio"] {
+    transform: scale(1.2);
+  }
+
   .categories,
   .listings {
     grid-template-columns: repeat(2, minmax(auto, 1fr));
@@ -549,6 +557,10 @@ fieldset .required {
     margin-bottom: 3rem;
   }
 
+  form#contact {
+    flex-direction: column;
+  }
+
   form > div {
     position: absolute;
     bottom: -60px;
@@ -565,9 +577,22 @@ fieldset .required {
   img {
     max-height: 236px;
   }
+
+  .questionnaire > details > div > div {
+    font-size: 1rem;
+  }
+
+  summary {
+    font-size: 1.2rem;
+  }
 }
 
 @media (min-width: 1000px) {
+  .questionnaire input[type="checkbox"],
+  .questionnaire input[type="radio"] {
+    transform: scale(1.3);
+  }
+
   .categories,
   .listings {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -580,12 +605,17 @@ fieldset .required {
 
   form {
     max-width: 1000px;
+    font-size: 0.9rem;
   }
 
   .registration .personal-info,
   .registration .user-address {
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+
+  legend {
+    font-size: 1.2rem;
   }
 
   .registration .personal-info legend,
@@ -645,10 +675,6 @@ a.selected {
   grid-template-columns: repeat(2, minmax(120px, 1fr));
 }
 
-.contact-preferences label {
-  position: inherit;
-}
-
 .contact-preferences div {
   display: flex;
   flex-direction: column;
@@ -658,4 +684,37 @@ a.selected {
 
 #contact > fieldset > div {
   padding-top: 0.5rem;
+}
+
+.questionnaire {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#form-questionnaire {
+  padding: 0.5rem;
+}
+
+details > div {
+  margin: 0.5rem;
+  width: 100%;
+}
+
+summary {
+  text-align: left;
+}
+
+textarea {
+  width: 90%;
+  border-radius: 10px;
+}
+
+details {
+  width: 100%;
+}
+
+#textarea-container {
+  padding-top: 0.5rem;
+  width: 85%;
 }

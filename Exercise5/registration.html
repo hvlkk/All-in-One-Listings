@@ -211,7 +211,7 @@
               </label>
               <input
                 type="checkbox"
-                id="advertisements"
+                id="advertisements-checkbox"
                 name="advertisements"
               />
             </div>
@@ -219,11 +219,7 @@
               <label for="updates">
                 I want to be notified about major website updates
               </label>
-              <input
-                type="checkbox"
-                id="advertisements"
-                name="advertisements"
-              />
+              <input type="checkbox" id="updates-checkbox" name="updates" />
             </div>
           </fieldset>
           <fieldset id="contact-methods" class="contact-preferences">
@@ -265,14 +261,14 @@
               </label>
               <input
                 type="checkbox"
-                id="terms-and-conditions"
+                id="terms-checkbox"
                 name="terms-and-conditions"
                 required
               />
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden">
+        <form action="" class="hidden" id="form-questionnaire">
           <fieldset class="questionnaire">
             <details open>
               <summary>What is your gender?</summary>
@@ -480,19 +476,26 @@
                 If you have any feedback about our website or this
                 questionnaire, please provide it below.
               </summary>
-              <textarea
-                id="feedback-txt"
-                placeholder="Enter your feedback here."
-                rows="2"
-                cols="20"
-              ></textarea>
+              <div>
+                <div id="textarea-container">
+                  <textarea
+                    id="feedback-txt"
+                    placeholder="Enter your feedback here."
+                    rows="2"
+                    cols="30"
+                  ></textarea>
+                </div>
+              </div>
             </details>
           </fieldset>
         </form>
         <div class="buttons">
           <button id="btn-previous" class="btn">Previous</button>
+          <button id="btn-submit" class="btn btn-submit" disabled>
+            Submit
+          </button>
           <button id="btn-next" class="btn">Next</button>
-          <button id="btn-submit" class="btn btn-submit">Submit</button>
+        </div>
       </div>
     </main>
     <footer>

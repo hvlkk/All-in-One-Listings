@@ -5,14 +5,26 @@ const inFirstName = document.getElementById("first-name-txt");
 const inLastName = document.getElementById("last-name-txt");
 const inPhone = document.getElementById("telephone-txt");
 const inDOB = document.getElementById("date-of-birth");
+// Form 2.
 const inAddress1 = document.getElementById("address-line-1");
 const inAddress2 = document.getElementById("address-line-2");
 const inCity = document.getElementById("city");
 const inCountry = document.getElementById("country");
 const inPostCode = document.getElementById("postal-code");
+// Form 3.
 const inUsername = document.getElementById("username");
 const inPassword = document.getElementById("password");
 const inConfirmPassword = document.getElementById("password-confirmation");
+// Form 4.
+const inCheckboxAds = document.getElementById("advertisements-checkbox");
+const inCheckboxNews = document.getElementById("updates-checkbox");
+const inCheckboxSMS = document.getElementById("sms-checkbox");
+const inCheckboxEmail = document.getElementById("email-checkbox");
+const inCheckboxViber = document.getElementById("viber-checkbox");
+const inCheckboxWhatsApp = document.getElementById("whatsapp-checkbox");
+const inCheckboxTerms = document.getElementById("terms-checkbox");
+// Form 5.
+
 // Button selectors.
 const pageSelector = document.querySelector(".pages");
 const btnPrevious = document.getElementById("btn-previous");
@@ -28,7 +40,7 @@ const pages = document.querySelector(".pages").children;
 let pageIndex = 0;
 
 // Fill form with test data.
-// fillForm();
+fillForm();
 
 // Page Change Event.
 pageSelector.addEventListener("click", (ev) => {
@@ -71,6 +83,11 @@ btnNext.addEventListener("click", (ev) => {
   }
   pageIndex++;
   changeForm();
+});
+
+btnSubmit.addEventListener("click", (ev) => {
+  ev.preventDefault();
+  console.log("Submit");
 });
 
 // btnReset.addEventListener("click", (ev) => {

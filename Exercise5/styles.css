@@ -508,7 +508,10 @@ fieldset > div > input {
 
 fieldset > legend {
   font-family: MyLightFont;
-  margin: 0.5rem 0;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 fieldset .required {
@@ -591,21 +594,21 @@ fieldset .required {
     max-width: 1000px;
   }
 
-  .registration fieldset {
+  .registration .personal-info,
+  .registration .user-address {
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
 
-  .registration fieldset legend {
+  .registration .personal-info legend,
+  .registration .user-address legend {
     grid-column: 1 / -1;
+    text-align: center;
   }
 
   .registration .user-authentication,
-  .registration .terms-and-conditions {
-    display: flex;
+  .registration .contact-preferences {
     width: 80%;
-    justify-content: center;
-    align-items: center;
   }
 }
 

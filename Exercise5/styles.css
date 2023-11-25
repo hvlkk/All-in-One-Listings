@@ -346,10 +346,6 @@ footer {
   text-align: center;
 }
 
-.category {
-  /* height: 510px; */
-}
-
 .category:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
@@ -515,6 +511,10 @@ fieldset > legend {
   margin: 0.5rem 0;
 }
 
+fieldset .required {
+  color: brown;
+}
+
 #intro > h1 {
   font-size: 2em;
 }
@@ -591,3 +591,5 @@ fieldset > legend {
     max-width: 1300px;
   }
 }
+
+/* Exercise 5 - Form Validation */

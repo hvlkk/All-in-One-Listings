@@ -102,14 +102,16 @@ function onSubmit() {
     });
   });
 
-    fetch("http://localhost:3000", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-      .catch((err) => console.log(err));
-      
+  fetch("http://localhost:8080/api/submit", {
+    method: "POST",
+    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 }
 
 function checkPasswordMatch() {

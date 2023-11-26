@@ -658,12 +658,13 @@ textarea:valid {
 }
 
 .pages > a:hover:not(.selected) {
-  background-color: #f5f5f5;
+  opacity: 0.5;
   cursor: pointer;
 }
 
-a.selected {
+.pages > a.selected {
   background-color: lightblue;
+  color: black;
 }
 
 .hidden {
@@ -717,4 +718,14 @@ details {
 #textarea-container {
   padding-top: 0.5rem;
   width: 85%;
+}
+
+.pages > .valid {
+  background-color: green;
+  color: white;
+}
+
+.pages > .invalid {
+  background-color: red;
+  color: white;
 }

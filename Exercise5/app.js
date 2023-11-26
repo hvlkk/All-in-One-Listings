@@ -1,4 +1,3 @@
-const form = document.querySelector("form");
 // Input selectors.
 const inEmail = document.getElementById("email-txt");
 const inFirstName = document.getElementById("first-name-txt");
@@ -38,65 +37,80 @@ const forms = document.querySelectorAll("form");
 const pages = document.querySelector(".pages").children;
 // Page index.
 let pageIndex = 0;
+// Required inputs.
+const requiredInputs = document.querySelectorAll("input[required]");
 
 // Fill form with test data.
 fillForm();
 
-// Page Change Event.
-pageSelector.addEventListener("click", (ev) => {
-  console.log(forms[0]);
-  const temp = ev.target.getAttribute("data-index");
-  if (temp === pageIndex || temp === undefined || temp === null) {
-    return;
-  }
-  pageIndex = temp;
-  for (let i = 0; i < pages.length; i++) {
-    if (i == pageIndex) {
-      pages[i].classList.add("selected");
+requiredInputs.forEach((input) => {
+  input.addEventListener("change", (ev) => {
+    if ([...forms].every((form) => form.checkValidity())) {
+      btnSubmit.disabled = false;
     } else {
-      pages[i].classList.remove("selected");
+      btnSubmit.disabled = true;
     }
-  }
-  changeForm();
+  });
 });
 
-form.addEventListener("submit", (ev) => {
-  if (!ev.target.checkValidity()) {
-    ev.preventDefault();
-    console.log("Form is invalid - prevent submit");
-  }
-  ev.preventDefault();
-  console.log("Form is valid - submit");
+// Page Change Event.
+pageSelector.addEventListener("click", (ev) => {
+  const temp = ev.target.getAttribute("data-index");
+  changeForm(temp);
 });
 
 btnPrevious.addEventListener("click", (ev) => {
-  if (pageIndex == 0) {
-    return;
-  }
-  pageIndex--;
-  changeForm();
+  changeForm(pageIndex - 1);
 });
 
 btnNext.addEventListener("click", (ev) => {
-  if (pageIndex == pages.length - 1) {
-    return;
-  }
-  pageIndex++;
-  changeForm();
+  changeForm(pageIndex + 1);
 });
 
 btnSubmit.addEventListener("click", (ev) => {
   ev.preventDefault();
-  console.log("Submit");
+  onSubmit();
 });
-
-// btnReset.addEventListener("click", (ev) => {
-//   ev.preventDefault();
-//   console.log(inEmail.checkValidity());
-// });
 
 inConfirmPassword.addEventListener("input", checkPasswordMatch);
 inPassword.addEventListener("input", checkPasswordMatch);
+
+// function checkEligibility() {
+//   if (forms[pageIndex].checkValidity()) {
+//     btnNext.disabled = false;
+//     btnSubmit.disabled = false;
+//   } else {
+//     btnNext.disabled = true;
+//     btnSubmit.disabled = true;
+//   }
+// }
+
+function onSubmit() {
+  const formData = new FormData();
+  forms.forEach((form) => {
+    form.querySelectorAll("input").forEach((input) => {
+      if (input.type === "checkbox") formData.append(input.name, input.checked);
+      else if (input.type === "radio") {
+        if (input.checked) formData.append(input.name, input.id);
+      } else {
+        formData.append(input.name, input.value);
+      }
+    });
+
+    form.querySelectorAll("textarea").forEach((txt) => {
+      formData.append(txt.name, txt.value);
+    });
+  });
+
+    fetch("http://localhost:3000", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+      .catch((err) => console.log(err));
+      
+}
 
 function checkPasswordMatch() {
   if (inPassword.value != inConfirmPassword.value) {
@@ -106,16 +120,27 @@ function checkPasswordMatch() {
   }
 }
 
-function changeForm() {
-  for (let i = 0; i < pages.length; i++) {
-    if (i == pageIndex) {
-      pages[i].classList.add("selected");
-      forms[i].classList.remove("hidden");
-    } else {
-      forms[i].classList.add("hidden");
-      pages[i].classList.remove("selected");
-    }
+function changeForm(newIndex) {
+  if (
+    newIndex === pageIndex ||
+    newIndex === undefined ||
+    newIndex === null ||
+    newIndex < 0 ||
+    newIndex >= pages.length
+  )
+    return;
+  if (forms[pageIndex].checkValidity()) {
+    pages[pageIndex].classList.add("valid");
+    pages[pageIndex].classList.remove("invalid");
+  } else {
+    pages[pageIndex].classList.remove("valid");
+    pages[pageIndex].classList.add("invalid");
   }
+  pages[pageIndex].classList.remove("selected");
+  forms[pageIndex].classList.add("hidden");
+  forms[newIndex].classList.remove("hidden");
+  pages[newIndex].classList.add("selected");
+  pageIndex = newIndex;
 }
 
 // Fill form with test data.

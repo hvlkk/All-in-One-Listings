@@ -32,7 +32,7 @@
       </div>
       <div class="main registration">
         <!-- <form method="post"> -->
-        <form action="#">
+        <form action="/submit" method="post">
           <fieldset class="personal-info">
             <legend>User details</legend>
             <div>
@@ -103,7 +103,7 @@
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden">
+        <form action="/submit" method="post" class="hidden">
           <fieldset class="user-address">
             <legend>Address</legend>
             <div>
@@ -167,7 +167,7 @@
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden">
+        <form action="/submit" method="post" class="hidden">
           <fieldset class="user-authentication">
             <legend>User info</legend>
             <div>
@@ -202,7 +202,7 @@
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden" id="contact">
+        <form action="/submit" method="post" class="hidden" id="contact">
           <fieldset class="contact-preferences">
             <legend>Contact Preferences</legend>
             <div>
@@ -272,7 +272,12 @@
             </div>
           </fieldset>
         </form>
-        <form action="" class="hidden" id="form-questionnaire">
+        <form
+          action="/submit"
+          method="post"
+          class="hidden"
+          id="form-questionnaire"
+        >
           <fieldset class="questionnaire">
             <details open>
               <summary>What is your gender?</summary>
@@ -487,6 +492,7 @@
                     placeholder="Enter your feedback here."
                     rows="2"
                     cols="30"
+                    name="feedback"
                   ></textarea>
                 </div>
               </div>

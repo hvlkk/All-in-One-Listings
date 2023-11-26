@@ -614,6 +614,7 @@ dd:nth-of-type(n) {
     gap: 2rem;
   }
 
+  /* Make the form get 80% of its parent width */
   form {
     flex-direction: row;
     width: 80%;
@@ -626,10 +627,12 @@ dd:nth-of-type(n) {
     bottom: -50px;
   }
 
+  /* Make social media images bigger */
   .company-social-media > ul > li > a > img {
     height: 3rem;
   }
 
+  /* Make footer content font size bigger than smartphone */
   footer {
     font-size: 0.9rem;
   }
@@ -640,16 +643,19 @@ dd:nth-of-type(n) {
 }
 
 @media (min-width: 1000px) {
+  /* Implementing 3 columns for listings and categories */
   .categories,
   .listings {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
   }
 
+  /* Make the team member cards get more screen estate */
   .team-members {
     display: flex;
     gap: 2rem;
   }
 
+  /* Assign a maximum width to the form for better UX */
   form {
     max-width: 1300px;
   }

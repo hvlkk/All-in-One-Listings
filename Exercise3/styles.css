@@ -38,6 +38,13 @@ body {
   overflow-x: hidden;
 }
 
+main.detailed-listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 figcaption {
   font-family: MyBoldFont;
 }
@@ -322,16 +329,20 @@ body {
   max-height: 100%;
 }
 
+/* Making the pictures of the apartment a 2x2 grid*/
 .apartment {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: 2.5rem;
   padding: 1rem;
 }
 
 .apartment > figcaption {
   margin-top: 1rem;
 }
+
+/* Adding a hover effect to the apartment pictures */
 .apartment > img:hover {
   transform: scale(1.1);
 }
@@ -340,7 +351,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 80%; */
 }
 
 nav {
@@ -385,7 +395,6 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* gap: 0.5rem; */
 }
 
 #team > h2 {
@@ -473,4 +482,33 @@ fieldset .required {
 
 #intro > h1 {
   font-size: 2em;
+}
+
+/* Organising the listing details definition list as a grid */
+.listing-details {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+/* Organising columns and alignment for the dd and dt childs of listing details  */
+dt {
+  grid-column: 1 / 2;
+  text-align: center;
+}
+
+dd {
+  grid-column: 2 / 3;
+  text-align: center;
+}
+
+/* And similarly organising the rows */
+dt:nth-of-type(n),
+dd:nth-of-type(n) {
+  grid-row: n / n + 1;
+}
+
+/* adding a small margin between the listing details and the table that follows */
+.detailed-listing > .listing-details {
+  margin-bottom: 2rem;
 }

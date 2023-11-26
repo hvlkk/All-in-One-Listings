@@ -534,7 +534,7 @@ fieldset .required {
 
   .listing {
     height: 550px;
-    padding-bottom: auto;
+    padding-bottom: 1rem;
   }
 
   nav {

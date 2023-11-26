@@ -797,10 +797,7 @@ details {
   color: white;
 }
 
-.registration {
-  position: relative;
-}
-
+/* Use red color for invalid input custom errors */
 .error {
   padding-top: 10px;
   color: red;

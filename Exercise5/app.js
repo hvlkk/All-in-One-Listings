@@ -34,7 +34,7 @@ const btnSubmit = document.getElementById("btn-submit");
 const forms = document.querySelectorAll("form");
 
 // Page selectors.
-const pages = document.querySelector(".pages")?.children;
+const pages = document.querySelector(".pages").children;
 // Page index.
 let pageIndex = 0;
 // Required inputs.

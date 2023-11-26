@@ -85,6 +85,9 @@
                 name="telephone"
                 placeholder="+30 6901234567"
                 autocomplete="tel"
+                minlength="3"
+                maxlength="15"
+                pattern="^(\+\d{2,3}\s?)?\d{10}$"
                 required
               />
             </div>
@@ -509,6 +512,9 @@
             </details>
           </fieldset>
         </form>
+        <div id="error-message">
+          <p>Test</p>
+        </div>
         <div class="buttons">
           <button id="btn-previous" class="btn">Previous</button>
           <button id="btn-submit" class="btn btn-submit" disabled>

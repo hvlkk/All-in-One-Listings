@@ -796,3 +796,12 @@ details {
   background-color: red;
   color: white;
 }
+
+.registration {
+  position: relative;
+}
+
+.error {
+  padding-top: 10px;
+  color: red;
+}

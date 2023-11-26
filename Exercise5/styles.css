@@ -604,10 +604,12 @@ details > div > div {
     bottom: -60px;
   }
 
+  /* Make images bigger than smartphone */
   .company-social-media > ul > li > a > img {
     height: 3rem;
   }
 
+  /* Adjust footer's content font size */
   footer {
     font-size: 0.9rem;
   }
@@ -624,13 +626,15 @@ details > div > div {
     font-size: 1.2rem;
   }
 }
-
+/* Laptop width */
 @media (min-width: 1000px) {
+  /* Make checkboxes and radio buttons bigger */
   .questionnaire input[type="checkbox"],
   .questionnaire input[type="radio"] {
     transform: scale(1.3);
   }
 
+  /* Use 3 columns for categories and listings */
   .categories,
   .listings {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -641,27 +645,32 @@ details > div > div {
     gap: 2rem;
   }
 
+  /* Set a max width to the forms for better UX */
   form {
     max-width: 1000px;
     font-size: 0.9rem;
   }
 
+  /* Use a grid of 2 columns for the inputs inside these elements */
   .registration .personal-info,
   .registration .user-address {
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
 
+  /* Adjust the size of the legends for bigger screens */
   legend {
     font-size: 1.2rem;
   }
 
+  /* Assign to the legend the full row length by using all the columns */
   .registration .personal-info legend,
   .registration .user-address legend {
     grid-column: 1 / -1;
     text-align: center;
   }
 
+  /* Add custom width to push the content to the center of the view */
   .registration .user-authentication,
   .registration .contact-preferences {
     width: 80%;
@@ -669,16 +678,20 @@ details > div > div {
 }
 
 /* Exercise 5 - Form Validation */
+
+/* Mark invalid input and textarea with red border */
 input:invalid,
 textarea:invalid {
   border: 2px solid red;
 }
 
+/* Mark valid input and textarea with green border */
 input:valid,
 textarea:valid {
   border: 1px solid green;
 }
 
+/* Parent of the pages, center each page inside */
 .pages {
   display: flex;
   justify-content: center;
@@ -687,6 +700,7 @@ textarea:valid {
   margin: 1rem 0;
 }
 
+/* Style the pages with padding and rounded edges */
 .pages > a {
   padding: 0.5rem;
   border: 1px solid black;
@@ -695,25 +709,30 @@ textarea:valid {
   color: black;
 }
 
+/* Hover effect for pages except the selected */
 .pages > a:hover:not(.selected) {
   opacity: 0.5;
   cursor: pointer;
 }
 
+/* Make the selected page light blue color to stand out */
 .pages > a.selected {
   background-color: lightblue;
   color: black;
 }
 
+/* Class used to hide forms */
 .hidden {
   display: none;
 }
 
+/* Implementation of 2 column grid for better UX */
 #contact-methods {
   display: grid;
   grid-template-columns: repeat(2, minmax(120px, 1fr));
 }
 
+/* Align the content of the contact methods to the center */
 .contact-preferences div {
   display: flex;
   flex-direction: column;
@@ -721,48 +740,58 @@ textarea:valid {
   align-items: center;
 }
 
+/* Add some padding for better readability */
 #contact > fieldset > div {
   padding-top: 0.5rem;
 }
 
+/* Align the content vertically, make the elements start from the left. */
 .questionnaire {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+/* Add minor padding in a way where the content doesnt collide with the edges of the form */
 #form-questionnaire {
   padding: 0.5rem;
 }
 
+/* Add minor margin for better readability */
 details > div {
   margin: 0.5rem;
   width: 100%;
 }
 
+/* Align the content of the details to the left */
 summary {
   text-align: left;
 }
 
+/* Use rounded edges for textarea */
 textarea {
   width: 90%;
   border-radius: 10px;
 }
 
+/* Append the full width to the details element */
 details {
   width: 100%;
 }
 
+/* Make the parent of textarea have some spacing from the top, append enough width for better UX */
 #textarea-container {
   padding-top: 0.5rem;
   width: 85%;
 }
 
+/* Mark pages of valid forms with green */
 .pages > .valid {
   background-color: green;
   color: white;
 }
 
+/* Mark pages of invalid forms with red */
 .pages > .invalid {
   background-color: red;
   color: white;

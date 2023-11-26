@@ -150,7 +150,13 @@
                 name="city"
                 autocomplete="address-level2"
                 placeholder="Athens"
+                list="city-list"
               />
+              <datalist id="city-list">
+                <option value="Athens"></option>
+                <option value="Thessaloniki"></option>
+                <option value="Heraklion"></option>
+              </datalist>
             </div>
             <div>
               <label for="country"
@@ -162,8 +168,13 @@
                 name="country"
                 autocomplete="country-name"
                 placeholder="Greece"
+                list="country-list"
                 required
               />
+              <datalist id="country-list">
+                <option value="Greece"></option>
+                <option value="Cyprus"></option>
+              </datalist>
             </div>
           </fieldset>
         </form>

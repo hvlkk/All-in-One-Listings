@@ -141,7 +141,8 @@ function checkPasswordMatch() {
 
 // Changing the form. We are hiding the current form and showing the new one.
 // We are also changing the selected page button.
-function changeForm(newIndex) {
+function changeForm(index) {
+  const newIndex = +index;
   if (
     newIndex === pageIndex ||
     newIndex === undefined ||
@@ -159,7 +160,7 @@ function changeForm(newIndex) {
   }
   pages[pageIndex].classList.remove("selected");
   forms[pageIndex].classList.add("hidden");
-  forms[newIndex].classList.remove("hidden");
+  forms[newIndex].classList?.remove("hidden");
   pages[newIndex].classList.add("selected");
   pageIndex = newIndex;
 }

@@ -45,6 +45,11 @@ if (forms.length) {
   fillForm();
 }
 
+inConfirmPassword.addEventListener("change", checkPasswordMatch);
+inPassword.addEventListener("change", checkPasswordMatch);
+inDOB.addEventListener("change", validateAge);
+inPhone.addEventListener("change", validatePhone);
+
 requiredInputs.forEach((input) => {
   input.addEventListener("change", (ev) => {
     if ([...forms].every((form) => form.checkValidity())) {
@@ -74,18 +79,37 @@ btnSubmit.addEventListener("click", (ev) => {
   onSubmit();
 });
 
-inConfirmPassword.addEventListener("input", checkPasswordMatch);
-inPassword.addEventListener("input", checkPasswordMatch);
+function validateAge() {
+  const today = new Date();
+  const birthDate = new Date(inDOB.value);
+  const age = today.getFullYear() - birthDate.getFullYear();
+  const month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
+    age--;
+  if (age < 18) {
+    inDOB.setCustomValidity("You must be 18 years or older to register.");
+    if (inDOB.parentNode.querySelector(".error")) return;
+    const div = document.createElement("div");
+    div.classList.add("error");
+    div.innerText = "You must be 18 years or older to register.";
+    inDOB.parentNode.appendChild(div);
+  } else {
+    inDOB.setCustomValidity("");
+    inDOB.parentNode.querySelector(".error").remove();
+  }
+}
 
-// function checkEligibility() {
-//   if (forms[pageIndex].checkValidity()) {
-//     btnNext.disabled = false;
-//     btnSubmit.disabled = false;
-//   } else {
-//     btnNext.disabled = true;
-//     btnSubmit.disabled = true;
-//   }
-// }
+function validatePhone() {
+  if (!inPhone.checkValidity()) {
+    if (inPhone.parentNode.querySelector(".error")) return;
+    const div = document.createElement("div");
+    div.classList.add("error");
+    div.innerText = "Invalid phone number.";
+    inPhone.parentNode.appendChild(div);
+  } else {
+    inPhone.parentNode.querySelector(".error").remove();
+  }
+}
 
 function onSubmit() {
   const formData = new FormData();
@@ -123,8 +147,14 @@ function onSubmit() {
 function checkPasswordMatch() {
   if (inPassword.value != inConfirmPassword.value) {
     inConfirmPassword.setCustomValidity("Password mismatch");
+    if (inConfirmPassword.parentNode.querySelector(".error")) return;
+    const div = document.createElement("div");
+    div.classList.add("error");
+    div.innerText = "Password mismatch";
+    inConfirmPassword.parentNode.appendChild(div);
   } else {
     inConfirmPassword.setCustomValidity("");
+    inConfirmPassword.parentNode.querySelector(".error").remove();
   }
 }
 

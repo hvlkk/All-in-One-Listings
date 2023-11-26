@@ -1,55 +1,43 @@
 // Input selectors.
-const inEmail = document.getElementById("email-txt");
-const inFirstName = document.getElementById("first-name-txt");
-const inLastName = document.getElementById("last-name-txt");
 const inPhone = document.getElementById("telephone-txt");
 const inDOB = document.getElementById("date-of-birth");
-// Form 2.
-const inAddress1 = document.getElementById("address-line-1");
-const inAddress2 = document.getElementById("address-line-2");
-const inCity = document.getElementById("city");
-const inCountry = document.getElementById("country");
-const inPostCode = document.getElementById("postal-code");
-// Form 3.
-const inUsername = document.getElementById("username");
 const inPassword = document.getElementById("password");
 const inConfirmPassword = document.getElementById("password-confirmation");
-// Form 4.
-const inCheckboxAds = document.getElementById("advertisements-checkbox");
-const inCheckboxNews = document.getElementById("updates-checkbox");
-const inCheckboxSMS = document.getElementById("sms-checkbox");
-const inCheckboxEmail = document.getElementById("email-checkbox");
-const inCheckboxViber = document.getElementById("viber-checkbox");
-const inCheckboxWhatsApp = document.getElementById("whatsapp-checkbox");
-const inCheckboxTerms = document.getElementById("terms-checkbox");
-// Form 5.
-
 // Button selectors.
 const pageSelector = document.querySelector(".pages");
 const btnPrevious = document.getElementById("btn-previous");
 const btnNext = document.getElementById("btn-next");
 const btnSubmit = document.getElementById("btn-submit");
-
 // Form selectors.
 const forms = document.querySelectorAll("form");
-
-// Page selectors.
+// Page selector.
 const pages = document.querySelector(".pages").children;
 // Page index.
 let pageIndex = 0;
 // Required inputs.
 const requiredInputs = document.querySelectorAll("input[required]");
-
-// Fill form with test data.
-if (forms.length) {
-  fillForm();
-}
-
+// Input event Listeners.
 inConfirmPassword.addEventListener("change", checkPasswordMatch);
 inPassword.addEventListener("change", checkPasswordMatch);
 inDOB.addEventListener("change", validateAge);
 inPhone.addEventListener("change", validatePhone);
+// Form changing event listeners.
+pageSelector.addEventListener("click", (ev) => {
+  const temp = ev.target.getAttribute("data-index");
+  changeForm(temp);
+});
+btnPrevious.addEventListener("click", (ev) => {
+  changeForm(pageIndex - 1);
+});
+btnNext.addEventListener("click", (ev) => {
+  changeForm(pageIndex + 1);
+});
+btnSubmit.addEventListener("click", (ev) => {
+  ev.preventDefault();
+  onSubmit();
+});
 
+// Validating required inputs. If all are valid, enable submit button.
 requiredInputs.forEach((input) => {
   input.addEventListener("change", (ev) => {
     if ([...forms].every((form) => form.checkValidity())) {
@@ -60,25 +48,9 @@ requiredInputs.forEach((input) => {
   });
 });
 
-// Page Change Event.
-pageSelector.addEventListener("click", (ev) => {
-  const temp = ev.target.getAttribute("data-index");
-  changeForm(temp);
-});
-
-btnPrevious.addEventListener("click", (ev) => {
-  changeForm(pageIndex - 1);
-});
-
-btnNext.addEventListener("click", (ev) => {
-  changeForm(pageIndex + 1);
-});
-
-btnSubmit.addEventListener("click", (ev) => {
-  ev.preventDefault();
-  onSubmit();
-});
-
+// Validating user age. Must be 18 or older.
+// If the user is younger than 18, we are setting a custom validity message.
+// If the user is 18 or older, we are removing the custom validity message.
 function validateAge() {
   const today = new Date();
   const birthDate = new Date(inDOB.value);
@@ -95,10 +67,13 @@ function validateAge() {
     inDOB.parentNode.appendChild(div);
   } else {
     inDOB.setCustomValidity("");
-    inDOB.parentNode.querySelector(".error").remove();
+    inDOB.parentNode.querySelector(".error")?.remove();
   }
 }
 
+// Validating phone number.
+// If the phone number is invalid, we are setting a custom validity message.
+// If the phone number is valid, we are removing the custom validity message.
 function validatePhone() {
   if (!inPhone.checkValidity()) {
     if (inPhone.parentNode.querySelector(".error")) return;
@@ -107,10 +82,13 @@ function validatePhone() {
     div.innerText = "Invalid phone number.";
     inPhone.parentNode.appendChild(div);
   } else {
-    inPhone.parentNode.querySelector(".error").remove();
+    inPhone.parentNode.querySelector(".error")?.remove();
   }
 }
 
+// Complex form submission. Using FormData to submit all forms at once.
+// We are retrieving all input values and appending them to the FormData object.
+// We are then sending the FormData object to the server.
 function onSubmit() {
   const formData = new FormData();
   forms.forEach((form) => {
@@ -144,6 +122,9 @@ function onSubmit() {
     });
 }
 
+// Validating the password and confirm password fields.
+// If they do not match, we are setting a custom validity message.
+// If they do match, we are removing the custom validity message.
 function checkPasswordMatch() {
   if (inPassword.value != inConfirmPassword.value) {
     inConfirmPassword.setCustomValidity("Password mismatch");
@@ -158,6 +139,8 @@ function checkPasswordMatch() {
   }
 }
 
+// Changing the form. We are hiding the current form and showing the new one.
+// We are also changing the selected page button.
 function changeForm(newIndex) {
   if (
     newIndex === pageIndex ||
@@ -179,21 +162,4 @@ function changeForm(newIndex) {
   forms[newIndex].classList.remove("hidden");
   pages[newIndex].classList.add("selected");
   pageIndex = newIndex;
-}
-
-// Fill form with test data.
-function fillForm() {
-  inEmail.value = "papatzopoulos@gmail.com";
-  inFirstName.value = "John";
-  inLastName.value = "Papatzopoulos";
-  inPhone.value = "1234567890";
-  inDOB.value = "1990-01-01";
-  inAddress1.value = "123 Main Street";
-  inAddress2.value = "Apt 1";
-  inCity.value = "Toronto";
-  inCountry.value = "Canada";
-  inPostCode.value = "M1M 1M1";
-  inUsername.value = "johnp";
-  inPassword.value = "password";
-  inConfirmPassword.value = "password1";
 }

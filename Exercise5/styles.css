@@ -575,6 +575,11 @@ details > div > div {
 
 /* Tablet width starts here */
 @media (min-width: 480px) {
+  div.buttons {
+    flex-direction: row;
+    transform: scale(1);
+  }
+
   /* Make checkboxes and radio buttons bigger */
   .questionnaire input[type="checkbox"],
   .questionnaire input[type="radio"] {
@@ -844,4 +849,10 @@ details {
 .error {
   padding-top: 10px;
   color: red;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.8);
 }

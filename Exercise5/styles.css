@@ -95,11 +95,8 @@ form {
   margin-bottom: 0.3rem;
 }
 
-p {
-  text-align: center;
-}
-
-p.listing-number {
+p,
+#team > div > article {
   text-align: center;
 }
 
@@ -126,19 +123,22 @@ a:hover {
   text-decoration: underline;
 }
 
-/*  When an anchor tag is visited/active, the following styles will be applied.
+/*  When an anchor tag is visited/active/link, the following styles will be applied.
 
 */
 a:visited {
   color: rgb(128, 0, 70);
 }
 
-a:active {
+/* Reduce opacity  */
+a:active,
+.btn:hover {
   opacity: 0.7;
 }
 
+/*  */
 a:link {
-  color: #8b4513; /* Soft blue color */
+  color: #8b4513;
 }
 
 /*  spin -> Creating a custom animation called sway. 
@@ -174,6 +174,7 @@ a:link {
   opacity: 0.8;
 }
 
+/* Our default style for buttons.*/
 button {
   background-color: #f5f5f5;
   border: 1px solid black;
@@ -184,20 +185,19 @@ button {
   cursor: pointer;
 }
 
+/* Coloring green the button used for submitting. */
 .btn-submit {
   background-color: rgb(98, 174, 91);
   color: white;
 }
 
+/* Coloring red the button used for resetting. */
 .btn-reset {
   background-color: rgb(160, 52, 52);
   color: white;
 }
 
-.btn:hover {
-  opacity: 0.7;
-}
-
+/* Highlighting with red color the price trend. */
 #price-trend {
   color: red;
   font-weight: normal;
@@ -209,28 +209,34 @@ table {
   width: 350px;
 }
 
+/* Align text to the left */
 tr > * {
-  text-align: start;
+  text-align: left;
   border: 1px solid black;
 }
 
+/* Make characteristics stand out with bold text */
 .listing-characteristics {
   font-weight: bold;
 }
 
+/* Make the caption stand out */
 table > caption {
   font-weight: bold;
   font-size: 1.1rem;
 }
 
+/* Add padding to the content of the table rows to make them more readable */
 tr > * {
   padding: 5px;
 }
 
+/* Give the table rows alternate color, utilizing the previous table color and this rule */
 tr:nth-child(odd) {
   background-color: #fbe8d2;
 }
 
+/*  Implement card like listings, with border, rounded edges, background color */
 .listing {
   font-size: 0.9rem;
   background-color: #fcfbfb;
@@ -245,15 +251,13 @@ tr:nth-child(odd) {
   align-items: center;
 }
 
-.listing:hover {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
+/*  Allow images get the full size their parent gives them */
 .listing img {
   width: 100%;
   margin-bottom: 1rem;
 }
 
+/* Simple hover effect to the .card class */
 a.card:hover {
   text-decoration: none;
   color: black;
@@ -265,10 +269,12 @@ a.card:link {
   color: black;
 }
 
+/* Set max width to the images inside each category card */
 .category img {
   max-width: 100%;
 }
 
+/* Create simple cards to display diffrent categories. Add rounded edges, padding and arrange the content in a centered column */
 .category {
   background-color: whitesmoke;
   border: 1px solid grey;
@@ -284,10 +290,7 @@ ul {
   padding: 0px;
 }
 
-#team > div > article {
-  text-align: center;
-}
-
+/* Make the person images of our team a circle */
 #team > div > article > figure > img {
   height: 5rem;
   width: 5rem;
@@ -295,23 +298,31 @@ ul {
   margin: 1rem;
 }
 
+/* Make the heading get the full width available. */
 header {
   padding: 0.2rem 0;
   background-color: #ffdeb7;
   width: 100%;
 }
 
+/* Hover effect for the anchor tags inside the header */
 header a:hover {
   color: darkblue;
 }
 
+/* Make the footer get the full width, make the color white for better readability, add padding */
 footer {
   width: 100%;
-  background-color: #333; /* Add background color as needed */
-  color: #fff; /* Add text color as needed */
+  background-color: #333;
+  color: #fff;
   padding: 10px 0px;
   text-align: center;
   font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .company-logo {
@@ -321,6 +332,7 @@ footer {
 
 /* Exercise 3 - Grid, Flexbox */
 
+/* Create a grid of categories / listings, seperate into 2 row, using the first for h1, and the second for the categories / listings */
 .categories,
 .listings {
   display: grid;
@@ -329,13 +341,16 @@ footer {
   place-items: center;
 }
 
+/* h1 inside the grid expands through every column of its row */
 .categories > h1,
 .listings > h1 {
   grid-column: 1 / -1;
   text-align: center;
 }
 
-.category:hover {
+/* Simple hover effect with a shadow at the cards of the categories */
+.category:hover,
+.listing:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -344,6 +359,7 @@ footer {
   max-height: 100%;
 }
 
+/* Create a grid of apartments, of 1, 2, or 3 columns depending on the screen size later. */
 .apartment {
   display: grid;
   gap: 1rem;
@@ -353,16 +369,19 @@ footer {
   justify-items: center;
 }
 
+/* Append some margin for better readability */
 .apartment > figcaption {
   margin-top: 1rem;
 }
 
+/* Center the description of the apartment */
 .description {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Spread the elements inside the navigation bar */
 nav {
   display: flex;
   justify-content: space-around;
@@ -371,29 +390,25 @@ nav {
   max-width: 100%;
 }
 
+/* Assign a height for the images of the navigation bar */
 nav > img {
   height: 2rem;
   border-radius: 50%;
 }
 
+/* Space out the elements inside the ul for better readability */
 nav > ul {
   display: flex;
   gap: 0.7rem;
 }
 
+/* Align paragraphs left */
 .description > p {
   text-align: left;
   margin: 2rem;
 }
 
-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-
+/* Center the social media images */
 .company-social-media > ul {
   display: flex;
   justify-content: center;
@@ -401,10 +416,12 @@ footer {
   gap: 0.5rem;
 }
 
+/* Set same height for the social media images */
 .company-social-media > ul > li > a > img {
   height: 3rem;
 }
 
+/* Center the content of the element with id team */
 #team {
   display: flex;
   flex-direction: column;
@@ -412,10 +429,12 @@ footer {
   align-items: center;
 }
 
+/* Remove excess margin */
 #team > h2 {
   margin-bottom: 0rem;
 }
 
+/* Create card like elements to display details about members of the team, align the details to the center, add padding and background */
 #team > div > article {
   background-color: rgb(214, 235, 235);
   display: flex;
@@ -428,11 +447,12 @@ footer {
   margin: 0.5rem 0rem;
 }
 
+/* Remove excess margin*/
 #team > div > article > figure {
   margin: 0rem;
 }
 
-/* TODO:  Rename this class!! */
+/* Center the content of the main class and add padding to the sides for better readability */
 .main {
   display: flex;
   flex-direction: column;
@@ -441,10 +461,12 @@ footer {
   padding: 0rem 2rem;
 }
 
+/* Add some padding to the sides */
 .about {
   padding: 0rem 2rem;
 }
 
+/* Give background to the form, center its content, use rounded edges, add padding and margin for better readability */
 form {
   display: flex;
   flex-direction: column;
@@ -459,6 +481,7 @@ form {
   margin-bottom: 1rem;
 }
 
+/* Align vertically the content and center it. */
 fieldset {
   display: flex;
   flex-direction: column;
@@ -472,6 +495,7 @@ fieldset {
   padding: 0;
 }
 
+/* Used to align the inputs left, and stack the labels on top of them */
 fieldset > div {
   display: flex;
   flex-direction: column;
@@ -481,6 +505,7 @@ fieldset > div {
   width: 90%;
 }
 
+/* Create rounded edges on the inputs, add some padding to the start of the input area */
 fieldset > div > input {
   border-radius: 10px;
   height: 1.5rem;
@@ -489,6 +514,7 @@ fieldset > div > input {
   padding-left: 0.5rem;
 }
 
+/* Give some margin to the legend of every fieldset for seperation of the other elements adjecent to it */
 fieldset > legend {
   font-family: MyLightFont;
   margin-top: 0.5rem;
@@ -501,10 +527,12 @@ fieldset .required {
   color: brown;
 }
 
+/* Adjust the size of this h1 */
 #intro > h1 {
   font-size: 2em;
 }
 
+/* Space the elements out */
 details > div > div {
   display: flex;
   justify-content: space-between;
@@ -516,39 +544,48 @@ details > div > div {
 /* Exercise 4 - Media Queries */
 /* 480px - 768px */
 
+/* Tablet width starts here */
 @media (min-width: 480px) {
+  /* Make checkboxes and radio buttons bigger */
   .questionnaire input[type="checkbox"],
   .questionnaire input[type="radio"] {
     transform: scale(1.2);
   }
 
+  /* Make the grid of categories / listings 2 columns wide */
   .categories,
   .listings {
     grid-template-columns: repeat(2, minmax(auto, 1fr));
     padding: 0 1rem;
   }
 
+  /* Give every category the same size */
   .category {
     height: 470px;
   }
 
+  /* Give every listing the same heigh, add padding */
   .listing {
     height: 550px;
     padding-bottom: 1rem;
   }
 
+  /* Make font size bigger than smartphone */
   nav {
     font-size: 1rem;
   }
 
+  /* Scale up the images of the navigation bar, becaus ethey where smaller on the smartphone */
   nav > img {
     height: 2.2rem;
   }
 
+  /* Make gap bigger than smartphones */
   nav > ul {
     gap: 2rem;
   }
 
+  /* Make the form have a relative position */
   form {
     flex-direction: row;
     width: 80%;
@@ -561,6 +598,7 @@ details > div > div {
     flex-direction: column;
   }
 
+  /* Use the relative position of the form for */
   form > div {
     position: absolute;
     bottom: -60px;

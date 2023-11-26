@@ -34,14 +34,16 @@ const btnSubmit = document.getElementById("btn-submit");
 const forms = document.querySelectorAll("form");
 
 // Page selectors.
-const pages = document.querySelector(".pages").children;
+const pages = document.querySelector(".pages")?.children;
 // Page index.
 let pageIndex = 0;
 // Required inputs.
 const requiredInputs = document.querySelectorAll("input[required]");
 
 // Fill form with test data.
-fillForm();
+if (forms.length) {
+  fillForm();
+}
 
 requiredInputs.forEach((input) => {
   input.addEventListener("change", (ev) => {
@@ -111,7 +113,11 @@ function onSubmit() {
   })
     .then((res) => res.json())
     .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => {
+      window.location.href =
+        "http://localhost:5500/Exercise5/registration-success.html";
+    });
 }
 
 function checkPasswordMatch() {

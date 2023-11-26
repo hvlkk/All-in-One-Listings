@@ -144,6 +144,7 @@ a:link {
   opacity: 0.8;
 }
 
+/* Our default button style, rounded edges */
 button {
   background-color: #f5f5f5;
   border: 1px solid black;
@@ -154,25 +155,30 @@ button {
   cursor: pointer;
 }
 
+/* Using green color for submit button */
 .btn-submit {
   background-color: rgb(98, 174, 91);
   color: white;
 }
 
+/* Using red background color for reset button */
 .btn-reset {
   background-color: rgb(160, 52, 52);
   color: white;
 }
 
+/* Reducing opacity when hovered */
 .btn:hover {
   opacity: 0.7;
 }
 
+/* Marking price trend with red */
 #price-trend {
   color: red;
   font-weight: normal;
 }
 
+/* Adjusting the table's width and backround color. */
 table {
   background-color: #f1d6b5;
   border-collapse: collapse;
@@ -180,28 +186,34 @@ table {
   margin: 3rem;
 }
 
+/* Make the content of the rows align left */
 tr > * {
-  text-align: start;
+  text-align: left;
   border: 1px solid black;
 }
 
+/* Adding bold font */
 .listing-characteristics {
   font-weight: bold;
 }
 
+/* Adding bold font */
 table > caption {
   font-weight: bold;
   font-size: 1.1rem;
 }
 
+/* Adding some padding for better readability */
 tr > * {
   padding: 5px;
 }
 
+/* Adding alternate background color the the table rows */
 tr:nth-child(odd) {
   background-color: #fbe8d2;
 }
 
+/* Making a card like listing, with rounded edges, padding and background color for better UX */
 .listing {
   background-color: #fcfbfb;
   height: 40rem;
@@ -212,15 +224,18 @@ tr:nth-child(odd) {
   padding: 1rem;
 }
 
+/* Adding shadow when hovered */
 .listing:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+/* Custom height and width for the images inside each listing */
 .listing img {
   height: 15rem;
   width: 18rem;
 }
 
+/* Using black color when hovering */
 a.card:hover {
   text-decoration: none;
   color: black;
@@ -232,6 +247,7 @@ a.card:link {
   color: black;
 }
 
+/* Setting custom width and height for images inside the category */
 .category img {
   height: 15rem;
   width: 20rem;
@@ -239,6 +255,7 @@ a.card:link {
   max-height: 100%;
 }
 
+/* Creating a card like category, with column aligned content in the center */
 .category {
   /* width: 60%; */
   background-color: whitesmoke;
@@ -251,14 +268,17 @@ a.card:link {
   padding: 1rem;
 }
 
+/* Removing excess padding */
 ul {
   padding: 0px;
 }
 
+/* Aligned text to the center */
 #team > article {
   text-align: center;
 }
 
+/* Custom image height and widht for the member images. Also make them rounded */
 #team > article > figure > img {
   height: 10rem;
   width: 10rem;
@@ -266,19 +286,19 @@ ul {
   margin: 1rem;
 }
 
+/* Setting the full width of the parent to hte header */
 header {
-  /* position: sticky; */
-  /* top: 0rem; */
   padding: 0.2rem;
   background-color: #ffdeb7;
   width: 100%;
-  /* margin-bottom: 1rem; */
 }
 
+/* Hover effect using blue color in hte anchor tags of the header when hovered */
 header a:hover {
   color: darkblue;
 }
 
+/* Assigning the full width of the body to the footer */
 footer {
   width: 100%;
   background-color: #333; /* Add background color as needed */
@@ -287,6 +307,7 @@ footer {
   text-align: center;
 }
 
+/* Make the company logo round */
 .company-logo {
   height: 100px;
   border-radius: 50%;
@@ -294,12 +315,14 @@ footer {
 
 /* Exercise 3 - Grid, Flexbox */
 
+/* Implementing a grid in the body, with 3 parts, header, main, footer */
 body {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
 }
 
+/* Implementing grid of 3 columns and 2 rows */
 .categories,
 .listings {
   display: grid;
@@ -309,20 +332,24 @@ body {
   place-items: center;
 }
 
+/* Using the first grid row for the h1 */
 .categories > h1,
 .listings > h1 {
   grid-column: 1 / -1;
   text-align: center;
 }
 
+/* Set fixed height to each category card */
 .category {
   height: 510px;
 }
 
+/* Set hover effect with small shadow */
 .category:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+/* Setting the image width and height inside the apartment card */
 .apartment > img {
   height: 15rem;
   width: 20rem;
@@ -339,6 +366,7 @@ body {
   padding: 1rem;
 }
 
+/* Adding a minor margin for better raedability and seperation with other elements */
 .apartment > figcaption {
   margin-top: 1rem;
 }
@@ -348,12 +376,14 @@ body {
   transform: scale(1.1);
 }
 
+/* Using flexbox to center the content of the description */
 .description {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Using flexbox to center the content of the navigation bar and space it accordingly */
 nav {
   display: flex;
   justify-content: space-around;
@@ -361,21 +391,25 @@ nav {
   gap: 2.5rem;
 }
 
+/* Setting a custom height to the images of the nav bar, and making them rounded */
 nav > img {
   height: 3rem;
   border-radius: 50%;
 }
 
+/* Spacing up the ul containing the navigation links */
 nav > ul {
   display: flex;
   gap: 2rem;
 }
 
+/* Aliging the paragraph left */
 .description > p {
   text-align: left;
   margin: 5rem;
 }
 
+/* Using flexbox  to center the content of the footer */
 footer {
   display: flex;
   flex-direction: column;
@@ -384,6 +418,7 @@ footer {
   margin-top: 2rem;
 }
 
+/* Using flexbox to center the content */
 .company-social-media > ul {
   display: flex;
   justify-content: center;
@@ -391,6 +426,7 @@ footer {
   gap: 1rem;
 }
 
+/* Using flexbox to center the content */
 #team {
   display: flex;
   flex-direction: column;
@@ -398,10 +434,12 @@ footer {
   align-items: center;
 }
 
+/* Removing excess margin */
 #team > h2 {
   margin-bottom: 0rem;
 }
 
+/* Creating card like articles */
 #team > article {
   background-color: rgb(214, 235, 235);
   display: flex;
@@ -413,11 +451,12 @@ footer {
   margin: 0.5rem 0rem;
 }
 
+/* Ading a minor margin */
 #team > article > figure {
   margin: 1rem 0rem;
 }
 
-/* TODO:  Rename this class!! */
+/* Using flexbox to align the content to the center */
 .main {
   display: flex;
   flex-direction: column;
@@ -426,6 +465,7 @@ footer {
   padding: 0rem 3rem;
 }
 
+/* Using flexbox to align the content, setting rounded edges and background color for better UX */
 form {
   display: flex;
   flex-direction: column;
@@ -438,6 +478,7 @@ form {
   border-radius: 10px;
 }
 
+/* Using flexbox to center the content */
 fieldset {
   display: flex;
   flex-direction: column;
@@ -451,6 +492,7 @@ fieldset {
   padding: 0;
 }
 
+/* Using flexbox to center the content */
 fieldset > div {
   display: flex;
   flex-direction: column;
@@ -459,12 +501,14 @@ fieldset > div {
   width: 90%;
 }
 
+/* Using absolute to position the labels to the desired place on top of the inputs */
 fieldset > div > label {
   position: absolute;
   top: 0;
   left: 0;
 }
 
+/* Setting rounded corners and custom width to the inputs */
 fieldset > input {
   border-radius: 5px;
   height: 1.5rem;
@@ -472,6 +516,7 @@ fieldset > input {
   max-width: 95%;
 }
 
+/* Setting our custom font to the legend */
 fieldset > legend {
   font-family: MyLightFont;
   margin: 0.5rem 0;

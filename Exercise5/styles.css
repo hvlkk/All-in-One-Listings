@@ -575,6 +575,7 @@ details > div > div {
 
 /* Tablet width starts here */
 @media (min-width: 480px) {
+  /* Horizontally align buttons inside this div */
   div.buttons {
     flex-direction: row;
     transform: scale(1);
@@ -851,6 +852,7 @@ details {
   color: red;
 }
 
+/* Vertically align the buttons inside div.buttons */
 .buttons {
   display: flex;
   flex-direction: column;

@@ -104,6 +104,7 @@ a:link {
   opacity: 0.8;
 }
 
+/* Setting the default style of our buttons. Adding rounded corners */
 button {
   background-color: #f5f5f5;
   border: 1px solid black;
@@ -114,57 +115,69 @@ button {
   cursor: pointer;
 }
 
+/* Setting green color for the submit buttons */
 .btn-submit {
   background-color: rgb(25, 157, 200);
   color: white;
 }
 
+/* Setting red color for the reset button */
 .btn-reset {
   background-color: rgb(225, 0, 0);
   color: white;
 }
 
+/* Reducing opacity when hovering */
 .btn:hover {
   opacity: 0.7;
 }
 
+/* Adding red color for price trends */
 #price-trend {
   color: red;
   font-weight: normal;
 }
 
+/* Setting default width for the table elements */
 table {
   background-color: #f1d6b5;
   border-collapse: collapse;
   width: 350px;
 }
 
+/* Aligning the content of the rows to the left */
 tr > * {
-  text-align: start;
+  text-align: left;
   border: 1px solid black;
 }
 
+/* Adding bold font for better UX */
 .listing-characteristics {
   font-weight: bold;
 }
 
+/* Adjusting the size of the captions and making it bold */
 table > caption {
   font-weight: bold;
   font-size: 1.1rem;
 }
 
+/* Adding minor padding fo rbetter readability */
 tr > * {
   padding: 5px;
 }
 
+/* Alternating row colors */
 tr:nth-child(odd) {
   background-color: #fbe8d2;
 }
 
+/* Adding some margin for better spacing */
 table {
   margin: 2rem 0px;
 }
 
+/* Create a card like listing */
 .listing {
   background-color: #fcfbfb;
   height: 40rem;
@@ -175,15 +188,18 @@ table {
   padding: 1rem;
 }
 
+/* Adding a small shadow when hovering */
 .listing:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+/* Setting custom image size */
 .listing img {
   height: 15rem;
   width: 18rem;
 }
 
+/* Adding black color to the hovered cards */
 a.card:hover {
   text-decoration: none;
   color: black;
@@ -195,11 +211,13 @@ a.card:link {
   color: black;
 }
 
+/* Setting the image size inside each category */
 .category img {
   height: 20rem;
   width: 30rem;
 }
 
+/* Setting the edges to rounded, and aligning the text to the center */
 .category {
   width: 60%;
   background-color: whitesmoke;
@@ -213,13 +231,14 @@ a.card:link {
   text-align: center;
 }
 
+/* Setting custom image size for the team members, and making them rounded */
 #team > article > figure > img {
   height: 10rem;
   width: 10rem;
   border-radius: 50%;
   margin: 1rem;
 }
-
+/* Adding a sticky header to the page top */
 header {
   position: sticky;
   top: 0rem;
@@ -242,6 +261,7 @@ header a:hover {
   display: inline;
 }
 
+/* Set the full parent width to the footer */
 footer {
   position: relative;
   bottom: -10px;
@@ -252,12 +272,14 @@ footer {
   text-align: center;
 }
 
+/* Setting custom height for the company logo */
 .company-logo {
   height: 100px;
   border-radius: 50%;
   float: left;
 }
 
+/* Setting custom size for the images inside the apartment cards */
 .apartment > img {
   height: 15rem;
   width: 20rem;

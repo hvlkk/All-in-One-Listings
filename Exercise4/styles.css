@@ -263,9 +263,10 @@ tr:nth-child(odd) {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
-/* Set the images to the full width of their parent, and assign a small margin to their bottom for seperation */
+/* Letting the responsive listing images get their full size if needed, and assign a small margin */
 .listing img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   margin-bottom: 1rem;
 }
 
@@ -579,6 +580,12 @@ dd:nth-of-type(n) {
   margin-bottom: 2rem;
 }
 
+/* letting the responsive images get their max width & height */
+.category img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* Exercise 4 - Media Queries */
 /* 480px - 1000px */
 
@@ -641,6 +648,15 @@ dd:nth-of-type(n) {
   img {
     max-height: 236px;
   }
+
+  /* Making the pictures of the apartment a 2x2 grid on tablets and pc screens */
+  .apartment {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    padding: 1rem 1rem 2rem 1rem;
+    gap: 1rem;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -661,13 +677,9 @@ dd:nth-of-type(n) {
     max-width: 1300px;
   }
 
-  /* Making the pictures of the apartment a 2x2 grid on pc screens */
+  /* Slightly adjusting the gap on pc screens */
   .apartment {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
     gap: 2.5rem;
-    padding: 1rem;
   }
 
   /* Adding a hover effect to the apartment pictures */

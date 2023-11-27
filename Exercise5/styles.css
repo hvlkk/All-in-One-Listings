@@ -251,9 +251,10 @@ tr:nth-child(odd) {
   align-items: center;
 }
 
-/*  Allow images get the full size their parent gives them */
+/* Letting the responsive listing images get their full size if needed, and assign a small margin */
 .listing img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   margin-bottom: 1rem;
 }
 
@@ -570,6 +571,12 @@ details > div > div {
   margin-bottom: 0.3rem;
 }
 
+/* letting the responsive images get their max width & height */
+.category img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* Exercise 4 - Media Queries */
 /* 480px - 768px */
 
@@ -653,6 +660,15 @@ details > div > div {
     max-height: 236px;
   }
 
+  /* Making the pictures of the apartment a 2x2 grid on tablets and pc screens */
+  .apartment {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    padding: 1rem 1rem 2rem 1rem;
+    gap: 1rem;
+  }
+
   .questionnaire > details > div > div {
     font-size: 1rem;
   }
@@ -711,13 +727,9 @@ details > div > div {
     width: 80%;
   }
 
-  /* Making the pictures of the apartment a 2x2 grid on pc screens */
+  /* Slightly adjusting the gap on pc screens */
   .apartment {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
     gap: 2.5rem;
-    padding: 1rem;
   }
 
   /* Adding a hover effect to the apartment pictures */

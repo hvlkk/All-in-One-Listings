@@ -548,12 +548,6 @@ dd {
   text-align: center;
 }
 
-/* And similarly organising the rows */
-dt:nth-of-type(n),
-dd:nth-of-type(n) {
-  grid-row: n / n + 1;
-}
-
 /* adding a small margin between the listing details and the table that follows */
 .detailed-listing > .listing-details {
   margin-bottom: 2rem;

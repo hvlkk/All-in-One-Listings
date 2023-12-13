@@ -164,23 +164,3 @@ function changeForm(index) {
   pages[newIndex].classList.add("selected");
   pageIndex = newIndex;
 }
-
-// Part 2.
-const httpGet = (endpoint) => http("GET", endpoint);
-const httpPost = (endpoint, data) => http("POST", endpoint, data);
-
-async function http(method, endpoint, data = {}) {
-  const res = await fetch(`https://wiki-ads.onrender.com/${endpoint}`, {
-    method,
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await res.json();
-}
-
-console.log("hello");
-httpGet("/categories").then((data) => {
-  console.log(data);
-});

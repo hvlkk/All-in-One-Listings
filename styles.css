@@ -3,26 +3,26 @@
 */
 @font-face {
   font-family: MyLightFont;
-  src: url(../resources/fonts/Roboto-Light.ttf);
+  src: url(./resources/fonts/Roboto-Light.ttf);
   font-weight: 100;
 }
 
 @font-face {
   font-family: MyRegularFont;
-  src: url(../resources/fonts/Roboto-Regular.ttf);
+  src: url(./resources/fonts/Roboto-Regular.ttf);
   font-weight: 400;
 }
 
 @font-face {
   font-family: MyItalicFont;
-  src: url(../resources/fonts/Roboto-Italic.ttf);
+  src: url(./resources/fonts/Roboto-Italic.ttf);
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: MyBoldFont;
-  src: url(../resources/fonts/Roboto-Bold.ttf);
+  src: url(./resources/fonts/Roboto-Bold.ttf);
   font-weight: 700;
 }
 

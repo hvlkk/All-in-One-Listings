@@ -55,7 +55,6 @@ templates.index = Handlebars.compile(`
 {{/each}}
 `);
 templates.category = Handlebars.compile(`
-<h1>{{selectedCategory}}</h1>
 {{#each this}}
 <a class="card">
         <article class="listing">
@@ -81,6 +80,20 @@ templates.category = Handlebars.compile(`
       </a>
 {{/each}}
 `);
+templates.filter = Handlebars.compile(`
+  <div>
+  <div>
+      <label for="all">Όλα</label>
+      <input type="radio" id="all" name="selected" data-index="0" checked/>
+    </div>
+  {{#each this}}
+    <div>
+      <label for="{{title}}">{{title}}</label>
+      <input type="radio" id="{{title}}" name="selected" data-index="{{id}}"/>
+    </div>
+  {{/each}}
+  </div>
+`);
 
 window.onload = async function () {
   const url = window.location.href;
@@ -101,12 +114,33 @@ window.onload = async function () {
     const categoryTitle = new URLSearchParams(window.location.search).get(
       "title"
     );
+    subcategories.selectedCategory = categoryTitle;
     const query = `ads/category?id=${categoryId}`;
     const ads = await httpGetLocalServer(query);
     ads.selectedCategory = categoryTitle;
     console.log("Ads:", ads);
+
     let content = templates.category(ads);
     let div = document.querySelector(".listings");
     div.innerHTML = content;
+
+    content = templates.filter(subcategories);
+    div = document.querySelector(".filter");
+    div.innerHTML = content;
+
+    div = document.querySelector("h1");
+    div.innerHTML = categoryTitle;
+
+    const radioButtons = document.querySelectorAll("input[type=radio]");
+    radioButtons.forEach((radioButton) => {
+      radioButton.addEventListener("click", async (event) => {
+        const index = event.target.dataset.index;
+        const selectedAds =
+          index == 0 ? ads : ads.filter((ad) => ad.subcategory_id == index);
+        content = templates.category(selectedAds);
+        div = document.querySelector(".listings");
+        div.innerHTML = content;
+      });
+    });
   }
 };

@@ -1,21 +1,22 @@
-const httpGet = (endpoint) => http("GET", endpoint);
-const httpPost = (endpoint, data) => http("POST", endpoint, data);
+const httpGet = (endpoint) =>
+  http("GET", `https://wiki-ads.onrender.com/${endpoint}`);
+const httpPost = (endpoint, data) =>
+  http("POST", `https://wiki-ads.onrender.com/${endpoint}`, data);
+const httpGetLocalServer = (endpoint) =>
+  http("GET", `http://localhost:5000/${endpoint}`);
 
 let categories = [];
 
 async function http(method, endpoint, data = {}) {
   if (method === "GET") {
-    const res = await fetch(`https://wiki-ads.onrender.com/${endpoint}`, {
+    const res = await fetch(`${endpoint}`, {
       method: "GET",
     });
     return await res.json();
   }
-  const res = await fetch(`https://wiki-ads.onrender.com/${endpoint}`, {
+  const res = await fetch(`${endpoint}`, {
     method,
     body: JSON.stringify(data),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
   });
   return await res.json();
 }
@@ -69,7 +70,7 @@ window.onload = async function () {
   if (url.includes("category.html")) {
     const categoryId = new URLSearchParams(window.location.search).get("id");
     console.log("Category ID:", categoryId);
-    const category = await httpGet("ads?category=1");
+    const category = await httpGetLocalServer("category/ads");
     console.log("Category:", category);
   }
 };

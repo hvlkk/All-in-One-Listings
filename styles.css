@@ -864,3 +864,7 @@ details {
   flex-direction: column;
   transform: scale(0.8);
 }
+
+.category-img:hover {
+  transform: scale(1.05);
+}

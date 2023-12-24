@@ -602,7 +602,7 @@ details > div > div {
 
   /* Give every listing the same heigh, add padding */
   .listing {
-    height: 550px;
+    /* height: 550px;  Some listings are longer in the api response. */
     padding-bottom: 1rem;
   }
 

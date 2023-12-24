@@ -38,22 +38,48 @@ templates.index = Handlebars.compile(`
 {{#each this}}
 <section class="category">
 <h2>{{title}}</h2>
-<a class="category-img" href="category.html?id={{id}}">
+<a class="category-img" href="category.html?id={{id}}&title={{title}}">
 <img
   src="https://wiki-ads.onrender.com/{{img_url}}"
-  alt="category image"
+  alt="{{title}}"
 />
 </a>
 <ul>
-  {{#each this.subcategories}}
-  <li>{{this.title}}</li>
-  {{/each}}
+{{#each this.subcategories}}
+<li>
+<a href="subcategory.html?id={{id}}">{{this.title}}</a>
+</li>
+{{/each}}
 </ul>
 </section>
 {{/each}}
 `);
 templates.category = Handlebars.compile(`
-
+<h1>{{selectedCategory}}</h1>
+{{#each this}}
+<a class="card">
+        <article class="listing">
+          <h3>{{title}}</h3>
+          <figure>
+          {{#each images}}
+          {{#if @first}}
+            <img
+              src="https://wiki-ads.onrender.com/{{this}}"
+              alt="{{title}}"
+            />
+            {{/if}}
+          {{/each}}
+            <figcaption>
+              {{description}}
+            </figcaption>
+          </figure>
+          <dl class="listing-details">
+            <dt>Τιμή</dt>
+            <dd>€{{cost}}</dd>
+          </dl>
+        </article>
+      </a>
+{{/each}}
 `);
 
 window.onload = async function () {
@@ -69,8 +95,18 @@ window.onload = async function () {
 
   if (url.includes("category.html")) {
     const categoryId = new URLSearchParams(window.location.search).get("id");
-    console.log("Category ID:", categoryId);
-    const category = await httpGetLocalServer("category/ads");
-    console.log("Category:", category);
+    const subcategories = await httpGet(
+      `categories/${categoryId}/subcategories`
+    );
+    const categoryTitle = new URLSearchParams(window.location.search).get(
+      "title"
+    );
+    const query = `ads/category?id=${categoryId}`;
+    const ads = await httpGetLocalServer(query);
+    ads.selectedCategory = categoryTitle;
+    console.log("Ads:", ads);
+    let content = templates.category(ads);
+    let div = document.querySelector(".listings");
+    div.innerHTML = content;
   }
 };

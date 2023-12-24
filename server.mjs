@@ -8,11 +8,10 @@ const port = 5000;
 
 app.use(cors());
 
-app.get("/category/ads", async (req, res) => {
-  console.log("GET /category/ads");
-  console.log(req);
+app.get("/ads/category", async (req, res) => {
   try {
-    const apiUrl = "https://wiki-ads.onrender.com/ads?category=1";
+    const id = req.query.id;
+    const apiUrl = `https://wiki-ads.onrender.com/ads?category=${id}`;
     const response = await fetch(apiUrl);
     res.json(await response.json());
     console.log(response);

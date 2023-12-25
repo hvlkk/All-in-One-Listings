@@ -38,11 +38,14 @@ async function processAds(ads) {
   // for each ad, make features into an array
   ads.forEach((ad) => {
     ad.features = ad.features.split("; ");
-
     // for each feature, split it into a key-value pair
+    const pairs = [];
     ad.features.forEach((feature) => {
-      feature = feature.split(": ");
+      const pair = feature.split(": ");
+      if (pair.length == 1) pair.push("Ναι");
+      pairs.push(pair);
     });
+    ad.features = pairs;
   });
   console.log(ads);
 }
@@ -107,7 +110,6 @@ templates.filter = Handlebars.compile(`
 // setting up the HTML template for each category.html page
 templates.subcategory = Handlebars.compile(`
 {{#each this}}
-{{#each this}}
 <a class="card">
   <article class="listing">
     <h3>{{title}}</h3>
@@ -127,6 +129,8 @@ templates.subcategory = Handlebars.compile(`
 `);
 window.onload = async function () {
   const url = window.location.href;
+  console.log(url);
+  console.log("hello");
 
   if (url.includes("index.html")) {
     categories = await httpGet("categories");
@@ -136,7 +140,7 @@ window.onload = async function () {
     div.innerHTML = content;
   }
 
-  if (url.includes("subcategory.html")) {
+  if (url.includes("/subcategory.html")) {
     const subcategoryId = new URLSearchParams(window.location.search).get("id");
     const subcategoryTitle = new URLSearchParams(window.location.search).get(
       "title"
@@ -152,7 +156,9 @@ window.onload = async function () {
 
     div = document.querySelector("h1");
     div.innerHTML = subcategoryTitle;
-  } else if (url.includes("category.html")) {
+  }
+
+  if (url.includes("/category.html")) {
     const categoryId = new URLSearchParams(window.location.search).get("id");
     const categoryTitle = new URLSearchParams(window.location.search).get(
       "title"

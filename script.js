@@ -22,7 +22,6 @@ async function http(method, endpoint, data = {}) {
 }
 
 async function addSubcategories() {
-  console.log("addSubcategories");
   // Use Promise.all to wait for all async calls to complete
   await Promise.all(
     categories.map(async (category) => {
@@ -32,6 +31,22 @@ async function addSubcategories() {
   );
 }
 
+// processes the ads fetched from subcategory GETs
+async function processAds(ads) {
+  console.log(ads);
+
+  // for each ad, make features into an array
+  ads.forEach((ad) => {
+    ad.features = ad.features.split("; ");
+
+    // for each feature, split it into a key-value pair
+    ad.features.forEach((feature) => {
+      feature = feature.split(": ");
+    });
+  });
+  console.log(ads);
+}
+
 let templates = {};
 
 // setting up the HTML template for the index.html page
@@ -39,20 +54,17 @@ templates.index = Handlebars.compile(`
 <h1>Categories</h1>
 {{#each this}}
 <section class="category">
-<h2>{{title}}</h2>
-<a class="category-img" href="category.html?id={{id}}&title={{title}}">
-<img
-  src="https://wiki-ads.onrender.com/{{img_url}}"
-  alt="{{title}}"
-/>
-</a>
-<ul>
-{{#each this.subcategories}}
-<li>
-<a href="subcategory.html?id={{id}}">{{this.title}}</a>
-</li>
-{{/each}}
-</ul>
+  <h2>{{title}}</h2>
+  <a class="category-img" href="category.html?id={{id}}&title={{title}}">
+    <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}" />
+  </a>
+  <ul>
+    {{#each this.subcategories}}
+    <li>
+      <a href="subcategory.html?id={{id}}&title={{title}}">{{title}}</a>
+    </li>
+    {{/each}}
+  </ul>
 </section>
 {{/each}}
 `);
@@ -61,44 +73,58 @@ templates.index = Handlebars.compile(`
 templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
-        <article class="listing">
-          <h3>{{title}}</h3>
-          <figure>
-          {{#each images}}
-          {{#if @first}}
-            <img
-              src="https://wiki-ads.onrender.com/{{this}}"
-              alt="{{title}}"
-            />
-            {{/if}}
-          {{/each}}
-            <figcaption>
-              {{description}}
-            </figcaption>
-          </figure>
-          <dl class="listing-details">
-            <dt>Τιμή</dt>
-            <dd>€{{cost}}</dd>
-          </dl>
-        </article>
-      </a>
+  <article class="listing">
+    <h3>{{title}}</h3>
+    <figure>
+      {{#each images}} {{#if @first}}
+      <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}" />
+      {{/if}} {{/each}}
+      <figcaption>{{description}}</figcaption>
+    </figure>
+    <dl class="listing-details">
+      <dt>Τιμή</dt>
+      <dd>€{{cost}}</dd>
+    </dl>
+  </article>
+</a>
 {{/each}}
 `);
 
 // setting up the HTML template for the filter options (in the category.html page)
 templates.filter = Handlebars.compile(`
-    <div>
-      <label for="all">Όλα</label>
-      <input type="radio" id="all" name="selected" data-index="0" checked/>
-    </div>
-    {{#each this}}
-    <div>
-      <label for="{{title}}">{{title}}</label>
-      <input type="radio" id="{{title}}" name="selected" data-index="{{id}}"/>
-    </div>
-    {{/each}}
+<div>
+  <label for="all">Όλα</label>
+  <input type="radio" id="all" name="selected" data-index="0" checked />
+</div>
+{{#each this}}
+  <div>
+    <label for="{{title}}">{{title}}</label>
+    <input type="radio" id="{{title}}" name="selected" data-index="{{id}}" />
+  </div>
+{{/each}}
 `);
 
+// setting up the HTML template for each category.html page
+templates.subcategory = Handlebars.compile(`
+{{#each this}}
+{{#each this}}
+<a class="card">
+  <article class="listing">
+    <h3>{{title}}</h3>
+    <figure>
+      {{#each images}} {{#if @first}}
+      <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}" />
+      {{/if}} {{/each}}
+      <figcaption>{{description}}</figcaption>
+    </figure>
+    <dl class="listing-details">
+      <dt>Τιμή</dt>
+      <dd>€{{cost}}</dd>
+    </dl>
+  </article>
+</a>
+{{/each}}
+`);
 window.onload = async function () {
   const url = window.location.href;
 
@@ -110,19 +136,32 @@ window.onload = async function () {
     div.innerHTML = content;
   }
 
-  if (url.includes("category.html")) {
-    const categoryId = new URLSearchParams(window.location.search).get("id");
-    const subcategories = await httpGet(
-      `categories/${categoryId}/subcategories`
+  if (url.includes("subcategory.html")) {
+    const subcategoryId = new URLSearchParams(window.location.search).get("id");
+    const subcategoryTitle = new URLSearchParams(window.location.search).get(
+      "title"
     );
+    const query = `ads/subcategory?id=${subcategoryId}`;
+    const ads = await httpGetLocalServer(query);
+
+    processAds(ads);
+
+    let content = templates.subcategory(ads);
+    let div = document.querySelector(".listings");
+    div.innerHTML = content;
+
+    div = document.querySelector("h1");
+    div.innerHTML = subcategoryTitle;
+  } else if (url.includes("category.html")) {
+    const categoryId = new URLSearchParams(window.location.search).get("id");
     const categoryTitle = new URLSearchParams(window.location.search).get(
       "title"
     );
-    subcategories.selectedCategory = categoryTitle;
+    const subcategories = await httpGet(
+      `categories/${categoryId}/subcategories`
+    );
     const query = `ads/category?id=${categoryId}`;
     const ads = await httpGetLocalServer(query);
-    ads.selectedCategory = categoryTitle;
-    console.log("Ads:", ads);
 
     let content = templates.category(ads);
     let div = document.querySelector(".listings");

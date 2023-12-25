@@ -684,6 +684,7 @@ details > div > div {
   .categories,
   .listings {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
+    align-items: start;
   }
 
   .team-members {

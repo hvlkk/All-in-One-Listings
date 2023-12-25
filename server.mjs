@@ -20,6 +20,18 @@ app.get("/ads/category", async (req, res) => {
   }
 });
 
+app.get("/ads/subcategory", async (req, res) => {
+  try {
+    const id = req.query.id;
+    const apiUrl = `https://wiki-ads.onrender.com/ads?subcategory=${id}`;
+    const response = await fetch(apiUrl);
+    res.json(await response.json());
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

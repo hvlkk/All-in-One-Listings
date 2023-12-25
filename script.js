@@ -33,6 +33,8 @@ async function addSubcategories() {
 }
 
 let templates = {};
+
+// setting up the HTML template for the index.html page
 templates.index = Handlebars.compile(`
 <h1>Categories</h1>
 {{#each this}}
@@ -54,6 +56,8 @@ templates.index = Handlebars.compile(`
 </section>
 {{/each}}
 `);
+
+// setting up the HTML template for each category.html page
 templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
@@ -80,19 +84,19 @@ templates.category = Handlebars.compile(`
       </a>
 {{/each}}
 `);
+
+// setting up the HTML template for the filter options (in the category.html page)
 templates.filter = Handlebars.compile(`
-  <div>
-  <div>
+    <div>
       <label for="all">Όλα</label>
       <input type="radio" id="all" name="selected" data-index="0" checked/>
     </div>
-  {{#each this}}
+    {{#each this}}
     <div>
       <label for="{{title}}">{{title}}</label>
       <input type="radio" id="{{title}}" name="selected" data-index="{{id}}"/>
     </div>
-  {{/each}}
-  </div>
+    {{/each}}
 `);
 
 window.onload = async function () {

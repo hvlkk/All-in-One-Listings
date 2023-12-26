@@ -277,5 +277,5 @@ async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   console.log(data);
   const res = await httpPutLocalServer("favourites", data);
-  console.log(res);
+  alert(res.message);
 }

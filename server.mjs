@@ -32,6 +32,12 @@ app.get("/ads/subcategory", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+function loginService(username, password) {}

@@ -1,43 +1,15 @@
-const httpGet = (endpoint) =>
-  http("GET", `https://wiki-ads.onrender.com/${endpoint}`);
-const httpPost = (endpoint, data) =>
-  http("POST", `https://wiki-ads.onrender.com/${endpoint}`, data);
-const httpGetLocalServer = (endpoint) =>
-  http("GET", `http://localhost:5000/${endpoint}`);
-const httpPostLocalServer = (endpoint, data) =>
-  http("POST", `http://localhost:5000/${endpoint}`, data);
-const httpPutLocalServer = (endpoint, data) =>
-  http("PUT", `http://localhost:5000/${endpoint}`, data);
-const httpDeleteLocalServer = (endpoint, data) =>
-  http("DELETE", `http://localhost:5000/${endpoint}`, data);
+import http from "./http.js";
 
 let categories = [];
 let username = "";
 let sessionId = "";
 const ads = [];
 
-async function http(method, endpoint, data = {}) {
-  if (method === "GET") {
-    const res = await fetch(`${endpoint}`, {
-      method: "GET",
-    });
-    return await res.json();
-  }
-  const res = await fetch(`${endpoint}`, {
-    method,
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await res.json();
-}
-
 async function addSubcategories() {
   // Use Promise.all to wait for all async calls to complete
   await Promise.all(
     categories.map(async (category) => {
-      const data = await httpGet(`categories/${category.id}/subcategories`);
+      const data = await http.get(`categories/${category.id}/subcategories`);
       category.subcategories = data;
     })
   );
@@ -169,7 +141,7 @@ window.onload = async function () {
   const url = window.location.href;
 
   if (url.includes("index.html")) {
-    categories = await httpGet("categories");
+    categories = await http.get("categories");
     await addSubcategories();
     let content = templates.index(categories);
     let div = document.querySelector(".categories");
@@ -182,7 +154,7 @@ window.onload = async function () {
       "title"
     );
     const query = `ads/subcategory?id=${subcategoryId}`;
-    const ads = await httpGetLocalServer(query);
+    const ads = await http.getMyServer(query);
 
     processAds(ads);
 
@@ -199,11 +171,11 @@ window.onload = async function () {
     const categoryTitle = new URLSearchParams(window.location.search).get(
       "title"
     );
-    const subcategories = await httpGet(
+    const subcategories = await http.get(
       `categories/${categoryId}/subcategories`
     );
     const query = `ads/category?id=${categoryId}`;
-    const ads = await httpGetLocalServer(query);
+    const ads = await http.getMyServer(query);
 
     let content = templates.category(ads);
     let div = document.querySelector(".listings");
@@ -215,6 +187,8 @@ window.onload = async function () {
 
     div = document.querySelector("h1");
     div.innerHTML = categoryTitle;
+
+    document.querySelector("form").addEventListener("submit", submitForm);
 
     document.querySelectorAll(".heart").forEach((heart) => {
       heart.addEventListener("click", async (event) => {
@@ -247,16 +221,17 @@ window.onload = async function () {
 
 async function submitForm() {
   event.preventDefault();
+  console.log("submitting form");
   const name = document.getElementById("username-txt").value;
   const password = document.getElementById("password-txt").value;
-  if (name == "" || password == "") {
-    alert("Παρακαλώ συμπληρώστε τα στοιχεία σας");
-    return;
-  }
+  // if (name == "" || password == "") {
+  //   alert("Παρακαλώ συμπληρώστε τα στοιχεία σας");
+  //   return;
+  // }
   username = name;
   const data = { username, password };
   console.log(data);
-  const response = await httpPostLocalServer("login", data);
+  const response = await http.postMyServer("login", data);
   console.log(response);
   sessionId = response.sessionId;
   // display message
@@ -276,6 +251,6 @@ async function submitForm() {
 async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   console.log(data);
-  const res = await httpPutLocalServer("favourites", data);
+  const res = await http.putMyServer("favourites", data);
   alert(res.message);
 }

@@ -26,7 +26,38 @@
     </header>
     <main>
       <h1></h1>
-      <div class="filter"></div>
+      <div class="category-container">
+        <div class="filter"></div>
+        <div class="login">
+          <form class="login-form">
+            <fieldset>
+              <legend>Log-in</legend>
+              <div>
+                <label for="username-txt">Username</label>
+                <input
+                  type="text"
+                  id="username-txt"
+                  name="username"
+                  maxlength="30"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password-txt">Password</label>
+                <input
+                  type="text"
+                  id="password-txt"
+                  name="password"
+                  maxlength="30"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
       <div class="listings"></div>
     </main>
     <footer>

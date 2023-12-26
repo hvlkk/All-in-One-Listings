@@ -2,15 +2,29 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 const port = 5000;
 
 app.use(cors());
+app.use(express.json());
 
 const users = [
-  { id: 1, username: "admin", password: "admin", favourites: [] },
-  { id: 2, username: "user", password: "user", favourites: [] },
+  {
+    id: 1,
+    username: "admin",
+    password: "admin",
+    favourites: new Map(),
+    sessionId: "",
+  },
+  {
+    id: 2,
+    username: "user",
+    password: "user",
+    favourites: new Map(),
+    sessionId: "",
+  },
 ];
 
 app.get("/ads/category", async (req, res) => {
@@ -19,7 +33,6 @@ app.get("/ads/category", async (req, res) => {
     const apiUrl = `https://wiki-ads.onrender.com/ads?category=${id}`;
     const response = await fetch(apiUrl);
     res.json(await response.json());
-    console.log(response);
   } catch (err) {
     console.log(err);
   }
@@ -31,7 +44,6 @@ app.get("/ads/subcategory", async (req, res) => {
     const apiUrl = `https://wiki-ads.onrender.com/ads?subcategory=${id}`;
     const response = await fetch(apiUrl);
     res.json(await response.json());
-    console.log(response);
   } catch (err) {
     console.log(err);
   }
@@ -39,30 +51,67 @@ app.get("/ads/subcategory", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = loginService(username, password);
-  if (user) {
-    res.json(response(200, "Login Success", user.favourites));
-  } else {
-    res.json(response(401, "Invalid credentials"));
-  }
+  loginService(username, password, res);
+});
+
+app.put("/favourites", async (req, res) => {
+  addToFavouritesService(req.body, res);
+});
+
+app.delete("/favourites", async (req, res) => {
+  removeFromFavouritesService(req.body, res);
 });
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-function loginService(username, password) {
+function loginService(username, password, res) {
   const user = users.find((user) => user.username === username);
   if (user && user.password === password) {
-    return user;
+    user.sessionId = uuidv4();
+    res.json(response(200, "Login Success", user.sessionId));
+  } else {
+    res.json(response(401, "Invalid credentials"));
   }
-  return null;
 }
 
-function response(code, message, data = null) {
+function addToFavouritesService(data, res) {
+  const { username, sessionId, ad } = data;
+  const user = users.find((user) => user.username === username);
+  if (user && user.sessionId === sessionId) {
+    if (user.favourites.has(ad.id)) {
+      res.json(response(409, "Favourite already exists"));
+    } else {
+      user.favourites.set(ad.id, ad);
+      res.json(response(200, "Favourite added"));
+    }
+  } else {
+    res.json(
+      response(401, "Παρακαλώ συνδεθείτε για προσθήκη στη λίστα αγαπημένων")
+    );
+  }
+}
+
+function removeFromFavouritesService(data, res) {
+  const { username, sessionId, ad } = data;
+  const user = users.find((user) => user.username === username);
+  if (user && user.sessionId === sessionId) {
+    if (user.favourites.has(ad.id)) {
+      user.favourites.delete(ad.id);
+      res.json(response(200, "Favourite removed"));
+    } else {
+      res.json(response(404, "Favourite not found"));
+    }
+  } else {
+    res.json(response(401, "Invalid credentials"));
+  }
+}
+
+function response(code, message, sessionId = null) {
   return {
-    code: code,
-    message: message,
-    data: data,
+    code,
+    message,
+    sessionId,
   };
 }

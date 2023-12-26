@@ -30,6 +30,7 @@
         <div class="filter"></div>
         <div class="login">
           <form class="login-form">
+            <span id="message"></span>
             <fieldset>
               <legend>Log In</legend>
               <div>
@@ -38,6 +39,7 @@
                   type="text"
                   id="username-txt"
                   name="username"
+                  minlength="3"
                   maxlength="30"
                   autocomplete="username"
                   required
@@ -46,18 +48,19 @@
               <div>
                 <label for="password-txt">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   id="password-txt"
                   name="password"
+                  minlength="3"
                   maxlength="30"
                   autocomplete="current-password"
                   required
                 />
               </div>
             </fieldset>
-            <div>
-              <button type="submit" class="btn btn-login">Log In</button>
-            </div>
+            <button type="submit" class="btn btn-login" onclick="submitForm()">
+              Log In
+            </button>
           </form>
         </div>
       </div>

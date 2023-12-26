@@ -632,7 +632,6 @@ details > div > div {
 
   /* Make the form have a relative position */
   form {
-    flex-direction: row;
     width: 80%;
     position: relative;
     padding: 1rem;
@@ -764,18 +763,6 @@ details > div > div {
 }
 
 /* Exercise 5 - Form Validation */
-
-/* Mark invalid input and textarea with red border */
-input:invalid,
-textarea:invalid {
-  border: 2px solid red;
-}
-
-/* Mark valid input and textarea with green border */
-input:valid,
-textarea:valid {
-  border: 1px solid green;
-}
 
 /* Parent of the pages, center each page inside */
 .pages {
@@ -926,4 +913,16 @@ details {
 
 table > caption {
   margin-bottom: 1rem;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.heart {
+  margin-top: 1rem;
 }

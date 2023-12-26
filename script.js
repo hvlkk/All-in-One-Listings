@@ -4,8 +4,17 @@ const httpPost = (endpoint, data) =>
   http("POST", `https://wiki-ads.onrender.com/${endpoint}`, data);
 const httpGetLocalServer = (endpoint) =>
   http("GET", `http://localhost:5000/${endpoint}`);
+const httpPostLocalServer = (endpoint, data) =>
+  http("POST", `http://localhost:5000/${endpoint}`, data);
+const httpPutLocalServer = (endpoint, data) =>
+  http("PUT", `http://localhost:5000/${endpoint}`, data);
+const httpDeleteLocalServer = (endpoint, data) =>
+  http("DELETE", `http://localhost:5000/${endpoint}`, data);
 
 let categories = [];
+let username = "";
+let sessionId = "";
+const ads = [];
 
 async function http(method, endpoint, data = {}) {
   if (method === "GET") {
@@ -17,6 +26,9 @@ async function http(method, endpoint, data = {}) {
   const res = await fetch(`${endpoint}`, {
     method,
     body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return await res.json();
 }
@@ -77,10 +89,12 @@ templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
   <article class="listing">
+  <img src="../resources/heart.svg" alt="heart" class="heart" data-index="{{id}}" />
     <h3>{{title}}</h3>
+   <h4>Κωδικός αγγελίας: {{id}}</h4>
     <figure>
       {{#each images}} {{#if @first}}
-      <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}" />
+      <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}"/>
       {{/if}} {{/each}}
       <figcaption>{{description}}</figcaption>
     </figure>
@@ -153,8 +167,6 @@ templates.subcategory = Handlebars.compile(`
 
 window.onload = async function () {
   const url = window.location.href;
-  console.log(url);
-  console.log("hello");
 
   if (url.includes("index.html")) {
     categories = await httpGet("categories");
@@ -204,6 +216,21 @@ window.onload = async function () {
     div = document.querySelector("h1");
     div.innerHTML = categoryTitle;
 
+    document.querySelectorAll(".heart").forEach((heart) => {
+      heart.addEventListener("click", async (event) => {
+        const id = event.target.dataset.index;
+        const title = event.target.parentElement.querySelector("h3").innerHTML;
+        const description =
+          event.target.parentElement.querySelector("figcaption").innerHTML;
+        const cost = event.target.parentElement.querySelector("dd").innerHTML;
+        const image_url =
+          event.target.parentElement.querySelector("figure>img").src;
+        const ad = { id, title, description, cost, image_url };
+        console.log(ad);
+        await addFavourite(ad);
+      });
+    });
+
     const radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach((radioButton) => {
       radioButton.addEventListener("click", async (event) => {
@@ -217,3 +244,38 @@ window.onload = async function () {
     });
   }
 };
+
+async function submitForm() {
+  event.preventDefault();
+  const name = document.getElementById("username-txt").value;
+  const password = document.getElementById("password-txt").value;
+  if (name == "" || password == "") {
+    alert("Παρακαλώ συμπληρώστε τα στοιχεία σας");
+    return;
+  }
+  username = name;
+  const data = { username, password };
+  console.log(data);
+  const response = await httpPostLocalServer("login", data);
+  console.log(response);
+  sessionId = response.sessionId;
+  // display message
+  const message = document.getElementById("message");
+  message.innerHTML = response.message;
+  // add class to message, depending on status code
+  const status = response.code == 200 ? "success" : "error";
+  message.classList.add(status);
+
+  // remove message after 3 seconds
+  setTimeout(() => {
+    message.innerHTML = "";
+    message.classList.remove(status);
+  }, 3000);
+}
+
+async function addFavourite(ad) {
+  const data = { ad, username, sessionId };
+  console.log(data);
+  const res = await httpPutLocalServer("favourites", data);
+  console.log(res);
+}

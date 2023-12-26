@@ -114,9 +114,11 @@ templates.subcategory = Handlebars.compile(`
   <article class="listing">
     <h3>{{title}}</h3>
     <figure>
-      {{#each images}}
-      <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}" />
-      {{/each}}
+      <div class="image-container">
+        {{#each images}}
+          <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}" />
+        {{/each}}
+      </div>
       <figcaption>{{description}}</figcaption>
     </figure>
     <dl class="listing-details">

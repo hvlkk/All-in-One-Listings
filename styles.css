@@ -503,7 +503,7 @@ fieldset > div {
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
   width: 90%;
 }
 
@@ -570,6 +570,14 @@ details > div > div {
 .category img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30%;
 }
 
 /* Exercise 4 - Media Queries */
@@ -673,15 +681,17 @@ details > div > div {
   }
 
   .category-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 40%;
+    flex-direction: row;
+  }
+
+  .filter {
+    min-height: 12rem;
+    min-width: 12rem;
   }
 
   .login-form {
-    min-width: 4rem;
+    min-height: 12rem;
+    min-width: 14rem;
   }
 }
 /* Laptop width */

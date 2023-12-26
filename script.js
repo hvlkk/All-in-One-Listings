@@ -150,6 +150,7 @@ templates.subcategory = Handlebars.compile(`
 </a>
 {{/each}}
 `);
+
 window.onload = async function () {
   const url = window.location.href;
   console.log(url);

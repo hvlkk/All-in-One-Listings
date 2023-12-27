@@ -950,7 +950,15 @@ table > caption {
   margin-bottom: 3rem;
 }
 
+#favourites-button {
+  color: rgb(194, 73, 73);
+  background-color: rgb(255, 255, 255);
+}
+
 #favourites-button:hover {
   text-decoration: none;
-  cursor: pointer;
+}
+
+#favourites-button:visited {
+  color: rgb(194, 73, 73);
 }

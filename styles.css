@@ -939,7 +939,7 @@ table > caption {
   background-color: #acf8c3;
 }
 
-#favourites-button {
+#favourites-btn {
   padding: 1.5rem;
   background-color: white;
   border: 1px solid black;
@@ -950,15 +950,15 @@ table > caption {
   margin-bottom: 3rem;
 }
 
-#favourites-button {
+#favourites-btn {
   color: rgb(194, 73, 73);
   background-color: rgb(255, 255, 255);
 }
 
-#favourites-button:hover {
+#favourites-btn:hover {
   text-decoration: none;
 }
 
-#favourites-button:visited {
+#favourites-btn:visited {
   color: rgb(194, 73, 73);
 }

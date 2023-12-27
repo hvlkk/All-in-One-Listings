@@ -215,15 +215,7 @@ window.onload = async function () {
 
     document.querySelectorAll(".heart").forEach((heart) => {
       heart.addEventListener("click", async (event) => {
-        const id = event.target.dataset.index;
-        const title = event.target.parentElement.querySelector("h3").innerHTML;
-        const description =
-          event.target.parentElement.querySelector("figcaption").innerHTML;
-        const cost = event.target.parentElement.querySelector("dd").innerHTML;
-        const image_url =
-          event.target.parentElement.querySelector("figure>img").src;
-        const ad = { id, title, description, cost, image_url };
-        await addFavourite(ad);
+        setHeartListener(event);
       });
     });
 
@@ -255,16 +247,19 @@ window.onload = async function () {
 };
 
 function filterFavourites(favourites) {
-  console.log(favourites);
   const favouriteIds = favourites.map((favourite) => favourite.id);
   // fetching the pictures that represent the heart pictures,
   // which we will use to a) retrieve ad indices, b) change their pics to the "full heart" pics
   const ads = document.querySelectorAll(".heart");
   ads.forEach((ad) => {
-    if (favouriteIds.includes(ad[data - index])) {
+    if (favouriteIds.includes(ad.dataset.index)) {
       ad.src = "../resources/heart_full.svg";
+      // ad.removeEventListener("click", setHeartListener(ev));
+      // ad.addEventListener("click", removeFavourite(ad));
     } else {
       ad.src = "../resources/heart.svg";
+      // ad.removeEventListener("click", removeFavourite(ad));
+      // ad.addEventListener("click", async (ev) => setHeartListener(ev));
     }
   });
 }
@@ -283,10 +278,10 @@ async function submitForm() {
   // add class to message, depending on status code
   const status = response.code == 200 ? "success" : "error";
   if (status == "success") {
-    const form = document.querySelector("form");
-    form.classList.add("hidden");
+    const form = document.querySelector(".login");
+    form.hidden = true;
     const btn = document.getElementById("favourites-btn");
-    btn.classList.remove("hidden");
+    btn.hidden = false;
     btn.href += `?username=${username}&sessionId=${sessionId}`;
 
     // fetching the ads in the category provided, in order to provide the heart pic accordingly
@@ -305,8 +300,32 @@ async function submitForm() {
 async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.putMyServer("favourites", data);
-  alert(res.message);
-  if (res.status == 200) {
+  if (res.code == 200) {
     filterFavourites(res.data);
   }
+  setTimeout(() => {
+    alert(res.message);
+  }, 10);
+}
+
+async function removeFavourite(ad) {
+  const data = { ad, username, sessionId };
+  const res = await http.deleteMyServer("favourites", data);
+  if (res.code == 200) {
+    filterFavourites(res.data);
+  }
+  setTimeout(() => {
+    alert(res.message);
+  }, 10);
+}
+
+async function setHeartListener(event) {
+  const id = event.target.dataset.index;
+  const title = event.target.parentElement.querySelector("h3").innerHTML;
+  const description =
+    event.target.parentElement.querySelector("figcaption").innerHTML;
+  const cost = event.target.parentElement.querySelector("dd").innerHTML;
+  const image_url = event.target.parentElement.querySelector("figure>img").src;
+  const ad = { id, title, description, cost, image_url };
+  await addFavourite(ad);
 }

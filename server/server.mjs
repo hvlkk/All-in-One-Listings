@@ -130,7 +130,14 @@ function removeFromFavouritesService(data, res) {
   if (user && user.sessionId === sessionId) {
     if (user.favourites.has(ad.id)) {
       user.favourites.delete(ad.id);
-      res.json(response(200, "Favourite removed"));
+      res.json(
+        response(
+          200,
+          "Favourite removed",
+          "",
+          Array.from(user.favourites.values())
+        )
+      );
     } else {
       res.json(response(404, "Favourite not found"));
     }

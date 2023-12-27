@@ -74,7 +74,9 @@ app.listen(port, () => {
 function favouritesRetrievalService(username, sessionId, res) {
   const user = users.find((user) => user.username === username);
   if (user && user.sessionId === sessionId) {
-    res.json(response(200, "Success", user.favourites));
+    // create an array from the map.
+    const favourites = Array.from(user.favourites.values());
+    res.json(response(200, "Success", "", favourites));
   } else {
     res.json(response(401, "Invalid credentials"));
   }
@@ -98,6 +100,7 @@ function addToFavouritesService(data, res) {
       res.json(response(409, "Favourite already exists"));
     } else {
       user.favourites.set(ad.id, ad);
+      console.log(user.favourites);
       res.json(response(200, "Favourite added"));
     }
   } else {
@@ -122,10 +125,11 @@ function removeFromFavouritesService(data, res) {
   }
 }
 
-function response(code, message, sessionId = null) {
+function response(code, message, sessionId = "", data = {}) {
   return {
     code,
     message,
     sessionId,
+    data,
   };
 }

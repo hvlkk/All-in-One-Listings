@@ -225,10 +225,8 @@ window.onload = async function () {
   }
 
   if (url.includes("/favorite-ads.html")) {
-    this.username = new URLSearchParams(window.location.search).get("username");
-    this.sessionId = new URLSearchParams(window.location.search).get(
-      "sessionId"
-    );
+    username = new URLSearchParams(window.location.search).get("username");
+    sessionId = new URLSearchParams(window.location.search).get("sessionId");
     const res = await http.getMyServer(
       `favourites?username=${username}&sessionId=${sessionId}`
     );
@@ -256,7 +254,7 @@ async function submitForm() {
     const form = document.querySelector("form");
     form.classList.add("hidden");
     const btn = document.getElementById("favourites-btn");
-    btn.hidden = false;
+    btn.classList.remove("hidden");
     btn.href += `?username=${username}&sessionId=${sessionId}`;
   }
   message.classList.add(status);

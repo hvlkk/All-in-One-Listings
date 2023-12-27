@@ -12,8 +12,16 @@ async function post(endpoint, data) {
   return res;
 }
 
-async function getMyServer(endpoint) {
-  const res = await http("GET", `http://localhost:5000/${endpoint}`);
+async function getMyServer(
+  endpoint,
+  headers = { "Content-Type": "application/json" }
+) {
+  const res = await http(
+    "GET",
+    `http://localhost:5000/${endpoint}`,
+    {},
+    headers
+  );
   return res;
 }
 
@@ -32,10 +40,11 @@ async function deleteMyServer(endpoint, data) {
   return res;
 }
 
-async function http(method, endpoint, data = {}) {
+async function http(method, endpoint, data = {}, headers = {}) {
   if (method === "GET") {
     const res = await fetch(`${endpoint}`, {
       method: "GET",
+      headers,
     });
     return await res.json();
   }

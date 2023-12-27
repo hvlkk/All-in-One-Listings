@@ -58,6 +58,11 @@ app.put("/favourites", async (req, res) => {
   addToFavouritesService(req.body, res);
 });
 
+app.get("/favourites", async (req, res) => {
+  const { username, sessionId } = req.query;
+  favouritesRetrievalService(username, sessionId, res);
+});
+
 app.delete("/favourites", async (req, res) => {
   removeFromFavouritesService(req.body, res);
 });
@@ -65,6 +70,15 @@ app.delete("/favourites", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+function favouritesRetrievalService(username, sessionId, res) {
+  const user = users.find((user) => user.username === username);
+  if (user && user.sessionId === sessionId) {
+    res.json(response(200, "Success", user.favourites));
+  } else {
+    res.json(response(401, "Invalid credentials"));
+  }
+}
 
 function loginService(username, password, res) {
   const user = users.find((user) => user.username === username);

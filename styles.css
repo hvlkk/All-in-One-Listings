@@ -580,6 +580,10 @@ details > div > div {
   gap: 30%;
 }
 
+.login {
+  min-width: 70%;
+}
+
 /* Exercise 4 - Media Queries */
 /* 480px - 768px */
 
@@ -601,6 +605,7 @@ details > div > div {
   .categories,
   .listings {
     grid-template-columns: repeat(2, minmax(auto, 1fr));
+    align-items: start;
     padding: 0 1rem;
   }
 
@@ -692,6 +697,10 @@ details > div > div {
     min-height: 12rem;
     min-width: 14rem;
   }
+
+  .login {
+    min-width: auto;
+  }
 }
 /* Laptop width */
 @media (min-width: 1000px) {
@@ -705,7 +714,6 @@ details > div > div {
   .categories,
   .listings {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
-    align-items: start;
   }
 
   .team-members {
@@ -925,4 +933,24 @@ table > caption {
 
 .heart {
   margin-top: 1rem;
+}
+
+.login button {
+  background-color: #acf8c3;
+}
+
+#favourites-button {
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.category-container {
+  margin-bottom: 3rem;
+}
+
+#favourites-button:hover {
+  text-decoration: none;
+  cursor: pointer;
 }

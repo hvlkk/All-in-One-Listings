@@ -19,7 +19,7 @@ async function addSubcategories() {
 async function processAds(ads) {
   console.log(ads);
 
-  // for each ad, make features into an array
+  // for each ad, make its features into an array
   ads.forEach((ad) => {
     ad.features = ad.features.split("; ");
     // for each feature, split it into a key-value pair
@@ -38,7 +38,7 @@ let templates = {};
 
 // setting up the HTML template for the index.html page
 templates.index = Handlebars.compile(`
-<h1>Categories</h1>
+<h1>Κατηγορίες</h1>
 {{#each this}}
 <section class="category">
   <h2>{{title}}</h2>
@@ -158,6 +158,9 @@ window.onload = async function () {
 
     processAds(ads);
 
+    let title = document.querySelector("title");
+    title.innerHTML = subcategoryTitle;
+
     let content = templates.subcategory(ads);
     let div = document.querySelector(".listings");
     div.innerHTML = content;
@@ -176,6 +179,9 @@ window.onload = async function () {
     );
     const query = `ads/category?id=${categoryId}`;
     const ads = await http.getMyServer(query);
+
+    let title = document.querySelector("title");
+    title.innerHTML = categoryTitle;
 
     let content = templates.category(ads);
     let div = document.querySelector(".listings");
@@ -224,10 +230,6 @@ async function submitForm() {
   console.log("submitting form");
   const name = document.getElementById("username-txt").value;
   const password = document.getElementById("password-txt").value;
-  // if (name == "" || password == "") {
-  //   alert("Παρακαλώ συμπληρώστε τα στοιχεία σας");
-  //   return;
-  // }
   username = name;
   const data = { username, password };
   console.log(data);

@@ -223,6 +223,17 @@ window.onload = async function () {
       });
     });
   }
+
+  if (url.includes("/favorite-ads.html")) {
+    this.username = new URLSearchParams(window.location.search).get("username");
+    this.sessionId = new URLSearchParams(window.location.search).get(
+      "sessionId"
+    );
+    const res = await http.getMyServer(
+      `favourites?username=${username}&sessionId=${sessionId}`
+    );
+    console.log(res);
+  }
 };
 
 async function submitForm() {
@@ -241,6 +252,13 @@ async function submitForm() {
   message.innerHTML = response.message;
   // add class to message, depending on status code
   const status = response.code == 200 ? "success" : "error";
+  if (status == "success") {
+    const form = document.querySelector("form");
+    form.classList.add("hidden");
+    const btn = document.getElementById("favourites-btn");
+    btn.hidden = false;
+    btn.href += `?username=${username}&sessionId=${sessionId}`;
+  }
   message.classList.add(status);
 
   // remove message after 3 seconds

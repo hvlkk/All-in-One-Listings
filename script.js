@@ -3,7 +3,6 @@ import http from "./http.js";
 let categories = [];
 let username = "";
 let sessionId = "";
-const ads = [];
 
 async function addSubcategories() {
   // Use Promise.all to wait for all async calls to complete
@@ -17,8 +16,6 @@ async function addSubcategories() {
 
 // processes the ads fetched from subcategory GETs
 async function processAds(ads) {
-  console.log(ads);
-
   // for each ad, make its features into an array
   ads.forEach((ad) => {
     ad.features = ad.features.split("; ");
@@ -31,7 +28,6 @@ async function processAds(ads) {
     });
     ad.features = pairs;
   });
-  console.log(ads);
 }
 
 let templates = {};
@@ -137,6 +133,27 @@ templates.subcategory = Handlebars.compile(`
 {{/each}}
 `);
 
+// setting up the HTML template for the favourite-ads.html page
+templates.favourites = Handlebars.compile(`
+{{#each this}}
+<a class="card">
+  <article class="listing">
+    <img src="../resources/heart_full.svg" alt="heart" class="heart" data-index="{{id}}" />
+    <h3>{{title}}</h3>
+    <h4>Κωδικός αγγελίας: {{id}}</h4>
+    <figure>
+      <img src="{{image_url}}" alt="{{title}}"/>
+      <figcaption>{{description}}</figcaption>
+    </figure>
+    <dl class="listing-details">
+      <dt>Τιμή</dt>
+      <dd>€{{cost}}</dd>
+    </dl>
+  </article>
+</a>
+{{/each}}
+`);
+
 window.onload = async function () {
   const url = window.location.href;
 
@@ -206,7 +223,6 @@ window.onload = async function () {
         const image_url =
           event.target.parentElement.querySelector("figure>img").src;
         const ad = { id, title, description, cost, image_url };
-        console.log(ad);
         await addFavourite(ad);
       });
     });
@@ -230,20 +246,36 @@ window.onload = async function () {
     const res = await http.getMyServer(
       `favourites?username=${username}&sessionId=${sessionId}`
     );
-    console.log(res);
+
+    let favourites = res.data;
+    let content = templates.favourites(favourites);
+    let div = document.querySelector(".listings");
+    div.innerHTML = content;
   }
 };
 
+function filterFavourites(favourites) {
+  console.log(favourites);
+  const favouriteIds = favourites.map((favourite) => favourite.id);
+  // fetching the pictures that represent the heart pictures,
+  // which we will use to a) retrieve ad indices, b) change their pics to the "full heart" pics
+  const ads = document.querySelectorAll(".heart");
+  ads.forEach((ad) => {
+    if (favouriteIds.includes(ad[data - index])) {
+      ad.src = "../resources/heart_full.svg";
+    } else {
+      ad.src = "../resources/heart.svg";
+    }
+  });
+}
+
 async function submitForm() {
   event.preventDefault();
-  console.log("submitting form");
   const name = document.getElementById("username-txt").value;
   const password = document.getElementById("password-txt").value;
   username = name;
   const data = { username, password };
-  console.log(data);
   const response = await http.postMyServer("login", data);
-  console.log(response);
   sessionId = response.sessionId;
   // display message
   const message = document.getElementById("message");
@@ -256,6 +288,10 @@ async function submitForm() {
     const btn = document.getElementById("favourites-btn");
     btn.classList.remove("hidden");
     btn.href += `?username=${username}&sessionId=${sessionId}`;
+
+    // fetching the ads in the category provided, in order to provide the heart pic accordingly
+    const ads = response.data;
+    filterFavourites(ads);
   }
   message.classList.add(status);
 
@@ -268,7 +304,9 @@ async function submitForm() {
 
 async function addFavourite(ad) {
   const data = { ad, username, sessionId };
-  console.log(data);
   const res = await http.putMyServer("favourites", data);
   alert(res.message);
+  if (res.status == 200) {
+    filterFavourites(res.data);
+  }
 }

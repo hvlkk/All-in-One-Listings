@@ -86,7 +86,14 @@ function loginService(username, password, res) {
   const user = users.find((user) => user.username === username);
   if (user && user.password === password) {
     user.sessionId = uuidv4();
-    res.json(response(200, "Login Success", user.sessionId));
+    res.json(
+      response(
+        200,
+        "Login Success",
+        user.sessionId,
+        Array.from(user.favourites.values())
+      )
+    );
   } else {
     res.json(response(401, "Invalid credentials"));
   }
@@ -101,7 +108,14 @@ function addToFavouritesService(data, res) {
     } else {
       user.favourites.set(ad.id, ad);
       console.log(user.favourites);
-      res.json(response(200, "Favourite added"));
+      res.json(
+        response(
+          200,
+          "Favourite added",
+          "",
+          Array.from(user.favourites.values())
+        )
+      );
     }
   } else {
     res.json(

@@ -1,3 +1,5 @@
+const PORT = 5000;
+
 async function get(endpoint) {
   const res = await http("GET", `https://wiki-ads.onrender.com/${endpoint}`);
   return res;
@@ -18,7 +20,7 @@ async function getMyServer(
 ) {
   const res = await http(
     "GET",
-    `http://localhost:5000/${endpoint}`,
+    `http://localhost:${PORT}/${endpoint}`,
     {},
     headers
   );
@@ -26,17 +28,21 @@ async function getMyServer(
 }
 
 async function postMyServer(endpoint, data) {
-  const res = await http("POST", `http://localhost:5000/${endpoint}`, data);
+  const res = await http("POST", `http://localhost:${PORT}/${endpoint}`, data);
   return res;
 }
 
 async function putMyServer(endpoint, data) {
-  const res = await http("PUT", `http://localhost:5000/${endpoint}`, data);
+  const res = await http("PUT", `http://localhost:${PORT}/${endpoint}`, data);
   return res;
 }
 
 async function deleteMyServer(endpoint, data) {
-  const res = await http("DELETE", `http://localhost:5000/${endpoint}`, data);
+  const res = await http(
+    "DELETE",
+    `http://localhost:${PORT}/${endpoint}`,
+    data
+  );
   return res;
 }
 

@@ -57,9 +57,10 @@ templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
   <article class="listing">
-  <img src="../resources/heart.svg" alt="heart" class="heart" data-index="{{id}}" />
+    <img src="../resources/heart.svg" alt="heart" class="heart heart-empty" data-index="{{id}}" />
+    <img src="../resources/heart_full.svg" alt="heart" class="heart heart-full" data-index="{{id}}" hidden/>
     <h3>{{title}}</h3>
-   <h4>Κωδικός αγγελίας: {{id}}</h4>
+    <h4>Κωδικός αγγελίας: {{id}}</h4>
     <figure>
       {{#each images}} {{#if @first}}
       <img src="https://wiki-ads.onrender.com/{{this}}" alt="{{title}}"/>
@@ -147,7 +148,7 @@ templates.favourites = Handlebars.compile(`
     </figure>
     <dl class="listing-details">
       <dt>Τιμή</dt>
-      <dd>€{{cost}}</dd>
+      <dd>{{cost}}</dd>
     </dl>
   </article>
 </a>
@@ -214,11 +215,18 @@ window.onload = async function () {
     document.querySelector("form").addEventListener("submit", submitForm);
 
     document.querySelectorAll(".heart").forEach((heart) => {
-      heart.addEventListener("click", async (event) => {
-        setHeartListener(event);
-      });
+      if (heart.classList.contains("heart-empty")) {
+        heart.addEventListener("click", async (event) => {
+          setEmptyHeartListener(event);
+        });
+      } else {
+        heart.addEventListener("click", async (event) => {
+          setFullHeartListener(event);
+        });
+      }
     });
 
+    // loading appropriate onclick event listeners for the filter radio buttons
     const radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach((radioButton) => {
       radioButton.addEventListener("click", async (event) => {
@@ -246,24 +254,24 @@ window.onload = async function () {
   }
 };
 
+// filterFavourites: Used to display a full/empty
 function filterFavourites(favourites) {
   const favouriteIds = favourites.map((favourite) => favourite.id);
-  // fetching the pictures that represent the heart pictures,
-  // which we will use to a) retrieve ad indices, b) change their pics to the "full heart" pics
-  const ads = document.querySelectorAll(".heart");
-  ads.forEach((ad) => {
-    if (favouriteIds.includes(ad.dataset.index)) {
-      ad.src = "../resources/heart_full.svg";
-      // ad.removeEventListener("click", setHeartListener(ev));
-      // ad.addEventListener("click", removeFavourite(ad));
+  const emptyHeart = document.querySelectorAll(".heart-empty");
+  const fullHeart = document.querySelectorAll(".heart-full");
+
+  for (let i = 0; i < emptyHeart.length; ++i) {
+    if (favouriteIds.includes(emptyHeart[i].dataset.index)) {
+      emptyHeart[i].hidden = true;
+      fullHeart[i].hidden = false;
     } else {
-      ad.src = "../resources/heart.svg";
-      // ad.removeEventListener("click", removeFavourite(ad));
-      // ad.addEventListener("click", async (ev) => setHeartListener(ev));
+      emptyHeart[i].hidden = false;
+      fullHeart[i].hidden = true;
     }
-  });
+  }
 }
 
+// used when a user attempts to log-in, in the category page
 async function submitForm() {
   event.preventDefault();
   const name = document.getElementById("username-txt").value;
@@ -297,6 +305,7 @@ async function submitForm() {
   }, 3000);
 }
 
+// called when adding an ad to a user's favourites
 async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.putMyServer("favourites", data);
@@ -308,6 +317,7 @@ async function addFavourite(ad) {
   }, 10);
 }
 
+// called when removing an ad from a user's favourites
 async function removeFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.deleteMyServer("favourites", data);
@@ -319,7 +329,8 @@ async function removeFavourite(ad) {
   }, 10);
 }
 
-async function setHeartListener(event) {
+// called to add onclick listeners to the empty heart images
+async function setEmptyHeartListener(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
   const description =
@@ -328,4 +339,16 @@ async function setHeartListener(event) {
   const image_url = event.target.parentElement.querySelector("figure>img").src;
   const ad = { id, title, description, cost, image_url };
   await addFavourite(ad);
+}
+
+// called to add onclick listeners to the full heart images
+async function setFullHeartListener(event) {
+  const id = event.target.dataset.index;
+  const title = event.target.parentElement.querySelector("h3").innerHTML;
+  const description =
+    event.target.parentElement.querySelector("figcaption").innerHTML;
+  const cost = event.target.parentElement.querySelector("dd").innerHTML;
+  const image_url = event.target.parentElement.querySelector("figure>img").src;
+  const ad = { id, title, description, cost, image_url };
+  await removeFavourite(ad);
 }

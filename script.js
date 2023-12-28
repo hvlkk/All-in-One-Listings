@@ -57,8 +57,8 @@ templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
   <article class="listing">
-    <img src="../resources/heart.svg" alt="heart" class="heart heart-empty" data-index="{{id}}" />
-    <img src="../resources/heart_full.svg" alt="heart" class="heart heart-full" data-index="{{id}}" hidden/>
+    <img src="../resources/heart.svg" alt="favourite item" class="heart heart-empty" data-index="{{id}}" />
+    <img src="../resources/heart_full.svg" alt="unfavourite item" class="heart heart-full" data-index="{{id}}" hidden/>
     <h3>{{title}}</h3>
     <h4>Κωδικός αγγελίας: {{id}}</h4>
     <figure>
@@ -139,7 +139,7 @@ templates.favourites = Handlebars.compile(`
 {{#each this}}
 <a class="card">
   <article class="listing">
-    <img src="../resources/heart_full.svg" alt="heart" class="heart" data-index="{{id}}" />
+    <img src="../resources/heart_full.svg" alt="unfavourite item" class="heart heart-full" data-index="{{id}}"/>
     <h3>{{title}}</h3>
     <h4>Κωδικός αγγελίας: {{id}}</h4>
     <figure>
@@ -214,6 +214,7 @@ window.onload = async function () {
 
     document.querySelector("form").addEventListener("submit", submitForm);
 
+    // add the appropriate onclick listeners to each favourite/unfavourite button
     document.querySelectorAll(".heart").forEach((heart) => {
       if (heart.classList.contains("heart-empty")) {
         heart.addEventListener("click", async (event) => {
@@ -251,6 +252,12 @@ window.onload = async function () {
     let content = templates.favourites(favourites);
     let div = document.querySelector(".listings");
     div.innerHTML = content;
+
+    document.querySelectorAll(".heart-full").forEach((heart) => {
+      heart.addEventListener("click", async (event) => {
+        setFavouritesHeartListener(event);
+      });
+    });
   }
 };
 
@@ -317,7 +324,8 @@ async function addFavourite(ad) {
   }, 10);
 }
 
-// called when removing an ad from a user's favourites
+/* called when removing an ad from a user's favourites, when on category.html.
+ * this version of removeFavourites is supposed to filter the ads shown on the page, to use in category.html */
 async function removeFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.deleteMyServer("favourites", data);
@@ -329,7 +337,21 @@ async function removeFavourite(ad) {
   }, 10);
 }
 
-// called to add onclick listeners to the empty heart images
+/* called when removing an ad from a user's favourites, when on category.html.
+ * this version of removeFavourites does not filter the ads shown on the page,
+ * and instead reloads the page for the user, to show the updated favourites. */
+async function removeFavouriteReload(ad) {
+  const data = { ad, username, sessionId };
+  const res = await http.deleteMyServer("favourites", data);
+  setTimeout(() => {
+    alert(res.message);
+    if (res.code == 200) {
+      window.location.reload();
+    }
+  }, 10);
+}
+
+// called to add onclick listeners to the empty heart images on category.html
 async function setEmptyHeartListener(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
@@ -341,7 +363,7 @@ async function setEmptyHeartListener(event) {
   await addFavourite(ad);
 }
 
-// called to add onclick listeners to the full heart images
+// called to add onclick listeners to the full heart images on category.html
 async function setFullHeartListener(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
@@ -351,4 +373,16 @@ async function setFullHeartListener(event) {
   const image_url = event.target.parentElement.querySelector("figure>img").src;
   const ad = { id, title, description, cost, image_url };
   await removeFavourite(ad);
+}
+
+// called to add onclick listeners to the full heart images on favorite-ads.html
+async function setFavouritesHeartListener(event) {
+  const id = event.target.dataset.index;
+  const title = event.target.parentElement.querySelector("h3").innerHTML;
+  const description =
+    event.target.parentElement.querySelector("figcaption").innerHTML;
+  const cost = event.target.parentElement.querySelector("dd").innerHTML;
+  const image_url = event.target.parentElement.querySelector("figure>img").src;
+  const ad = { id, title, description, cost, image_url };
+  await removeFavouriteReload(ad);
 }

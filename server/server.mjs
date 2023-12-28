@@ -3,29 +3,32 @@ import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
+import UserDAO from "./daos/userDAO.js";
+import LoginService from "./services/loginService.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 const PORT = process.env.npm_config_port || 5000;
+const userDAO = new UserDAO();
+const loginService = new LoginService(userDAO);
 
-const users = [
-  {
-    id: 1,
-    username: "admin",
-    password: "admin",
-    favourites: new Map(),
-    sessionId: "",
-  },
-  {
-    id: 2,
-    username: "user",
-    password: "user",
-    favourites: new Map(),
-    sessionId: "",
-  },
-];
+// const users = [
+//   {
+//     id: 1,
+//     username: "admin",
+//     password: "admin",
+//     favourites: new Map(),
+//     sessionId: "",
+//   },
+//   {
+//     id: 2,
+//     username: "user",
+//     password: "user",
+//     favourites: new Map(),
+//     sessionId: "",
+//   },
+// ];
 
 app.get("/ads/category", async (req, res) => {
   try {
@@ -51,7 +54,7 @@ app.get("/ads/subcategory", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  loginService(username, password, res);
+  loginService.login(username, password, res);
 });
 
 app.put("/favourites", async (req, res) => {
@@ -82,22 +85,22 @@ function favouritesRetrievalService(username, sessionId, res) {
   }
 }
 
-function loginService(username, password, res) {
-  const user = users.find((user) => user.username === username);
-  if (user && user.password === password) {
-    user.sessionId = uuidv4();
-    res.json(
-      response(
-        200,
-        "Login Success",
-        user.sessionId,
-        Array.from(user.favourites.values())
-      )
-    );
-  } else {
-    res.json(response(401, "Invalid credentials"));
-  }
-}
+// function loginService(username, password, res) {
+//   const user = users.find((user) => user.username === username);
+//   if (user && user.password === password) {
+//     user.sessionId = uuidv4();
+//     res.json(
+//       response(
+//         200,
+//         "Login Success",
+//         user.sessionId,
+//         Array.from(user.favourites.values())
+//       )
+//     );
+//   } else {
+//     res.json(response(401, "Invalid credentials"));
+//   }
+// }
 
 function addToFavouritesService(data, res) {
   const { username, sessionId, ad } = data;

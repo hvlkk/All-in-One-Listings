@@ -87,7 +87,7 @@ class InMemoryUserDAO {
 
 class DatabaseUserDAO {
   constructor(database) {
-    this._collection = database.collection();
+    this._collection = database.collection;
   }
 
   async authorize(username, sId) {
@@ -148,3 +148,5 @@ class DatabaseUserDAO {
     }
   }
 }
+
+export default UserDAO;

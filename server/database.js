@@ -35,31 +35,5 @@ class MongoDB {
   get collection() {
     return this._collection;
   }
-
-  //   async getUser(name) {
-  //     return await this._collection.findOne({ username: name });
-  //   }
-
-  //   async getFavourites(name) {
-  //     const user = await this._collection.findOne({ username: name });
-  //     return user.favourites;
-  //   }
-
-  //   async addToFavourites(name, ad) {
-  //     const user = await this._collection.findOne({ username: name });
-  //     user.favourites.push(ad);
-  //     await this._collection.updateOne(
-  //       { username: name },
-  //       { $set: { favourites: user.favourites } }
-  //     );
-  //   }
-
-  //   async removeFromFavourites(name, ad) {
-  //     const user = await this._collection.findOne({ username: name });
-  //     user.favourites = user.favourites.filter((fav) => fav.id !== ad.id);
-  //     await this._collection.updateOne(
-  //       { username: name },
-  //       { $set: { favourites: user.favourites } }
-  //     );
-  //   }
 }
+export default MongoDB;

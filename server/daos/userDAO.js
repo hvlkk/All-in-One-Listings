@@ -1,6 +1,7 @@
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import User from "../entities/user.js";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
 class UserDAO {
   constructor(database) {
@@ -90,7 +91,18 @@ class InMemoryUserDAO {
 
 class DatabaseUserDAO {
   constructor(database) {
-    this._collection = database.collection;
+    const MONGO_USER = process.env.npm_config_user || "csaueb";
+    const MONGO_PASS = process.env.npm_config_pass || "csaueb";
+    const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0.ndkdf9f.mongodb.net/?retryWrites=true&w=majority`;
+    this._client = new MongoClient(uri, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      },
+    });
+    this._collection;
+    this.run().catch(console.dir);
   }
 
   async authorize(username, sId) {
@@ -131,13 +143,14 @@ class DatabaseUserDAO {
     const res = await this._collection.findOne({ username: name });
     if (res) {
       const user = new User(res);
-      user.removeFromFavourites(ad);
+      const bool = user.removeFromFavourites(ad);
       await this._collection.updateOne(
         { username: name },
-        { $set: { favourites: user.favourites() } }
+        { $set: { favourites: user.favourites } }
       );
-      return user.favourites;
+      return bool;
     }
+    return false;
   }
 
   async login(username, password) {
@@ -147,9 +160,26 @@ class DatabaseUserDAO {
       user.sessionId = uuidv4();
       await this._collection.updateOne(
         { username },
-        { $set: { sessionId: user.sessionId() } }
+        { $set: { sessionId: user.sessionId } }
       );
       return user;
+    }
+  }
+
+  async run() {
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await this._client.connect();
+      // Send a ping to confirm a successful connection
+      this._collection = this._client.db("istos").collection("users");
+      console.log("You successfully connected to MongoDB!");
+      const users1 = await this._collection.findOne({
+        username: "admin",
+        id: 1,
+      });
+      console.log(users1);
+    } catch (err) {
+      console.log(err);
     }
   }
 }

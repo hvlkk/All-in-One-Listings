@@ -23,7 +23,7 @@ async function processAds(ads) {
     const pairs = [];
     ad.features.forEach((feature) => {
       const pair = feature.split(": ");
-      if (pair.length == 1) pair.push("Ναι");
+      if (pair.length == 1) pair.push("\u2713");
       pairs.push(pair);
     });
     ad.features = pairs;

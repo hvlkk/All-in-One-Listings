@@ -4,31 +4,35 @@ import User from "../entities/user.js";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 class UserDAO {
-  constructor(database) {
-    if (process.env.npm_config_db != "1") this.userDAO = new InMemoryUserDAO();
-    else this.userDAO = new DatabaseUserDAO(database);
+  /* If the app has been started with "npm start --db=1", the UserDAO will be a
+   * database DAO. Otherwise, it'll access the dummy file in memory that contains 2
+   * placeholder users with an empty list of favourites.  */
+  constructor() {
+    if (process.env.npm_config_db == "1") this.userDAO = new DatabaseUserDAO();
+    else this.userDAO = new InMemoryUserDAO();
   }
 
-  async getUser(username) {
-    return this.userDAO.getUser(username);
+  // Ensures the username + sessionId passed as arguments is a valid combination in our database.
+  async authorize(username, sessionId) {
+    return this.userDAO.authorize(username, sessionId);
   }
 
-  async authorize(username, sId) {
-    return this.userDAO.authorize(username, sId);
-  }
-
+  // Fetches the list of favourites for a user (with the username passed as an argument).
   async getFavourites(username) {
     return this.userDAO.getFavourites(username);
   }
 
+  // Adds an ad to the favourites of the user whose username is passed as an argument.
   async addToFavourites(username, ad) {
     return this.userDAO.addToFavourites(username, ad);
   }
 
+  // Symmentrically, removes an ad from the favourites of the user whose username is passed as an argument.
   async removeFromFavourites(username, ad) {
     return this.userDAO.removeFromFavourites(username, ad);
   }
 
+  // Logs in a user, returns the User instance that was created.
   async login(username, password) {
     return this.userDAO.login(username, password);
   }
@@ -39,13 +43,9 @@ class InMemoryUserDAO {
     this._users = this.loadUserData();
   }
 
-  async getUser(username) {
-    return this._users.find((user) => user.username === username);
-  }
-
-  authorize(username, sId) {
+  authorize(username, sessionId) {
     const user = this._users.find(
-      (u) => u.username === username && u.sessionId === sId
+      (u) => u.username === username && u.sessionId === sessionId
     );
     return user;
   }
@@ -77,6 +77,7 @@ class InMemoryUserDAO {
     }
   }
 
+  // parses the users.json file, and fetches an array of User objects with the users contained in the file.
   loadUserData() {
     try {
       const data = fs.readFileSync("server/data/users.json", "utf-8");
@@ -90,9 +91,9 @@ class InMemoryUserDAO {
 }
 
 class DatabaseUserDAO {
-  constructor(database) {
-    const MONGO_USER = process.env.npm_config_user || "csaueb";
-    const MONGO_PASS = process.env.npm_config_pass || "csaueb";
+  constructor() {
+    const MONGO_USER = "csaueb";
+    const MONGO_PASS = "csaueb";
     const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0.ndkdf9f.mongodb.net/?retryWrites=true&w=majority`;
     this._client = new MongoClient(uri, {
       serverApi: {
@@ -101,35 +102,33 @@ class DatabaseUserDAO {
         deprecationErrors: true,
       },
     });
-    this._collection;
+    this._collection; // will be used to fetch the collection once the connection to the db is established
     this.run().catch(console.dir);
   }
 
-  async authorize(username, sId) {
-    const res = await this._collection.findOne({ username, sessionId: sId });
+  async authorize(username, sessionId) {
+    const res = await this._collection.findOne({
+      username: username,
+      sessionId: sessionId,
+    });
     if (res) return new User(res);
   }
 
-  async getUser(name) {
-    const res = await this._collection.findOne({ username: name });
-    if (res) return new User(res);
-  }
-
-  async getFavourites(name) {
-    const res = await this._collection.findOne({ username: name });
+  async getFavourites(username) {
+    const res = await this._collection.findOne({ username: username });
     if (res) {
       const user = new User(res);
       return user.favourites;
     }
   }
 
-  async addToFavourites(name, ad) {
-    const res = await this._collection.findOne({ username: name });
+  async addToFavourites(username, ad) {
+    const res = await this._collection.findOne({ username: username });
     if (res) {
       const user = new User(res);
       if (user.addToFavourites(ad)) {
         await this._collection.updateOne(
-          { username: name },
+          { username: username },
           { $set: { favourites: user.favourites } }
         );
         return true;
@@ -139,13 +138,13 @@ class DatabaseUserDAO {
     return false;
   }
 
-  async removeFromFavourites(name, ad) {
-    const res = await this._collection.findOne({ username: name });
+  async removeFromFavourites(username, ad) {
+    const res = await this._collection.findOne({ username: username });
     if (res) {
       const user = new User(res);
       const bool = user.removeFromFavourites(ad);
       await this._collection.updateOne(
-        { username: name },
+        { username: username },
         { $set: { favourites: user.favourites } }
       );
       return bool;
@@ -159,26 +158,21 @@ class DatabaseUserDAO {
       const user = new User(res);
       user.sessionId = uuidv4();
       await this._collection.updateOne(
-        { username },
+        { username: username },
         { $set: { sessionId: user.sessionId } }
       );
       return user;
     }
   }
 
+  // Connects to the database, and fetches the collection used.
   async run() {
     try {
-      // Connect the client to the server	(optional starting in v4.7)
       await this._client.connect();
-      // Send a ping to confirm a successful connection
       this._collection = this._client.db("istos").collection("users");
-      console.log("You successfully connected to MongoDB!");
-      const users1 = await this._collection.findOne({
-        username: "admin",
-        id: 1,
-      });
-      console.log(users1);
+      console.log("Successfully connected to MongoDB.");
     } catch (err) {
+      console.log("There was an error connecting to MongoDB:");
       console.log(err);
     }
   }

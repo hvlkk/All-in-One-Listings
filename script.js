@@ -14,12 +14,12 @@ async function addSubcategories() {
   );
 }
 
-// processes the ads fetched from subcategory GETs
+// Processes the ads fetched from subcategory GETs.
 async function processAds(ads) {
-  // for each ad, make its features into an array
+  // For each ad, make its features into an array.
   ads.forEach((ad) => {
     ad.features = ad.features.split("; ");
-    // for each feature, split it into a key-value pair
+    // For each feature, split it into a key-value pair.
     const pairs = [];
     ad.features.forEach((feature) => {
       const pair = feature.split(": ");
@@ -32,7 +32,7 @@ async function processAds(ads) {
 
 let templates = {};
 
-// setting up the HTML template for the index.html page
+// Setting up the HTML template for the index.html page.
 templates.index = Handlebars.compile(`
 <h1>Κατηγορίες</h1>
 {{#each this}}
@@ -52,7 +52,7 @@ templates.index = Handlebars.compile(`
 {{/each}}
 `);
 
-// setting up the HTML template for each category.html page
+// Setting up the HTML template for each category.html page.
 templates.category = Handlebars.compile(`
 {{#each this}}
 <a class="card">
@@ -76,7 +76,7 @@ templates.category = Handlebars.compile(`
 {{/each}}
 `);
 
-// setting up the HTML template for the filter options (in the category.html page)
+// Setting up the HTML template for the filter options (in the category.html page).
 templates.filter = Handlebars.compile(`
 <div>
   <label for="all">Όλα</label>
@@ -90,7 +90,7 @@ templates.filter = Handlebars.compile(`
 {{/each}}
 `);
 
-// setting up the HTML template for each category.html page
+// Setting up the HTML template for each category.html page.
 templates.subcategory = Handlebars.compile(`
 {{#each this}}
 <a class="card">
@@ -134,7 +134,7 @@ templates.subcategory = Handlebars.compile(`
 {{/each}}
 `);
 
-// setting up the HTML template for the favourite-ads.html page
+// Setting up the HTML template for the favourite-ads.html page.
 templates.favourites = Handlebars.compile(`
 {{#each this}}
 <a class="card">
@@ -197,37 +197,37 @@ window.onload = async function () {
     );
     const query = `ads/category?id=${categoryId}`;
     const ads = await http.getMyServer(query);
-
+    // Set the title of the page according to the category selected.
     let title = document.querySelector("title");
     title.innerHTML = categoryTitle;
-
+    // Render the ads.
     let content = templates.category(ads);
     let div = document.querySelector(".listings");
     div.innerHTML = content;
-
+    // Render the filter.
     content = templates.filter(subcategories);
     div = document.querySelector(".filter");
     div.innerHTML = content;
-
+    // Set the h1 of the page according to the category selected.
     div = document.querySelector("h1");
     div.innerHTML = categoryTitle;
 
     document.querySelector("form").addEventListener("submit", submitForm);
 
-    // add the appropriate onclick listeners to each favourite/unfavourite button
+    // Add the appropriate onclick listeners to each favourite/unfavourite button
     document.querySelectorAll(".heart").forEach((heart) => {
       if (heart.classList.contains("heart-empty")) {
         heart.addEventListener("click", async (event) => {
-          setEmptyHeartListener(event);
+          emptyHeartOnClick(event);
         });
       } else {
         heart.addEventListener("click", async (event) => {
-          setFullHeartListener(event);
+          fullHeartOnClick(event);
         });
       }
     });
 
-    // loading appropriate onclick event listeners for the filter radio buttons
+    // Loading appropriate onclick event listeners for the filter radio buttons.
     const radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach((radioButton) => {
       radioButton.addEventListener("click", async (event) => {
@@ -242,31 +242,33 @@ window.onload = async function () {
   }
 
   if (url.includes("/favorite-ads.html")) {
+    // Read the username and sessionId from the URL.
     username = new URLSearchParams(window.location.search).get("username");
     sessionId = new URLSearchParams(window.location.search).get("sessionId");
+    // Fetch the favourites from the server, using the username and sessionId.
     const res = await http.getMyServer(
       `favourites?username=${username}&sessionId=${sessionId}`
     );
 
     let favourites = res.data;
+    // Load the favourites template.
     let content = templates.favourites(favourites);
     let div = document.querySelector(".listings");
     div.innerHTML = content;
-
+    // Add the appropriate onclick listeners to each button.
     document.querySelectorAll(".heart-full").forEach((heart) => {
       heart.addEventListener("click", async (event) => {
-        setFavouritesHeartListener(event);
+        favouritesHeartOnClick(event);
       });
     });
   }
 };
 
-// filterFavourites: Used to display a full/empty
+// Used to display a full/empty heart, depending on whether the ad is a favourite or not.
 function filterFavourites(favourites) {
   const favouriteIds = favourites.map((favourite) => favourite.id);
   const emptyHeart = document.querySelectorAll(".heart-empty");
   const fullHeart = document.querySelectorAll(".heart-full");
-
   for (let i = 0; i < emptyHeart.length; ++i) {
     if (favouriteIds.includes(emptyHeart[i].dataset.index)) {
       emptyHeart[i].hidden = true;
@@ -278,41 +280,46 @@ function filterFavourites(favourites) {
   }
 }
 
-// used when a user attempts to log-in, in the category page
+// Used when a user attempts to log-in, in the category page.
 async function submitForm() {
   event.preventDefault();
   const name = document.getElementById("username-txt").value;
   const password = document.getElementById("password-txt").value;
   username = name;
   const data = { username, password };
+  // Login using the credentials provided.
   const response = await http.postMyServer("login", data);
   sessionId = response.sessionId;
-  // display message
+  // Display message after login attempt.
   const message = document.getElementById("message");
   message.innerHTML = response.message;
-  // add class to message, depending on status code
+  // Add class to message, depending on status code.
   const status = response.code == 200 ? "success" : "error";
   if (status == "success") {
+    // Hide the login form after successful login.
     const form = document.querySelector(".login");
     form.hidden = true;
+    // Show the goto favourites button.
     const btn = document.getElementById("favourites-btn");
     btn.hidden = false;
+    // Add the appropriate href to the goto favourites button.
     btn.href += `?username=${username}&sessionId=${sessionId}`;
 
-    // fetching the ads in the category provided, in order to provide the heart pic accordingly
+    /* Fetching the ads in the category provided,
+      in order to provide the heart pic accordingly.*/
     const ads = response.data;
     filterFavourites(ads);
   }
   message.classList.add(status);
 
-  // remove message after 3 seconds
+  // Remove message after 3 seconds.
   setTimeout(() => {
     message.innerHTML = "";
     message.classList.remove(status);
   }, 3000);
 }
 
-// called when adding an ad to a user's favourites
+// Called when adding an ad to a user's favourites.
 async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.putMyServer("favourites", data);
@@ -323,9 +330,8 @@ async function addFavourite(ad) {
     alert(res.message);
   }, 10);
 }
-
-/* called when removing an ad from a user's favourites, when on category.html.
- * this version of removeFavourites is supposed to filter the ads shown on the page, to use in category.html */
+/* Called when removing an ad from a user's favourites, when on category.html.
+ * This version of removeFavourites is supposed to filter the ads shown on the page, to use in category.html.*/
 async function removeFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.deleteMyServer("favourites", data);
@@ -337,7 +343,7 @@ async function removeFavourite(ad) {
   }, 10);
 }
 
-/* called when removing an ad from a user's favourites, when on category.html.
+/* Called when removing an ad from a user's favourites, when on favorite-ads.html.
  * this version of removeFavourites does not filter the ads shown on the page,
  * and instead reloads the page for the user, to show the updated favourites. */
 async function removeFavouriteReload(ad) {
@@ -346,13 +352,14 @@ async function removeFavouriteReload(ad) {
   setTimeout(() => {
     alert(res.message);
     if (res.code == 200) {
+      // reload the page to show the updated favourites.
       window.location.reload();
     }
   }, 10);
 }
 
-// called to add onclick listeners to the empty heart images on category.html
-async function setEmptyHeartListener(event) {
+// Retrieve the advertisement details and add it to the user's favourites.
+async function emptyHeartOnClick(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
   const description =
@@ -363,8 +370,8 @@ async function setEmptyHeartListener(event) {
   await addFavourite(ad);
 }
 
-// called to add onclick listeners to the full heart images on category.html
-async function setFullHeartListener(event) {
+// Retrieve the advertisement details and remove it from the user's favourites.
+async function fullHeartOnClick(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
   const description =
@@ -375,8 +382,9 @@ async function setFullHeartListener(event) {
   await removeFavourite(ad);
 }
 
-// called to add onclick listeners to the full heart images on favorite-ads.html
-async function setFavouritesHeartListener(event) {
+/* Retrieve the advertisement details and remove it from the user's favourites,
+ * when on the favourite-ads.html page. Then reload the page to show the updated favourites.*/
+async function favouritesHeartOnClick(event) {
   const id = event.target.dataset.index;
   const title = event.target.parentElement.querySelector("h3").innerHTML;
   const description =

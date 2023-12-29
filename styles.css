@@ -186,24 +186,6 @@ button {
   cursor: pointer;
 }
 
-/* Coloring green the button used for submitting. */
-.btn-submit {
-  background-color: rgb(98, 174, 91);
-  color: white;
-}
-
-/* Coloring red the button used for resetting. */
-.btn-reset {
-  background-color: rgb(160, 52, 52);
-  color: white;
-}
-
-/* Highlighting with red color the price trend. */
-#price-trend {
-  color: red;
-  font-weight: normal;
-}
-
 table {
   background-color: #f1d6b5;
   border-collapse: collapse;
@@ -264,11 +246,6 @@ a.card:hover {
   text-decoration: none;
   color: black;
   box-sizing: border-box;
-}
-
-a.card:visited,
-a.card:link {
-  color: black;
 }
 
 /* Set max width to the images inside each category card */
@@ -354,26 +331,6 @@ footer {
 .category:hover,
 .listing:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-.apartment > img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Create a grid of apartments, of 1, 2, or 3 columns depending on the screen size later. */
-.apartment {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  padding: 1rem;
-  text-align: center;
-  justify-items: center;
-}
-
-/* Append some margin for better readability */
-.apartment > figcaption {
-  margin-top: 1rem;
 }
 
 /* Center the description of the apartment */
@@ -584,21 +541,12 @@ details > div > div {
   min-width: 70%;
 }
 
-/* Exercise 4 - Media Queries */
-/* 480px - 768px */
-
 /* Tablet width starts here */
 @media (min-width: 480px) {
   /* Horizontally align buttons inside this div */
   div.buttons {
     flex-direction: row;
     transform: scale(1);
-  }
-
-  /* Make checkboxes and radio buttons bigger */
-  .questionnaire input[type="checkbox"],
-  .questionnaire input[type="radio"] {
-    transform: scale(1.2);
   }
 
   /* Make the grid of categories / listings 2 columns wide */
@@ -667,19 +615,6 @@ details > div > div {
     max-height: 236px;
   }
 
-  /* Making the pictures of the apartment a 2x2 grid on tablets and pc screens */
-  .apartment {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    padding: 1rem 1rem 2rem 1rem;
-    gap: 1rem;
-  }
-
-  .questionnaire > details > div > div {
-    font-size: 1rem;
-  }
-
   summary {
     font-size: 1.2rem;
   }
@@ -704,12 +639,6 @@ details > div > div {
 }
 /* Laptop width */
 @media (min-width: 1000px) {
-  /* Make checkboxes and radio buttons bigger */
-  .questionnaire input[type="checkbox"],
-  .questionnaire input[type="radio"] {
-    transform: scale(1.3);
-  }
-
   /* Use 3 columns for categories and listings */
   .categories,
   .listings {
@@ -739,67 +668,12 @@ details > div > div {
     font-size: 1.2rem;
   }
 
-  /* Assign to the legend the full row length by using all the columns */
-  .registration .personal-info legend,
-  .registration .user-address legend {
-    grid-column: 1 / -1;
-    text-align: center;
-  }
-
-  /* Add custom width to push the content to the center of the view */
-  .registration .user-authentication,
-  .registration .contact-preferences {
-    width: 80%;
-  }
-
-  /* Slightly adjusting the gap on pc screens */
-  .apartment {
-    gap: 2.5rem;
-  }
-
-  /* Adding a hover effect to the apartment pictures */
-  .apartment > img:hover {
-    transform: scale(1.1);
-  }
-
   .category-container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     gap: 40%;
   }
-}
-
-/* Exercise 5 - Form Validation */
-
-/* Parent of the pages, center each page inside */
-.pages {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-/* Style the pages with padding and rounded edges */
-.pages > a {
-  padding: 0.5rem;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-decoration: none;
-  color: black;
-}
-
-/* Hover effect for pages except the selected */
-.pages > a:hover:not(.selected) {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-/* Make the selected page light blue color to stand out */
-.pages > a.selected {
-  background-color: lightblue;
-  color: black;
 }
 
 /* Class used to hide forms */
@@ -826,18 +700,6 @@ details > div > div {
   padding-top: 0.5rem;
 }
 
-/* Align the content vertically, make the elements start from the left. */
-.questionnaire {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* Add minor padding in a way where the content doesnt collide with the edges of the form */
-#form-questionnaire {
-  padding: 0.5rem;
-}
-
 /* Add minor margin for better readability */
 details > div {
   margin: 0.5rem;
@@ -849,46 +711,14 @@ summary {
   text-align: left;
 }
 
-/* Use rounded edges for textarea */
-textarea {
-  width: 90%;
-  border-radius: 10px;
-}
-
 /* Append the full width to the details element */
 details {
   width: 100%;
 }
-
-/* Make the parent of textarea have some spacing from the top, append enough width for better UX */
-#textarea-container {
-  padding-top: 0.5rem;
-  width: 85%;
-}
-
-/* Mark pages of valid forms with green */
-.pages > .valid {
-  background-color: green;
-  color: white;
-}
-
-/* Mark pages of invalid forms with red */
-.pages > .invalid {
-  background-color: red;
-  color: white;
-}
-
 /* Use red color for invalid input custom errors */
 .error {
   padding-top: 10px;
   color: red;
-}
-
-/* Vertically align the buttons inside div.buttons */
-.buttons {
-  display: flex;
-  flex-direction: column;
-  transform: scale(0.8);
 }
 
 .category-img:hover {
@@ -921,14 +751,6 @@ details {
 
 table > caption {
   margin-bottom: 1rem;
-}
-
-.success {
-  color: green;
-}
-
-.error {
-  color: red;
 }
 
 .heart {

@@ -1,8 +1,11 @@
+import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
+import User from "../entities/user.js";
+
 class UserDAO {
   constructor(database) {
-    this.userDAO = new InMemoryUserDAO()
-      ? process.env.npm_config_db != "1"
-      : new DatabaseUserDAO(database);
+    if (process.env.npm_config_db != "1") this.userDAO = new InMemoryUserDAO();
+    else this.userDAO = new DatabaseUserDAO(database);
   }
 
   async getUser(username) {
@@ -43,7 +46,7 @@ class InMemoryUserDAO {
     const user = this._users.find(
       (u) => u.username === username && u.sessionId === sId
     );
-    return user ? true : false;
+    return user;
   }
 
   getFavourites(username) {
@@ -53,14 +56,14 @@ class InMemoryUserDAO {
 
   addToFavourites(username, ad) {
     const user = this._users.find((user) => user.username === username);
-    user.addToFavourites(ad);
-    return user.favourites;
+    const bool = user.addToFavourites(ad);
+    return bool;
   }
 
   removeFromFavourites(username, ad) {
     const user = this._users.find((user) => user.username === username);
-    user.removeFromFavourites(ad);
-    return user.favourites;
+    const bool = user.removeFromFavourites(ad);
+    return bool;
   }
 
   login(username, password) {
@@ -75,7 +78,7 @@ class InMemoryUserDAO {
 
   loadUserData() {
     try {
-      const data = fs.readFileSync("../data/users.json", "utf-8");
+      const data = fs.readFileSync("server/data/users.json", "utf-8");
       const result = JSON.parse(data);
       return result.map((user) => new User(user));
     } catch (error) {
@@ -92,8 +95,7 @@ class DatabaseUserDAO {
 
   async authorize(username, sId) {
     const res = await this._collection.findOne({ username, sessionId: sId });
-    if (res) return true;
-    return false;
+    if (res) return new User(res);
   }
 
   async getUser(name) {
@@ -113,13 +115,16 @@ class DatabaseUserDAO {
     const res = await this._collection.findOne({ username: name });
     if (res) {
       const user = new User(res);
-      user.addToFavourites(ad);
-      await this._collection.updateOne(
-        { username: name },
-        { $set: { favourites: user.favourites() } }
-      );
-      return user.favourites;
+      if (user.addToFavourites(ad)) {
+        await this._collection.updateOne(
+          { username: name },
+          { $set: { favourites: user.favourites } }
+        );
+        return true;
+      }
+      return false;
     }
+    return false;
   }
 
   async removeFromFavourites(name, ad) {

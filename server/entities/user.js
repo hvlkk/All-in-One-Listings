@@ -27,7 +27,7 @@ class User {
   }
 
   get favourites() {
-    return this._favourites.values();
+    return Array.from(this._favourites.values());
   }
 
   addToFavourites(ad) {
@@ -48,3 +48,4 @@ class User {
     }
   }
 }
+export default User;

@@ -66,14 +66,14 @@ async function favouritesRetrievalService(username, sessionId, res) {
 }
 
 async function loginService(username, password, res) {
-  const user = new User(await userDAO.login(username, password));
-  if (user) {
-    return res.json(
-      response(200, "Login Success", user.sessionId, user.favourites)
-    );
-  } else {
-    return res.json(response(401, "Invalid credentials"));
+  const daoRes = await userDAO.login(username, password);
+  if (!daoRes) {
+    return res.json(response(401, "Λανθασμένα στοιχεία χρήστη."));
   }
+  const user = new User(daoRes);
+  return res.json(
+    response(200, "Συνδεθήκατε με επιτυχία!", user.sessionId, user.favourites)
+  );
 }
 
 async function addToFavouritesService(data, res) {
@@ -82,13 +82,15 @@ async function addToFavouritesService(data, res) {
   if (result) {
     if (await userDAO.addToFavourites(username, ad)) {
       const favourites = await userDAO.getFavourites(username);
-      res.json(response(200, "Favourite added", "", favourites));
+      res.json(
+        response(200, "Η αγγελία προστέθηκε στα αγαπημένα.", "", favourites)
+      );
     } else {
-      res.json(response(409, "Favourite already exists"));
+      res.json(response(409, "Η αγγελία υπάρχει ήδη στα αγαπημένα."));
     }
   } else {
     res.json(
-      response(401, "Παρακαλώ συνδεθείτε για προσθήκη στη λίστα αγαπημένων")
+      response(401, "Παρακαλώ συνδεθείτε για προσθήκη στη λίστα αγαπημένων.")
     );
   }
 }
@@ -99,12 +101,14 @@ async function removeFromFavouritesService(data, res) {
   if (result) {
     if (await userDAO.removeFromFavourites(username, ad)) {
       const favourites = await userDAO.getFavourites(username);
-      res.json(response(200, "Favourite removed", "", favourites));
+      res.json(
+        response(200, "Η αγγελία αφαιρέθηκε από τα αγαπημένα.", "", favourites)
+      );
     } else {
-      res.json(response(404, "Favourite not found"));
+      res.json(response(404, "Η αγγελία δεν βρέθηκε."));
     }
   } else {
-    res.json(response(401, "Invalid credentials"));
+    res.json(response(401, "Λανθασμένα στοιχεία χρήστη."));
   }
 }
 

@@ -1,6 +1,7 @@
 import http from "./http.js";
 
 let categories = [];
+let favourites = [];
 let username = "";
 let sessionId = "";
 
@@ -215,17 +216,7 @@ window.onload = async function () {
     document.querySelector("form").addEventListener("submit", submitForm);
 
     // Add the appropriate onclick listeners to each favourite/unfavourite button
-    document.querySelectorAll(".heart").forEach((heart) => {
-      if (heart.classList.contains("heart-empty")) {
-        heart.addEventListener("click", async (event) => {
-          emptyHeartOnClick(event);
-        });
-      } else {
-        heart.addEventListener("click", async (event) => {
-          fullHeartOnClick(event);
-        });
-      }
-    });
+    setHeartListeners();
 
     // Loading appropriate onclick event listeners for the filter radio buttons.
     const radioButtons = document.querySelectorAll("input[type=radio]");
@@ -237,6 +228,8 @@ window.onload = async function () {
         content = templates.category(selectedAds);
         div = document.querySelector(".listings");
         div.innerHTML = content;
+        setHeartListeners();
+        filterFavourites();
       });
     });
   }
@@ -264,8 +257,23 @@ window.onload = async function () {
   }
 };
 
+// Sets a listener for all the heart icons.
+function setHeartListeners() {
+  document.querySelectorAll(".heart").forEach((heart) => {
+    if (heart.classList.contains("heart-empty")) {
+      heart.addEventListener("click", async (event) => {
+        emptyHeartOnClick(event);
+      });
+    } else {
+      heart.addEventListener("click", async (event) => {
+        fullHeartOnClick(event);
+      });
+    }
+  });
+}
+
 // Used to display a full/empty heart, depending on whether the ad is a favourite or not.
-function filterFavourites(favourites) {
+function filterFavourites() {
   const favouriteIds = favourites.map((favourite) => favourite.id);
   const emptyHeart = document.querySelectorAll(".heart-empty");
   const fullHeart = document.querySelectorAll(".heart-full");
@@ -307,8 +315,8 @@ async function submitForm() {
 
     /* Fetching the ads in the category provided,
       in order to provide the heart pic accordingly.*/
-    const ads = response.data;
-    filterFavourites(ads);
+    favourites = response.data;
+    filterFavourites();
   }
   message.classList.add(status);
 
@@ -324,7 +332,8 @@ async function addFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.putMyServer("favourites", data);
   if (res.code == 200) {
-    filterFavourites(res.data);
+    favourites = res.data;
+    filterFavourites();
   }
   setTimeout(() => {
     alert(res.message);
@@ -336,7 +345,8 @@ async function removeFavourite(ad) {
   const data = { ad, username, sessionId };
   const res = await http.deleteMyServer("favourites", data);
   if (res.code == 200) {
-    filterFavourites(res.data);
+    favourites = res.data;
+    filterFavourites();
   }
   setTimeout(() => {
     alert(res.message);

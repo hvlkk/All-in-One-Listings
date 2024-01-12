@@ -721,6 +721,11 @@ details {
   color: red;
 }
 
+.success {
+  padding-top: 10px;
+  color: green;
+}
+
 .category-img:hover {
   transform: scale(1.05);
 }

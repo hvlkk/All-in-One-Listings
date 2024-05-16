@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="./resources/favicon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="script.js" type="module"></script>
+    <title>Κατηγορία</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="./resources/logo.jpg" alt="Company Logo" />
+        <ul>
+          <li><a href="index.html">Κατηγορίες</a></li>
+          <li><a href="about.html">Σχετικά με εμάς</a></li>
+        </ul>
+        <div></div>
+      </nav>
+    </header>
+    <main>
+      <h1>Κατηγορία</h1>
+      <div class="message-container">
+        <span id="message"></span>
+      </div>
+      <div class="category-container">
+        <div class="filter"></div>
+        <a href="favorite-ads.html" id="favourites-btn" hidden
+          >Αγαπημένες αγγελίες</a
+        >
+        <div class="login">
+          <form class="login-form">
+            <fieldset>
+              <legend>Log In</legend>
+              <div>
+                <label for="username-txt">Username</label>
+                <input
+                  type="text"
+                  id="username-txt"
+                  name="username"
+                  minlength="3"
+                  maxlength="30"
+                  autocomplete="username"
+                  value="admin"
+                  required
+                />
+              </div>
+              <div>
+                <label for="password-txt">Password</label>
+                <input
+                  type="password"
+                  id="password-txt"
+                  name="password"
+                  minlength="3"
+                  maxlength="30"
+                  autocomplete="current-password"
+                  value="admin"
+                  required
+                />
+              </div>
+            </fieldset>
+            <button type="submit" class="btn btn-login">Log In</button>
+          </form>
+        </div>
+      </div>
+      <div class="listings"></div>
+    </main>
+    <footer>
+      <div class="company-contact">
+        <address>
+          <ul>
+            <li>Telephone: +30 2101234567</li>
+            <li>e-mail: contact@allinonelistings.com</li>
+          </ul>
+        </address>
+      </div>
+      <div class="company-social-media">
+        <ul>
+          <li>
+            <a href="https://www.facebook.com">
+              <img alt="Facebook" src="./resources/icon-facebook.png" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com">
+              <img alt="Twitter" src="./resources/icon-twitter.png" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com">
+              <img alt="Instagram" src="./resources/icon-instagram.png" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>All In One Listings &copy; 2023</div>
+    </footer>
+  </body>
+</html>

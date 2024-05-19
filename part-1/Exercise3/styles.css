@@ -1,0 +1,554 @@
+/*
+  font-face -> Making 4 custom text fonts for light, regular, italic and bold font styles respectively.
+*/
+@font-face {
+  font-family: MyLightFont;
+  src: url(../resources/fonts/Roboto-Light.ttf);
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: MyRegularFont;
+  src: url(../resources/fonts/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: MyItalicFont;
+  src: url(../resources/fonts/Roboto-Italic.ttf);
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: MyBoldFont;
+  src: url(../resources/fonts/Roboto-Bold.ttf);
+  font-weight: 700;
+}
+
+/*
+    background-color -> Setting the background color of the body to #fbf0e4.
+    font-family -> Setting the font family of the body to our custom font (Roboto), "Times New Roman", serif.
+*/
+body {
+  background-color: #fff7ef;
+  font-family: MyRegularFont, "Times New Roman", serif;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+main.detailed-listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+figcaption {
+  font-family: MyBoldFont;
+}
+
+#team > article > p {
+  padding: 0.5rem;
+  font-family: MyItalicFont;
+}
+
+/*
+    font-family -> Setting the font family of the h1, h2, h3, h4, h5, h6 to "Helvetica", "Verdana", sans-serif.
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Helvetica", "Verdana", sans-serif;
+}
+/*
+    background-color -> Seting the background color of the form to #fffdfb66.
+*/
+form {
+  background-color: #fffdfb66;
+}
+
+/*
+    list-style-type: none -> Removing the default list style.
+*/
+li {
+  list-style-type: none;
+}
+
+/*
+    text-decoration: none -> Removing the default text decoration.
+*/
+a {
+  text-decoration: none;
+}
+
+/*  When hovering over an anchor tag, the following styles will be applied.
+
+    text-decoration: underline -> Adding an underline to the text.
+    color: blue -> Setting the color of the text to blue.
+*/
+a:hover {
+  text-decoration: underline;
+}
+
+/*  When an anchor tag is visited/active, the following styles will be applied.
+
+*/
+a:visited {
+  color: rgb(128, 0, 70);
+}
+
+a:active {
+  opacity: 0.7;
+}
+
+a:link {
+  color: #8b4513;
+}
+
+/*  spin -> Creating a custom animation called sway. 
+     transform: rotate(x); -> Rotating the element by x degrees.
+*/
+@keyframes sway {
+  0% {
+    transform: rotate(-20deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  75% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+/*  Selecting the images with hovering state,
+    inside the company-social-media class ancestor.
+    
+    animation: sway 0.4s linear; -> Applying the sway animation to the image.
+    opacity: 0.8; -> Setting the opacity of the image to 0.8, to make the color lighter.
+
+*/
+.company-social-media img:hover {
+  animation: sway 0.4s linear;
+  opacity: 0.8;
+}
+
+/* Our default button style, rounded edges */
+button {
+  background-color: #f5f5f5;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 35px;
+  width: 117px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* Using green color for submit button */
+.btn-submit {
+  background-color: rgb(98, 174, 91);
+  color: white;
+}
+
+/* Using red background color for reset button */
+.btn-reset {
+  background-color: rgb(160, 52, 52);
+  color: white;
+}
+
+/* Reducing opacity when hovered */
+.btn:hover {
+  opacity: 0.7;
+}
+
+/* Marking price trend with red */
+#price-trend {
+  color: red;
+  font-weight: normal;
+}
+
+/* Adjusting the table's width and backround color. */
+table {
+  background-color: #f1d6b5;
+  border-collapse: collapse;
+  width: 350px;
+  margin: 3rem;
+}
+
+/* Make the content of the rows align left */
+tr > * {
+  text-align: left;
+  border: 1px solid black;
+}
+
+/* Adding bold font */
+.listing-characteristics {
+  font-weight: bold;
+}
+
+/* Adding bold font */
+table > caption {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Adding some padding for better readability */
+tr > * {
+  padding: 5px;
+}
+
+/* Adding alternate background color the the table rows */
+tr:nth-child(odd) {
+  background-color: #fbe8d2;
+}
+
+/* Making a card like listing, with rounded edges, padding and background color for better UX */
+.listing {
+  background-color: #fcfbfb;
+  height: 40rem;
+  width: 25rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+/* Adding shadow when hovered */
+.listing:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Custom height and width for the images inside each listing */
+.listing img {
+  height: 15rem;
+  width: 18rem;
+}
+
+/* Using black color when hovering */
+a.card:hover {
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+}
+
+a.card:visited,
+a.card:link {
+  color: black;
+}
+
+/* Setting custom width and height for images inside the category */
+.category img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Creating a card like category, with column aligned content in the center */
+.category {
+  /* width: 60%; */
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+/* Removing excess padding */
+ul {
+  padding: 0px;
+}
+
+/* Aligned text to the center */
+#team > article {
+  text-align: center;
+}
+
+/* Custom image height and widht for the member images. Also make them rounded */
+#team > article > figure > img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+/* Setting the full width of the parent to hte header */
+header {
+  padding: 0.2rem;
+  background-color: #ffdeb7;
+  width: 100%;
+}
+
+/* Hover effect using blue color in hte anchor tags of the header when hovered */
+header a:hover {
+  color: darkblue;
+}
+
+/* Assigning the full width of the body to the footer */
+footer {
+  width: 100%;
+  background-color: #333; /* Add background color as needed */
+  color: #fff; /* Add text color as needed */
+  padding: 8px;
+  text-align: center;
+}
+
+/* Make the company logo round */
+.company-logo {
+  height: 100px;
+  border-radius: 50%;
+}
+
+/* Exercise 3 - Grid, Flexbox */
+
+/* Implementing a grid in the body, with 3 parts, header, main, footer */
+body {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Implementing grid of 3 columns and 2 rows */
+.categories,
+.listings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(430px, 1fr));
+  grid-template-rows: auto 1fr;
+  grid-gap: 1rem;
+  place-items: center;
+}
+
+/* Using the first grid row for the h1 */
+.categories > h1,
+.listings > h1 {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* Set fixed height to each category card */
+.category {
+  height: 510px;
+}
+
+/* Set hover effect with small shadow */
+.category:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Setting the image width and height inside the apartment card */
+.apartment > img {
+  height: 15rem;
+  width: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Making the pictures of the apartment a 2x2 grid*/
+.apartment {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: 2.5rem;
+  padding: 1rem;
+}
+
+/* Adding a minor margin for better raedability and seperation with other elements */
+.apartment > figcaption {
+  margin-top: 1rem;
+}
+
+/* Adding a hover effect to the apartment pictures */
+.apartment > img:hover {
+  transform: scale(1.1);
+}
+
+/* Using flexbox to center the content of the description */
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Using flexbox to center the content of the navigation bar and space it accordingly */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Setting a custom height to the images of the nav bar, and making them rounded */
+nav > img {
+  height: 3rem;
+  border-radius: 50%;
+}
+
+/* Spacing up the ul containing the navigation links */
+nav > ul {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Aliging the paragraph left */
+.description > p {
+  text-align: left;
+  margin: 5rem;
+}
+
+/* Using flexbox  to center the content of the footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Using flexbox to center the content */
+.company-social-media > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Using flexbox to center the content */
+#team {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Removing excess margin */
+#team > h2 {
+  margin-bottom: 0rem;
+}
+
+/* Creating card like articles */
+#team > article {
+  background-color: rgb(214, 235, 235);
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+  width: 60%;
+  justify-content: center;
+  margin: 0.5rem 0rem;
+}
+
+/* Ading a minor margin */
+#team > article > figure {
+  margin: 1rem 0rem;
+}
+
+/* Using flexbox to align the content to the center */
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 3rem;
+}
+
+/* Using flexbox to align the content, setting rounded edges and background color for better UX */
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(232, 226, 209);
+  width: 60%;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+/* Using flexbox to center the content */
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Using flexbox to center the content */
+fieldset > div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 1.5rem;
+  width: 90%;
+}
+
+/* Using absolute to position the labels to the desired place on top of the inputs */
+fieldset > div > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Setting rounded corners and custom width to the inputs */
+fieldset > input {
+  border-radius: 5px;
+  height: 1.5rem;
+  width: 90%;
+  max-width: 95%;
+}
+
+/* Setting our custom font to the legend */
+fieldset > legend {
+  font-family: MyLightFont;
+  margin: 0.5rem 0;
+}
+
+fieldset .required {
+  color: brown;
+}
+
+#intro > h1 {
+  font-size: 2em;
+}
+
+/* Organising the listing details definition list as a grid */
+.listing-details {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+/* Organising columns and alignment for the dd and dt childs of listing details  */
+dt {
+  grid-column: 1 / 2;
+  text-align: center;
+}
+
+dd {
+  grid-column: 2 / 3;
+  text-align: center;
+}
+
+/* adding a small margin between the listing details and the table that follows */
+.detailed-listing > .listing-details {
+  margin-bottom: 2rem;
+}

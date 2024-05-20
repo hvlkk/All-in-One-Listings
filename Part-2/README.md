@@ -1,48 +1,47 @@
-# Web Development part 2
+# All in One Listings - Part Two
 
-This project is utilising an API (https://wiki-ads.onrender.com) to construct a dynamic page with advertisements.
+## Description
 
-## Technologies Used
+For the second part of the project, we retained the final version of the webpage developed in the first part to serve as the frontend. The goal was to create a full-stack web application with a dynamic page for advertisements.
 
-The project contains a client application written in JavaScript, HTML and CSS, and a server application, written in Node.js and Express.
+The server, implemented with Node.js and Express.js, provides a RESTful API to handle HTTP requests from the client. Utilizing both in-memory storage and a MongoDB database, it manages data storage and retrieval. In-memory storage initializes with dummy data from a JSON file.
 
-The server has an API and listens for HTTP requests made by the client. The implementation contains both in-memory and database data, that are used to perform CRUD operations.
+To facilitate dynamic content generation on the frontend, Handlebars.js was utilized for dynamic HTML creation using JavaScript.
 
-The database used is MongoDB.
+This project integrates with an external API (https://wiki-ads.onrender.com) to construct the advertisement listings displayed on the website.
 
-The in-memory storage is initialised with dummy data from a json file.
+NOTE:  As the listings provided through the API were in Greek, we rewrote the entire webpage from the previous part in Greek to ensure a smooth user experience.
 
 ## Installation
 
-To install the dependencies of the project you need to have Node.js installed. Then you install them using npm
+To install the dependencies of the project you need to have Node.js and npm installed. Afterwards, you should follow the following instructions:
 
-```bash
-npm i
-```
+1. Clone the project.
+2. Navigate to the 'Part-2' directory.
+3. Install the required dependencies using npm, by running the following command: ```npm i```
 
 ## Usage
 
-To run the server with MongoDB use the following command.
+To run the server with MongoDB, use the following command:
 
-```
+``` bash
 npm start --db=1
 ```
 
-Else if you want to run the server with in-memory data initialised from the json file use the following:
+Else, if you want to run the server with in-memory data initialised from the JSON file, use the following command:
 
-```
+``` bash
 npm start
 ```
 
-## User credentials
+## User Credentials
 
-There are two users created that you can use.
+Two user accounts have been created for testing purposes. These accounts can be used to interact with the application, specifically for adding and removing ads from favorites:
 
-```
-username: admin, password: admin
-```
+1. ``` username: admin, password: admin```
+2. ``` username: user, password: user```
 
-```
-username: user, password: user
-```
->>>>>>> remotes/Web_Dev2/main
+## Collaborators
+
+- [hvlkk](https://www.github.com/hvlkk)
+- [TrifonisAth](https://www.github.com/TrifonisAth)
